@@ -1,5 +1,5 @@
 @echo off
-REM Phexora Aegis - Local Development Server (Windows)
+REM Phexora Cash - Local Development Server (Windows)
 
 setlocal EnableExtensions EnableDelayedExpansion
 
@@ -20,23 +20,24 @@ if errorlevel 1 (
 )
 
 if not defined PORT (
-    set "PORT_OUTPUT=%TEMP%\aegis_preview_port_!RANDOM!!RANDOM!.txt"
-    py -3 -c "import sys; sys.path.insert(0, r'%LIBRARIES_PYTHON%'); from ApplicationRegistry import get_application; config = get_application('aegis'); assert config is not None; print(config.local_preview_port)" > "!PORT_OUTPUT!" 2>&1
+    set "PORT_OUTPUT=%TEMP%\cash_preview_port_!RANDOM!!RANDOM!.txt"
+    set "PYTHONPATH=%LIBRARIES_PYTHON%"
+    py -3 -c "from ApplicationRegistry import get_application; config = get_application('cash'); assert config is not None; print(config.local_preview_port)" > "!PORT_OUTPUT!" 2>&1
     if errorlevel 1 (
         type "!PORT_OUTPUT!"
         del "!PORT_OUTPUT!" 2>nul
-        echo FATAL: Failed to resolve the Phexora Aegis preview port from ApplicationRegistry.
+        echo FATAL: Failed to resolve the Phexora Cash preview port from ApplicationRegistry.
         exit /b 1
     )
     set /p "PORT="<"!PORT_OUTPUT!"
     del "!PORT_OUTPUT!" 2>nul
 )
 if not defined PORT (
-    echo FATAL: Phexora Aegis preview port is empty.
+    echo FATAL: Phexora Cash preview port is empty.
     exit /b 1
 )
 
-call "%STARTUP_WINDOWS_HELPER%" prepare-app-py3 "Phexora Aegis Preview" "%PROJECT_ROOT%" "%PORT%=module:http.server"
+call "%STARTUP_WINDOWS_HELPER%" prepare-app-py3 "Phexora Cash Preview" "%PROJECT_ROOT%" "%PORT%=module:http.server"
 set "PORT_GUARD_EXIT=!ERRORLEVEL!"
 if "!PORT_GUARD_EXIT!"=="10" exit /b 0
 if not "!PORT_GUARD_EXIT!"=="0" exit /b 1
@@ -44,7 +45,7 @@ if not "!PORT_GUARD_EXIT!"=="0" exit /b 1
 pushd "%PROJECT_ROOT%"
 
 echo ================================================
-echo   Phexora Aegis - Privacy, Scalability and Post-Quantum Security Research
+echo   Phexora Cash - Privacy, Scalability and Post-Quantum Security Research
 echo   Local Development Server
 echo ================================================
 echo.

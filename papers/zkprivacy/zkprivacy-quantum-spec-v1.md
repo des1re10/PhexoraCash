@@ -1,6 +1,6 @@
 ---
 title: "Quantum: Privacy-Preserving Post-Quantum DAG Protocol"
-subtitle: "Unreleased clarifications to research design 0.5.4-research"
+subtitle: "Phexora Cash — unreleased clarifications to research design 0.5.4-research"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
 date: "2026-11-08"
 version: "0.5.4-research"
@@ -36,6 +36,12 @@ abstract: |
 ---
 
 # Document status
+
+**Programme identity:** Phexora Cash is the programme name.
+Quantum remains the historical protocol codename used in this
+manuscript and its stable filenames. This display-name change does not alter
+protocol encodings, domain-separation tags, wallet identifiers, QTM or any
+research requirement or evidence gate.
 
 This document defines the non-negotiable security, privacy, scalability,
 operability, recovery, producer-contestability, and economic-review
@@ -1888,6 +1894,9 @@ normative only with rationale, vectors, tests, and review.
 # Appendix B — Revision record
 
 ## Unreleased — 2026-11-08
+
+- identified the programme as Phexora Cash while retaining the historical
+  Quantum protocol codename and all existing protocol identifiers;
 
 - clarified construction-specific commitment evidence and composed-security
   parameter justification;

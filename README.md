@@ -1,13 +1,13 @@
-# Phexora Aegis
+# Phexora Cash
 
-**Open post-quantum privacy and scalability research by Phexora AI**
+**Research into private, post-quantum digital cash by Phexora AI**
 
-[![Website](https://img.shields.io/badge/Website-aegis.phexora.ai-6366f1)](https://aegis.phexora.ai)
+[![Website](https://img.shields.io/badge/Website-cash.phexora.ai-6366f1)](https://cash.phexora.ai)
 [![Research text: CC0 1.0](https://img.shields.io/badge/Research%20text-CC0--1.0-success)](LICENSE)
 
-## What Phexora Aegis is
+## What Phexora Cash is
 
-Phexora Aegis is a research program for a private note-based DAG protocol. A
+Phexora Cash is a research program for a private note-based DAG protocol. A
 releasable design must satisfy five requirements together:
 
 - **post-quantum security:** at least 128 bits of composed post-quantum security
@@ -67,8 +67,9 @@ cannot be demonstrated.
 
 ## Publication identity
 
-Phexora Aegis is the current programme name. The papers retain the historical
-project codename `Quantum` in filenames and publication text. The working
+Phexora Cash is the programme name. The papers
+identify this programme while retaining the historical project codename
+`Quantum` in filenames and protocol text. The working
 sources and regenerated PDFs now contain explicitly unreleased clarifications
 to the published 0.5.4-research specification/guide and 0.4.0 feasibility
 protocol. The published baseline remains in Git history; reproduction and
@@ -77,6 +78,14 @@ A publication-name change or new release still requires regenerated PDFs and
 the normal research review gates. The historical codename is not the current
 product or programme name.
 
+The repository is `PhexoraCash`, the registry/deployment ID is `cash`, and the
+configured host is `cash.phexora.ai`. Startup, deployment and CI filenames use
+the same identity. The GitHub repository rename is an owner action. Before
+publication, the new host requires DNS, certificates and the SiteBuilder
+publication/analytics mapping; source changes alone do not migrate a running
+service. Protocol encodings, hash-domain tags, wallet identifiers and QTM keep
+their existing research definitions.
+
 ## Research documents
 
 - [Research design specification](papers/zkprivacy/zkprivacy-quantum-spec-v1.md)
@@ -84,7 +93,7 @@ product or programme name.
 - [Private-transaction STARK feasibility protocol](papers/zkprivacy/quantum-private-transaction-feasibility.md)
 - [T305 prior-art and reuse decision](papers/zkprivacy/decisions/t305-prior-art-decision.md)
 - [Decentralisation, operability, and security-budget decision](papers/zkprivacy/decisions/decentralisation-operability-security-budget-decision.md)
-- [Market and claim thesis](Documentation/Phexora_Aegis_Market_Thesis.html)
+- [Market and claim thesis](Documentation/Phexora_Cash_Market_Thesis.html)
 - [Static-site system architecture](Documentation/SystemArchitecture.html)
 
 The specification filename retains “v1” for link compatibility. The normative
@@ -146,8 +155,8 @@ The checked-in website can be opened directly from a standalone clone without
 starting a runtime:
 
 ~~~bash
-git clone https://github.com/des1re10/PhexoraAegis.git PhexoraAegis
-cd PhexoraAegis
+git clone https://github.com/des1re10/PhexoraCash.git PhexoraCash
+cd PhexoraCash
 # Open index.html in a browser
 ~~~
 
@@ -163,7 +172,7 @@ The validated HTTP preview is a development-workspace command. From a complete
 <code>Libraries</code> repository, run:
 
 ~~~bash
-cd PhexoraAegis
+cd PhexoraCash
 ./start-local.sh
 # Open http://127.0.0.1:9180
 ~~~

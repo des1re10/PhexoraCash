@@ -1,15 +1,29 @@
-# Phexora Aegis - Release Notes
+# Phexora Cash - Release Notes
 
 ## Unreleased
 
+**Programme name — 2026-11-08**
+
+- Standardised the programme as Phexora Cash across the DE/EN website,
+  documentation, repository references, filenames and operational configuration.
+- Identified Phexora Cash in all three active papers and regenerated their
+  PDFs; Quantum remains the historical protocol codename.
+- Configured the `cash` registry ID, Cash startup/deployment paths and new
+  hostnames. Host activation requires DNS, certificates and publication mapping;
+  the GitHub repository rename remains an owner action.
+- Kept Quantum protocol encodings and QTM unchanged. The rename introduces no
+  implementation, research result, monetary change or new approved release.
+
+Earlier entries use the current programme name and source paths for navigation;
+Git history preserves their original naming and publication state.
+
 **Public metadata and link integrity — 2026-09-20**
 
-- Added the canonical URL plus OpenGraph and Twitter card metadata to the
-  landing page so shared links resolve to `https://aegis.phexora.ai/` and the
-  preview reuses the existing DE/EN title and description keys.
+- Added canonical, OpenGraph and Twitter card metadata to the landing page;
+  the preview reuses the existing DE/EN title and description keys.
 - Repaired the market-and-claim-thesis link in `README.md`, which still pointed
-  at the pre-Aegis `Documentation/Quantum_Market_Thesis.html` filename.
-- Extended the `aegis-identity` workflow with a metadata and link-target check
+  at the pre-Cash `Documentation/Quantum_Market_Thesis.html` filename.
+- Extended the `cash-identity` workflow with a metadata and link-target check
   so a missing canonical tag or a dead local link fails CI.
 
 **Research revision 0.5.4 — 2026-09-05**
@@ -38,7 +52,7 @@
   necessary-only and consent actions, plus a footer settings control.
 **Consent-based static-site measurement**
 
-- Registered Phexora Aegis as its own SiteBuilder website analytics owner, restricted
+- Registered Phexora Cash as its own SiteBuilder website analytics owner, restricted
   collection to the exact production origin, and linked aggregate reporting to
   BusinessPlanner.
 - Installed the SiteBuilder-generated opt-in runtime and assigned stable CTA
@@ -106,7 +120,7 @@
   multi-user, multi-target, and lifetime bound. Lower-entropy legacy imports
   remain explicitly degraded and do not inherit the full claim.
 - Separated generic proof-system accumulation capability in T306 from the exact
-  Phexora Aegis consensus/state relation in T505, made T405 a dependency for its
+  Phexora Cash consensus/state relation in T505, made T405 a dependency for its
   policy-state semantics, and removed performance-threshold ownership from the
   T104 commitment-security decision.
 - Added governance-capture, client-distribution, and voluntary-social-adoption
@@ -163,7 +177,7 @@
   Design targets are presented as the target architecture, repeated research
   copy and duplicate legal navigation were removed, and the mobile layout was
   shortened.
-- Reframed public copy around Phexora Aegis's vision, design principles, and research
+- Reframed public copy around Phexora Cash's vision, design principles, and research
   progress while retaining detailed uncertainty, prior-art, and stop/go
   analysis in the linked research documents.
 - Added consistent keyboard focus treatment, reduced-motion handling, and
@@ -180,9 +194,9 @@
   hidden port fallback, reject malformed or out-of-range explicit ports
   before PDF checks, bind only to <code>127.0.0.1</code>, and preserve startup
   failures. The Windows launcher now reports the same loopback URL it binds.
-- Aligned server publication with Phexora Aegis's registry-owned static-site
+- Aligned server publication with Phexora Cash's registry-owned static-site
   boundary: the wrapper uses shared deployment helpers but stages only the
-  Phexora Aegis payload and no longer requires or deploys a Libraries payload.
+  Phexora Cash payload and no longer requires or deploys a Libraries payload.
 - Server publication now receives one canonical bundle-staged shared-tooling
   directory, fails closed when non-interactive sudo is unavailable, verifies
   every web-root file/directory against the staged app, and emits the standard
@@ -215,20 +229,20 @@
 **Initial Release**
 
 - Created project structure for post-quantum cryptography research
-- Added Phexora Aegis specification:
+- Added Phexora Cash specification:
   - `zkprivacy-quantum-spec-v1.md` - Full specification for privacy-preserving DAG blockchain
   - `zkprivacy-verification-guide.md` - AI implementation and verification guide
 - Landing page with paper listing
 - Responsive design with light academic theme
 
 **Papers Included:**
-- Phexora Aegis: Privacy-Preserving DAG Blockchain (Draft v1.0)
+- Phexora Cash: Privacy-Preserving DAG Blockchain (Draft v1.0)
 
 ### v1.1.0 (2026-01-16)
 
 **Major Architecture Update: DAG-Native Design**
 
-- Renamed ZKPrivacy to Phexora Aegis
+- Renamed ZKPrivacy to Phexora Cash
 - Adopted GhostDAG consensus as core architecture (1,000+ TPS target)
 - Added comprehensive documentation:
   - Abstract, Introduction, Design Philosophy sections

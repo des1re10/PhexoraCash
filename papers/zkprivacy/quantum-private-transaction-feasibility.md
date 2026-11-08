@@ -1,6 +1,6 @@
 ---
 title: "Stateless Versus Stateful Hash-Based Authorisation Inside a Private-Transaction STARK"
-subtitle: "Unreleased clarifications to the Quantum 2-input/2-output protocol"
+subtitle: "Phexora Cash — unreleased clarifications to the Quantum 2-input/2-output protocol"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
 date: "2026-11-08"
 version: "0.4.0-research-protocol"
@@ -39,6 +39,11 @@ abstract: |
 ---
 
 # 1. Status and claim boundary
+
+**Programme identity:** This study belongs to Phexora Cash. Quantum remains
+the historical protocol codename used in this manuscript and stable filenames.
+The display-name change does not change the transaction relation, comparison
+arms, protocol identifiers, pre-registration or evidence requirements.
 
 This is a **research protocol**, not a result paper. This working copy contains
 unreleased clarifications dated 2026-11-08 to the
@@ -1005,6 +1010,9 @@ in any comparison.
 # Appendix A — Revision record
 
 ## Unreleased — 2026-11-08
+
+- identified the programme as Phexora Cash while retaining the historical
+  Quantum protocol codename and the comparative experiment contract;
 
 - added a targeted SophOMR/InstantOMR source update, explicitly separate from
   the earlier literature screen and from protocol measurements;

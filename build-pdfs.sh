@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Phexora Aegis - PDF Build Script
+# Phexora Cash - PDF Build Script
 # Converts active root-level Markdown papers to PDF using DocWizard-Pro
 #
 
@@ -13,20 +13,20 @@ DOCWIZARD_PYTHON="$DOCWIZARD_ROOT/.venv/bin/python"
 PAPERS_DIR="$SCRIPT_DIR/papers/zkprivacy"
 
 echo "================================================"
-echo "  Phexora Aegis - PDF Build Script"
+echo "  Phexora Cash - PDF Build Script"
 echo "================================================"
 echo ""
 
 # Check if DocWizard-Pro exists
 if [ ! -f "$DOCWIZARD_SCRIPT" ]; then
     echo "ERROR: DocWizard-Pro not found at: $DOCWIZARD_SCRIPT"
-    echo "       Make sure DocWizard-Pro is in the same parent directory as Phexora Aegis"
+    echo "       Make sure DocWizard-Pro is in the same parent directory as Phexora Cash"
     exit 1
 fi
 
 if [ ! -x "$DOCWIZARD_PYTHON" ]; then
     echo "ERROR: DocWizard-Pro Python runtime not found at: $DOCWIZARD_PYTHON"
-    echo "       Prepare the DocWizard-Pro .venv before building Phexora Aegis PDFs"
+    echo "       Prepare the DocWizard-Pro .venv before building Phexora Cash PDFs"
     exit 1
 fi
 

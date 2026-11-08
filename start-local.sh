@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Phexora Aegis - Local Development Server
+# Phexora Cash - Local Development Server
 # Quick start script for testing the website locally
 #
 
@@ -20,11 +20,11 @@ if [ -z "$PORT" ]; then
     PORT="$(PYTHONPATH="$LIBRARIES_PYTHON" python3 - <<'PY'
 from ApplicationRegistry import get_application
 
-config = get_application("aegis")
+config = get_application("cash")
 if config is None:
-    raise RuntimeError("Phexora Aegis is missing from ApplicationRegistry")
+    raise RuntimeError("Phexora Cash is missing from ApplicationRegistry")
 if config.local_preview_port is None:
-    raise RuntimeError("Phexora Aegis local_preview_port is not configured")
+    raise RuntimeError("Phexora Cash local_preview_port is not configured")
 print(config.local_preview_port)
 PY
 )"
@@ -38,7 +38,7 @@ fi
 cd "$SCRIPT_DIR"
 
 echo "================================================"
-echo "  Phexora Aegis - Privacy, Scalability and Post-Quantum Security Research"
+echo "  Phexora Cash - Privacy, Scalability and Post-Quantum Security Research"
 echo "  Local Development Server"
 echo "================================================"
 echo ""

@@ -1,6 +1,6 @@
 ---
 title: "Quantum Research Implementation and Verification Plan"
-subtitle: "Unreleased evidence-plan clarifications to research design 0.5.4"
+subtitle: "Phexora Cash — unreleased evidence-plan clarifications to research design 0.5.4"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
 date: "2026-11-08"
 version: "0.5.4-research"
@@ -31,6 +31,11 @@ abstract: |
 ---
 
 # 1. Purpose and status
+
+**Programme identity:** This is the Phexora Cash verification plan. Quantum
+remains the historical protocol codename used in the plan and stable filenames.
+The display-name change leaves protocol identifiers, task and scenario IDs,
+reviewer roles, requirements and acceptance gates unchanged.
 
 This working copy contains unreleased clarifications to the 0.5.4-research
 baseline, dated 2026-11-08. Campaigns must pin exact source hashes and obtain
@@ -1686,6 +1691,9 @@ At the current revision the project is a **research design**.
 # 13. Revision record
 
 ## Unreleased — 2026-11-08
+
+- identified the programme as Phexora Cash while retaining the historical
+  Quantum protocol codename, task IDs and evidence contracts;
 
 - clarified T001/T103/T104 security and construction evidence and T305
   component-cost and proof-distribution measurements;

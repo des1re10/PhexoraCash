@@ -33,7 +33,7 @@ download must document its separate privacy, availability and trust properties.
 
 ## Reproduce and inspect
 
-From the Aegis repository root:
+From the Phexora Cash repository root:
 
 ```bash
 python3 tools/feasibility_screen.py \
@@ -59,4 +59,4 @@ prover implementation, a named receiving/network reviewer must examine a bounded
 discovery/catch-up alternative and approve numeric T006 inputs. Only then revisit
 the existing T305 protocol with independent cryptography/proof reviewers.
 No enterprise performance or deployable blockchain pitch is justified. Keep
-Aegis out of the initial inference partner brief.
+Phexora Cash out of the initial inference partner brief.

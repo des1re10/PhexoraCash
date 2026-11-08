@@ -3,24 +3,25 @@
 > CRITICAL: Apply audit prompts from the `CRITICAL: Audit Prompt Compliance (Mandatory)` section before any code/review work.
 
 ## Repo overview
-- Repo: `Phexora Aegis`
-- App registry entries: aegis
-- aegis: Phexora Aegis - privacy, scalability and post-quantum security research - static documentation site; domain aegis.phexora.ai; backend none (static site); frontend none; redis n/a; status none; enabled
+- Repo: `Phexora Cash`
+- App registry entries: cash
+- cash: Phexora Cash - privacy, scalability and post-quantum security research - static documentation site; domain cash.phexora.ai; backend none (static site); frontend none; redis n/a; status none; enabled
 - Registry source: `Libraries/Python/ApplicationRegistry.py` (ports, domains, scripts, Redis DBs)
+- Phexora Cash uses the `PhexoraCash` repository, `cash` registry ID and `cash.phexora.ai` host. See `README.md#publication-identity` for publication and migration prerequisites.
 
 ## Quick start
 - Read: `README.md`, `CLAUDE.md`, `Documentation/`
-- Prefer startup scripts in `tools/Scripts/Startup`: `tools/Scripts/Startup/run_phexora_aegis.sh`
+- Prefer startup scripts in `tools/Scripts/Startup`: `tools/Scripts/Startup/run_phexora_cash.sh`
 - Local start scripts in repo root: `start-local.bat`, `start-local.sh`
 
 ## Setup
 - No dependency manifests detected; treat as docs/assets unless README says otherwise
 
 ## Commands
-- Dev: `tools/Scripts/Startup/run_phexora_aegis.sh`, `start-local.bat`, `start-local.sh`
+- Dev: `tools/Scripts/Startup/run_phexora_cash.sh`, `start-local.bat`, `start-local.sh`
 
 ## Notes
-- Deploy scripts: `tools/Scripts/Startup/phexora_aegis_deploy_script.sh`
+- Deploy scripts: `tools/Scripts/Startup/phexora_cash_deploy_script.sh`
 
 ## Fail-Fast Policy (Mandatory)
 - For all Python changes, follow: `/mnt/d/workspace/VisualStudio/Libraries/Scripts/audit_prompts/03_defensive_programming_violations.md`.

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # ============================================================================
-# Phexora Aegis - Server Deployment Script
+# Phexora Cash - Server Deployment Script
 # ============================================================================
 # Deploys static documentation website from pCloud to web server
 # Uses shared deployment infrastructure for consistency with other projects
 #
-# Usage: ./phexora_aegis_deploy_script.sh
+# Usage: ./phexora_cash_deploy_script.sh
 # ============================================================================
 
 # Fix own line endings first (handles Windows CRLF -> Unix LF)
@@ -35,7 +35,7 @@ if [ -n "${SCRIPT_REAL_PATH:-}" ] && [ -f "$SCRIPT_REAL_PATH" ]; then
 else
     SCRIPT_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" >/dev/null 2>&1 && pwd)"
 fi
-AEGIS_OUTPUT_FILE=""
+CASH_OUTPUT_FILE=""
 
 # Determine the system type
 SYSTEM=$(uname -s)
@@ -48,12 +48,12 @@ if [[ "$SYSTEM" == "Linux" ]]; then
         exit 1
     else
         # Linux server - pCloud mounted
-        SOURCE_BASE="$HOME/pCloudDrive/Crypto Folder/Phexora Aegis Sources/Phexora Aegis"
+        SOURCE_BASE="$HOME/pCloudDrive/Crypto Folder/Phexora Cash Sources/Phexora Cash"
         HOME_BASE="$HOME"
     fi
 elif [[ "$SYSTEM" == "Darwin" ]]; then
     # Mac path
-    SOURCE_BASE="$HOME/pCloudDrive/Crypto Folder/Phexora Aegis Sources/Phexora Aegis"
+    SOURCE_BASE="$HOME/pCloudDrive/Crypto Folder/Phexora Cash Sources/Phexora Cash"
     HOME_BASE="$HOME"
 else
     echo "Unsupported system type: $SYSTEM"
@@ -65,7 +65,7 @@ if [ -n "${SOURCE_BASE_OVERRIDE:-}" ]; then
 fi
 
 echo "================================================"
-echo "  Phexora Aegis - Server Deployment"
+echo "  Phexora Cash - Server Deployment"
 echo "================================================"
 echo ""
 echo "Source directory: $SOURCE_BASE"
@@ -120,14 +120,14 @@ fi
 
 # Set paths based on deployment target
 if [ "$DEPLOY_TARGET" == "main" ]; then
-    TARGET_DIR="$HOME_BASE/PhexoraAegis/PhexoraAegis"
-    WEB_ROOT="/var/www/phexora-aegis"
-    DOMAIN="aegis.phexora.ai"
+    TARGET_DIR="$HOME_BASE/PhexoraCash/PhexoraCash"
+    WEB_ROOT="/var/www/phexora-cash"
+    DOMAIN="cash.phexora.ai"
     echo "Deploying to MAIN server: $WEB_ROOT"
 else
-    TARGET_DIR="$HOME_BASE/PhexoraAegisTest/PhexoraAegis"
-    WEB_ROOT="/var/www/phexora-aegis-test"
-    DOMAIN="test.aegis.phexora.ai"
+    TARGET_DIR="$HOME_BASE/PhexoraCashTest/PhexoraCash"
+    WEB_ROOT="/var/www/phexora-cash-test"
+    DOMAIN="test.cash.phexora.ai"
     echo "Deploying to TEST server: $WEB_ROOT"
 fi
 
@@ -219,7 +219,7 @@ echo ""
 echo "=== Deployment Configuration ==="
 echo "Source: $SOURCE_BASE"
 echo "Target Project: $TARGET_DIR"
-echo "Shared Libraries payload: not applicable (Phexora Aegis is a static non-consumer)"
+echo "Shared Libraries payload: not applicable (Phexora Cash is a static non-consumer)"
 echo "Web Root: $WEB_ROOT"
 echo "Domain: $DOMAIN"
 echo ""
@@ -247,21 +247,21 @@ mkdir -p "$TARGET_DIR" 2>/dev/null || true
 static_publish_command mkdir -p "$WEB_ROOT"
 echo "  Directories ready (including web root)"
 
-# === Deploy Phexora Aegis using shared script ===
+# === Deploy Phexora Cash using shared script ===
 echo ""
-echo "=== Deploying Phexora Aegis ==="
-AEGIS_OUTPUT_FILE="$(mktemp)"
-register_deploy_temp_file "$AEGIS_OUTPUT_FILE"
+echo "=== Deploying Phexora Cash ==="
+CASH_OUTPUT_FILE="$(mktemp)"
+register_deploy_temp_file "$CASH_OUTPUT_FILE"
 bash "$SHARED_DEPLOY_SCRIPT" \
-    "PhexoraAegis" \
+    "PhexoraCash" \
     "$SOURCE_BASE" \
     "$TARGET_DIR" \
     "$DEPLOY_TARGET" \
-    "n" 2>&1 | tee "$AEGIS_OUTPUT_FILE"
-AEGIS_OUTPUT=$(<"$AEGIS_OUTPUT_FILE")
-rm -f "$AEGIS_OUTPUT_FILE"
-unregister_deploy_temp_file "$AEGIS_OUTPUT_FILE"
-AEGIS_OUTPUT_FILE=""
+    "n" 2>&1 | tee "$CASH_OUTPUT_FILE"
+CASH_OUTPUT=$(<"$CASH_OUTPUT_FILE")
+rm -f "$CASH_OUTPUT_FILE"
+unregister_deploy_temp_file "$CASH_OUTPUT_FILE"
+CASH_OUTPUT_FILE=""
 
 echo "  Verifying deployed site files..."
 for required_path in "index.html" "assets" "papers" "LICENSE"; do
@@ -277,7 +277,7 @@ for markdown_file in "${PUBLIC_MARKDOWN_FILES[@]}"; do
     fi
 done
 
-# === Copy to web root (Phexora Aegis-specific: static website served by nginx) ===
+# === Copy to web root (Phexora Cash-specific: static website served by nginx) ===
 echo ""
 echo "[2/5] Deploying to web root..."
 echo "  Deploying to web root: $WEB_ROOT"
@@ -316,12 +316,12 @@ echo "  ✓ Web root deployment complete"
 MANIFEST_FILE="$TARGET_DIR/deployment_sync_manifest.json"
 validate_sync_manifest "$MANIFEST_FILE"
 
-read -r AEGIS_ITEMS AEGIS_FILES <<< "$(parse_deployment_counts "$AEGIS_OUTPUT")"
+read -r CASH_ITEMS CASH_FILES <<< "$(parse_deployment_counts "$CASH_OUTPUT")"
 display_app_only_deployment_summary \
-    "Phexora Aegis" \
-    "$AEGIS_OUTPUT" \
-    "$AEGIS_ITEMS" \
-    "$AEGIS_FILES"
+    "Phexora Cash" \
+    "$CASH_OUTPUT" \
+    "$CASH_ITEMS" \
+    "$CASH_FILES"
 
 # Cleanup source manifests
 if should_cleanup_source_manifests; then
@@ -353,7 +353,7 @@ echo "  Deployed $WEB_FILE_COUNT files to $WEB_ROOT"
 
 # === Run startup script for nginx/SSL setup ===
 echo "[5/5] Running startup script for nginx configuration..."
-STARTUP_SCRIPT="$TARGET_DIR/tools/Scripts/Startup/run_phexora_aegis.sh"
+STARTUP_SCRIPT="$TARGET_DIR/tools/Scripts/Startup/run_phexora_cash.sh"
 if [ ! -f "$STARTUP_SCRIPT" ]; then
     echo "ERROR: Required startup script not found: $STARTUP_SCRIPT"
     exit 1
@@ -390,7 +390,7 @@ echo "NEXT STEPS:"
 echo "=============="
 if [ "$DEPLOY_TARGET" == "test" ]; then
     echo "1. Verify test site at http://$DOMAIN"
-    echo "2. Check nginx logs: sudo tail -20 /var/log/nginx/aegis_error.log"
+    echo "2. Check nginx logs: sudo tail -20 /var/log/nginx/cash_error.log"
 else
     echo "1. Verify site at https://$DOMAIN"
     echo "2. Check all papers load correctly"

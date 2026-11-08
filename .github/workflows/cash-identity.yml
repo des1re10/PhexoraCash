@@ -1,10 +1,10 @@
-name: aegis-identity
+name: cash-identity
 
 on:
   push:
     branches: [main]
     paths:
-      - '.github/workflows/aegis-identity.yml'
+      - '.github/workflows/cash-identity.yml'
       - 'README.md'
       - 'AGENTS.md'
       - 'CLAUDE.md'
@@ -20,7 +20,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - '.github/workflows/aegis-identity.yml'
+      - '.github/workflows/cash-identity.yml'
       - 'README.md'
       - 'AGENTS.md'
       - 'CLAUDE.md'
@@ -42,10 +42,10 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Aegis research repository
+      - name: Checkout Phexora Cash research repository
         uses: actions/checkout@v4
         with:
-          path: PhexoraAegis
+          path: PhexoraCash
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -57,27 +57,27 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Validate Aegis operational identity
-        working-directory: PhexoraAegis
+      - name: Validate Phexora Cash branding and deployment identity
+        working-directory: PhexoraCash
         shell: bash
         run: |
           set -euo pipefail
-          grep -Fq '# Phexora Aegis' README.md
-          grep -Fq 'aegis.phexora.ai' README.md
-          grep -Fq 'Phexora Aegis' index.html
-          test -f tools/Scripts/Startup/run_phexora_aegis.sh
-          test -f tools/Scripts/Startup/phexora_aegis_deploy_script.sh
+          grep -Fq '# Phexora Cash' README.md
+          grep -Fq 'cash.phexora.ai' README.md
+          grep -Fq 'Phexora Cash' index.html
+          test -f tools/Scripts/Startup/run_phexora_cash.sh
+          test -f tools/Scripts/Startup/phexora_cash_deploy_script.sh
           test ! -e tools/Scripts/Startup/run_quantum.sh
           test ! -e tools/Scripts/Startup/quantum_deploy_script.sh
           test ! -e Documentation/Quantum_Market_Thesis.html
-          test -f Documentation/Phexora_Aegis_Market_Thesis.html
-          grep -Fq 'get_application("aegis")' start-local.sh
-          grep -Fq "get_application('aegis')" start-local.bat
-          grep -Fq 'PhexoraAegis/PhexoraAegis' tools/Scripts/Startup/phexora_aegis_deploy_script.sh
-          grep -Fq 'PhexoraAegisTest/PhexoraAegis' tools/Scripts/Startup/phexora_aegis_deploy_script.sh
-          grep -Fq 'https://github.com/des1re10/PhexoraAegis' README.md
-          grep -Fq 'https://github.com/des1re10/PhexoraAegis' index.html
-          stale_matches="$(git grep -InE 'quantum\.phexora\.ai|run_quantum\.sh|quantum_deploy_script\.sh|get_application\(["'\'' ]*quantum["'\'' ]*\)|QuantumTest|Phexora Aegis/Phexora Aegis|QUANTUM_(OUTPUT|NGINX)|maintenance_quantum|quantum_(access|error)\.log|github\.com/des1re10/Quantum|github\.com/des1re10/Phexora-Aegis' -- README.md AGENTS.md CLAUDE.md index.html Documentation assets tools start-local.sh start-local.bat build-pdfs.sh build-pdfs.bat || true)"
+          test -f Documentation/Phexora_Cash_Market_Thesis.html
+          grep -Fq 'get_application("cash")' start-local.sh
+          grep -Fq "get_application('cash')" start-local.bat
+          grep -Fq 'PhexoraCash/PhexoraCash' tools/Scripts/Startup/phexora_cash_deploy_script.sh
+          grep -Fq 'PhexoraCashTest/PhexoraCash' tools/Scripts/Startup/phexora_cash_deploy_script.sh
+          grep -Fq 'https://github.com/des1re10/PhexoraCash' README.md
+          grep -Fq 'https://github.com/des1re10/PhexoraCash' index.html
+          stale_matches="$(git grep -InE 'quantum\.phexora\.ai|run_quantum\.sh|quantum_deploy_script\.sh|get_application\(["'\'' ]*quantum["'\'' ]*\)|QuantumTest|Phexora Cash/Phexora Cash|QUANTUM_(OUTPUT|NGINX)|maintenance_quantum|quantum_(access|error)\.log|github\.com/des1re10/Quantum|github\.com/des1re10/Phexora-Cash' -- README.md AGENTS.md CLAUDE.md index.html Documentation assets tools start-local.sh start-local.bat build-pdfs.sh build-pdfs.bat || true)"
           if [[ -n "$stale_matches" ]]; then
             printf '%s\n' "$stale_matches"
             echo 'Stale operational Quantum identity remains'
@@ -85,24 +85,24 @@ jobs:
           fi
 
       - name: Validate shell and site syntax
-        working-directory: PhexoraAegis
+        working-directory: PhexoraCash
         shell: bash
         run: |
           set -euo pipefail
-          bash -n tools/Scripts/Startup/run_phexora_aegis.sh
-          bash -n tools/Scripts/Startup/phexora_aegis_deploy_script.sh
+          bash -n tools/Scripts/Startup/run_phexora_cash.sh
+          bash -n tools/Scripts/Startup/phexora_cash_deploy_script.sh
           bash -n build-pdfs.sh
           bash -n start-local.sh
           node --check assets/js/site-i18n.js
 
       - name: Validate public metadata and link targets
-        working-directory: PhexoraAegis
+        working-directory: PhexoraCash
         shell: bash
         run: |
           set -euo pipefail
-          grep -Fq '<link rel="canonical" href="https://aegis.phexora.ai/">' index.html
-          grep -Fq 'property="og:url" content="https://aegis.phexora.ai/"' index.html
-          grep -Fq 'property="og:site_name" content="Phexora Aegis"' index.html
+          grep -Fq '<link rel="canonical" href="https://cash.phexora.ai/">' index.html
+          grep -Fq 'property="og:url" content="https://cash.phexora.ai/"' index.html
+          grep -Fq 'property="og:site_name" content="Phexora Cash"' index.html
           python3 - <<'PY'
           import os, re, sys
           missing = []
@@ -122,11 +122,11 @@ jobs:
                       missing.append(f'{markdown} -> {target}')
           if missing:
               print('\n'.join(missing))
-              sys.exit('Aegis links point at missing targets')
+              sys.exit('Phexora Cash links point at missing targets')
           PY
 
       - name: Preserve released 0.5.4 publication artifacts
-        working-directory: PhexoraAegis
+        working-directory: PhexoraCash
         shell: bash
         run: |
           set -euo pipefail
