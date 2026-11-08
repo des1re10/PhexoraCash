@@ -36,7 +36,7 @@ reviewed profiles and do not inherit the base protocol's claims.
 
 ## Current status
 
-**Research design 0.5.4-research — not implementation-ready or production-safe.**
+**Research design 0.5.4-research with unreleased clarifications — not implementation-ready or production-safe.**
 
 This repository currently contains a static documentation website, a research
 design, a verification plan, and a transaction-feasibility pre-registration
@@ -48,7 +48,7 @@ benchmark.
 |---|---|
 | SHAKE256 and ML-KEM-1024 | Standards selected; integration not verified |
 | Spend authorization | FIPS 205 SLH-DSA-SHAKE-256f incumbent and required 256s comparator; comparative gate open |
-| Lattice commitment | Blocking research gate |
+| Note commitment | Hash-based and lattice-based candidates; blocking research gate |
 | STARK validity proof | Blocking research gate |
 | Complete 2-input/2-output transaction proof | Experiment specified; implementation and result absent |
 | Receiving, offline catch-up and transport costs | Early T006 screen specified before T305; not run |
@@ -67,13 +67,15 @@ cannot be demonstrated.
 
 ## Publication identity
 
-Phexora Aegis is the current programme name. The already released 0.5.4-research
-paper set and its generated PDFs retain the historical project codename
-`Quantum` in filenames and publication text so the published revision remains
-reproducible. A future paper revision may adopt the Aegis publication name only
-together with regenerated PDFs, updated checksums, and the normal research
-review gates. The historical codename is not the current product or programme
-name.
+Phexora Aegis is the current programme name. The papers retain the historical
+project codename `Quantum` in filenames and publication text. The working
+sources and regenerated PDFs now contain explicitly unreleased clarifications
+to the published 0.5.4-research specification/guide and 0.4.0 feasibility
+protocol. The published baseline remains in Git history; reproduction and
+campaign approval must identify the exact source commit and artifact hashes.
+A publication-name change or new release still requires regenerated PDFs and
+the normal research review gates. The historical codename is not the current
+product or programme name.
 
 ## Research documents
 
@@ -121,7 +123,7 @@ may become an active paper.
 | Authorization | Stateless incumbent: SLH-DSA-SHAKE-256f; required 256s comparator; stateful comparators: independently specified one-time tree and applicable NIST SP 800-208 profile | Same-relation cost, state-failure model, and separate material-benefit decisions open |
 | Key encapsulation | ML-KEM-1024, NIST FIPS 203 | Authenticated composition open |
 | Validity proof | Transparent STARK | Exact AIR/FRI/ZK profile open |
-| Note commitment | Reviewed lattice construction | Construction and parameters open |
+| Note commitment | Hash-based or lattice-based construction | Construction, parameters and review open |
 | Consensus | Versioned GHOSTDAG-based PoW profile | State ordering, DAA and finality open |
 | Origin privacy | Dedicated anonymous transport layer | Protocol and analysis open |
 | Validator operability | Versioned profile frozen before result interpretation | Exact ceilings and G7/G10 evidence open |

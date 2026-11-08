@@ -1,8 +1,8 @@
 ---
 title: "Quantum: Privacy-Preserving Post-Quantum DAG Protocol"
-subtitle: "Research Design Draft 0.5.4-research and Security Requirements"
+subtitle: "Unreleased clarifications to research design 0.5.4-research"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
-date: "2026-09-05"
+date: "2026-11-08"
 version: "0.5.4-research"
 status: "Research design draft — not implementation-ready, audited, or production-safe"
 license: "CC0-1.0; see repository LICENSE"
@@ -45,7 +45,10 @@ no conformant implementation, testnet, security proof, external audit, or
 production network at this revision.
 
 The legacy filename contains “v1” so that existing links remain valid. The
-normative document version is <code>0.5.4-research</code>.
+baseline is <code>0.5.4-research</code>. This working copy contains unreleased
+clarifications dated 2026-11-08; it is not the unchanged published revision
+or an approved experiment profile. Evidence MUST identify the exact source
+commit and file hashes, not the baseline version alone.
 
 The words **MUST**, **MUST NOT**, **REQUIRED**, **SHOULD**, and **MAY** describe
 research acceptance criteria. They do not imply that an implementation already
@@ -677,6 +680,12 @@ The selected KEM candidate is <code>ML-KEM-1024</code> from
 [NIST FIPS 203](https://csrc.nist.gov/pubs/fips/203/final), including applicable
 NIST errata and KATs.
 
+T001 MUST justify this parameter set and each retained authorisation profile
+against R3.1's composed post-quantum target. NIST security categories and
+parameter names are not equivalent to concrete post-quantum security bits.
+Any smaller parameter comparator requires its own security argument and
+reviewed campaign; smaller encodings alone cannot justify a replacement.
+
 ML-KEM is not an authenticated transport protocol. The final note-encryption
 and P2P profiles MUST specify KEM composition, transcript binding, key
 derivation, authenticated encryption, nonce rules, replay protection, identity
@@ -733,6 +742,14 @@ Homomorphism is not required: exact conservation is proved inside the
 transaction validity relation. If homomorphism is later added, carry semantics
 and all algebraic assumptions require a separate proof.
 
+T103/T104 MUST admit both hash-based and lattice-based candidates under this
+same interface and security target. Construction-specific obligations apply
+only to the selected construction: a hash commitment requires reviewed
+randomness, hiding/binding and digest-length arguments; a lattice commitment
+requires its sampler, matrix and hardness estimates. A hash commitment may
+remove the commitment's additional lattice assumption, but does not remove
+lattice assumptions used by ML-KEM or a selected homomorphic retrieval service.
+
 ## 4.5 Zero-knowledge proof system — blocking gate
 
 The candidate family is a transparent hash-based STARK, informed by the
@@ -771,6 +788,16 @@ the compact aggregate plus authenticated transaction references while omitting
 the individual proofs it replaces. The aggregate relation MUST bind the exact
 ordered transaction set, public inputs, pre-state, and post-state; aggregation
 MUST NOT turn proof generation into a trusted service.
+
+The carriage profile for each retained proof mode MUST also specify the path
+before block publication: wallet admission, any individual-proof transfer to
+aggregators, any aggregate distribution, and validator receipt. A smaller consensus block does
+not establish lower network load if large individual proofs are first gossiped
+to the same validators. T006 models and T305/T604 measure bytes per hop,
+fanout, batching delay, aggregator work, retries, withholding and outage
+behaviour. Aggregate-before-wide-distribution is a candidate, not a mandatory
+topology; any selected path must meet the same frozen R9/R10 bounds without a
+trusted sole aggregator or an unreported full-proof fallback.
 
 T304/T305 may first measure this relation against an explicitly labelled
 test state context. T503–T505 supply the final canonical DAG and monetary
@@ -1508,6 +1535,17 @@ target is possible only with a measured combination of compact representations,
 pruning/state commitments, and a separate recovery design. These calculations
 are mandatory design inputs, not optional optimizations.
 
+These are illustrative budgets, not T005 acceptance thresholds. At continuous
+1,000 two-input transactions/s, 63,072,000,000 new nullifiers arise in a
+365-day year. An explicit 48-byte-per-entry representation alone occupies
+3.027456 TB/year before indexes, proofs, replication or recovery data. This
+is not a lower bound for every validator representation. T403 MUST compare
+explicit state with any proposed authenticated witness-carrying representation,
+including provider storage, witness creation/update and offline recovery.
+Pruning MUST NOT forget spent identity or permit double spending. Expiry or
+migration is a separate reviewed protocol choice subject to R7.10; it cannot
+silently strand an offline wallet's funds or erase a spent note's identity.
+
 The final profile MUST publish budgets for:
 
 - average and worst-case wire transaction size;
@@ -1530,6 +1568,14 @@ encrypted-payload bytes, total bytes generated per payment, provider/retrieval
 traffic, and availability and retention assumptions. Digest-only carriage
 MUST NOT reduce the reported client or wire feasibility cost by moving required
 bytes to an unreported provider.
+
+For each required retrieval, aggregation, state/recovery and mix/relay role,
+the profile MUST identify the payer, resource and service assumptions, payment
+metadata leakage, admission/abuse limits, and behaviour on non-payment,
+provider exit, censorship or correlated outage. T006/T305/T403/T602/T605 own
+their respective role evidence; T604 checks the combined cost and availability
+budget. Any subsidy or protocol-fee allocation change must separately pass
+R12/T506; presumed volunteer capacity or token issuance is not funding proof.
 
 ## 9.3 Pre-node cryptographic feasibility gate
 
@@ -1597,6 +1643,22 @@ retrieval path, including malicious outputs, missed notes, false positives,
 offline catch-up, provider work and query leakage. It MUST also evaluate the
 traffic and latency cost of candidate batching, mixing and cover traffic
 against the named observer, including idle clients and correlated retries.
+
+For every private-retrieval candidate, the screen MUST distinguish recipient
+privacy from response completeness. An empty response is not proof that no
+payment exists. The candidate MUST specify how the wallet authenticates the
+covered canonical range and detects omitted, truncated, stale or equivocated
+results from a malicious provider. Unavailable or unverifiable coverage must
+remain visibly incomplete, with a bounded recovery path; agreement among
+providers alone is not a completeness proof. T404/T605 must verify these
+failure paths in implementation before any complete-catch-up claim.
+
+Any time-window or bucket candidate MUST report its anonymity set, query
+linkability, missed-note risk and total work over the same history. Splitting
+all messages into smaller batches does not itself reduce total scan work.
+SophOMR and InstantOMR are prior-work comparators, not evidence that this
+protocol meets its active-adversary, composed-security or provider budgets.
+
 At 1,000 two-output transactions/s, one 1,568-byte ML-KEM-1024 ciphertext per
 output alone gives 270,950,400,000 bytes/day before payloads and overhead.
 This is a lower-bound workload calculation, not an implemented wallet cost.
@@ -1824,6 +1886,17 @@ Each item has an owner task in the verification guide. A value becomes
 normative only with rationale, vectors, tests, and review.
 
 # Appendix B — Revision record
+
+## Unreleased — 2026-11-08
+
+- clarified construction-specific commitment evidence and composed-security
+  parameter justification;
+- required full proof-distribution accounting, malicious-provider retrieval
+  completeness and explicit helper-service funding and failure assumptions;
+- distinguished nullifier-state representations while retaining offline
+  recovery and consumed-note protection; and
+- retained all R1–R12 requirements and research/no-result labels; these
+  clarifications do not record a new release or an approved campaign.
 
 ## 0.5.4-research — 2026-09-05
 

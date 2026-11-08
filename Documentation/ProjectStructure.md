@@ -71,10 +71,14 @@ PhexoraAegis/
 The [receive-floor supplement](ResearchEvaluation/README.md) retains its config
 and source-bound analytic output under `Documentation/ResearchEvaluation/`.
 It is an internal exploratory screen, not an active paper, implemented wallet
-or approved T006/T305 result. Active-paper sources and PDFs are unchanged.
+or approved T006/T305 result. Its evidence remains separate from the active
+papers and does not approve their receiving or transport profiles.
 
 - Root-level Markdown files in `papers/zkprivacy/` are the authoritative active
   publication sources; same-name PDFs are generated artifacts.
+- The current working papers contain unreleased clarifications to the listed
+  0.5.4/0.4.0 baselines. Their status sections distinguish these edits from a
+  released revision; campaign evidence must bind exact source/artifact hashes.
 - Active sources select DocWizard's `scientific` style in YAML front matter.
   The normative specification and verification guide retain their explicit
   section numbers.

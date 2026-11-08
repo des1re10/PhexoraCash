@@ -1,8 +1,8 @@
 ---
 title: "Quantum Research Implementation and Verification Plan"
-subtitle: "Evidence plan for the 0.5.4 research design"
+subtitle: "Unreleased evidence-plan clarifications to research design 0.5.4"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
-date: "2026-09-05"
+date: "2026-11-08"
 version: "0.5.4-research"
 status: "Planning document — no conformant implementation or completed verification"
 license: "CC0-1.0; see repository LICENSE"
@@ -31,6 +31,10 @@ abstract: |
 ---
 
 # 1. Purpose and status
+
+This working copy contains unreleased clarifications to the 0.5.4-research
+baseline, dated 2026-11-08. Campaigns must pin exact source hashes and obtain
+the existing owner/reviewer approvals; these edits do not approve a profile.
 
 This guide turns the Quantum research requirements into an ordered body of
 work. It does **not** certify the design, prove security, or report completed
@@ -245,6 +249,10 @@ post-quantum security target.
 - explicit definition of ledger privacy, recipient-key privacy, and network
   anonymity;
 - per-component and composed security budget;
+- explicit justification of ML-KEM and authorisation parameters against R3.1,
+  distinguishing NIST security categories from concrete post-quantum attack
+  costs after composition; smaller parameter sets require a separate reviewed
+  profile and cannot inherit the target from their name or category;
 - quantum collision, preimage, and second-preimage cost models, including
   time/memory assumptions, multi-target loss, and required digest lengths;
 - wallet target counts and the source-entropy bound required of the complete
@@ -382,6 +390,16 @@ and independent performance and network-privacy review. Proofs or transport
 components not yet implemented are explicitly modelled, with a frozen size
 and cost sweep rather than fictitious throughput or anonymity evidence.
 
+For each retrieval candidate, specify authenticated canonical coverage and
+malicious-provider omission, false-empty, truncation, stale-range and
+equivocation cases, including client-visible incomplete status and bounded
+recovery. A passive privacy argument or matching provider replies do not
+prove completeness. Window/bucket variants must quantify privacy loss and
+total work over the same history. The transport model must include the
+wallet-to-validator path (including any aggregators), individual-proof fanout, batching,
+retries and outages. Each required service must expose its payer, cost,
+payment leakage, abuse limits and exit assumptions under specification 9.2.
+
 **Pass:** return NOT_RULED_OUT only if at least one candidate satisfies all
 applicable frozen screening thresholds throughout the declared envelope,
 including required evidence and privacy assumptions. This permits T305; it is
@@ -425,9 +443,15 @@ floating-point roots, undocumented padding, or silent reduction.
 inventing a new formula.
 
 **Deliverables:** construction citation and delta from it; exact parameters;
-matrix/seed generation; canonical encodings; unbiased rejection samplers;
+construction-specific parameter/seed generation; canonical encodings;
+unbiased randomness sampling (including rejection sampling where required);
 commit/open API; note-field binding; deterministic test mode isolated from
 production entropy.
+
+Hash-based and lattice-based candidates are eligible under specification 4.4;
+matrix generation is required only by constructions that use it. Freeze one
+commitment before the T305 authorisation comparison; changing it starts a
+separate campaign rather than confounding the authorisation results.
 
 **Pass:** correctness and vectors pass and the artifact is ready for T104
 analysis. **Reject:** byte modulo sampling, reused randomness, invertible-linear
@@ -439,8 +463,12 @@ encoding.
 **Objective:** Decide whether the commitment candidate meets R1, R3, and R4.
 
 **Deliverables:** quantum hiding/binding definitions and reduction; concrete
-parameter estimates with reproducible lattice-estimator inputs; multi-target
-loss; side-channel review; independent cryptographer report.
+parameter estimates and multi-target/lifetime loss; side-channel review;
+independent cryptographer report. For lattice candidates include reproducible
+lattice-estimator inputs; for hash candidates include the randomness/hiding
+argument, required hash properties, digest lengths and quantum cost models.
+An assumption inventory must also cover ML-KEM and any homomorphic retrieval
+scheme; removing a lattice commitment does not remove their assumptions.
 
 **Pass:** composed security remains at least 128 post-quantum bits and all
 findings are resolved. **Reject:** collision-search testing is used as proof,
@@ -693,6 +721,13 @@ pre-registered material-benefit criteria; clearly labelled reproduced versus
 author-reported prior-work measurements; raw artifacts; and a signed
 GO/ADAPT/REPLICATE/STOP decision.
 
+Break down trace rows/cycles, time and memory for authorisation, commitments,
+Merkle paths, nullifiers, ML-KEM/KDF/AEAD binding, ranges/balance and proof
+overhead; report shared work without double counting. Hash-call or permutation
+counts are analytical estimates, not measured proving costs. Include the
+specification 4.5 carriage path, per-hop bytes/fanout, aggregator resources and
+failure behaviour; amortised proof bytes are not complete transaction bytes.
+
 **Pass:** the run reuses the canonical T402 codec and staged digest vectors,
 its actual output/packet sizes remain within a NOT_RULED_OUT T006 envelope,
 and it satisfies every T004 method and every T005 threshold frozen
@@ -765,6 +800,13 @@ nullifier checks; snapshot/recovery format; reorg journal; concurrency model;
 invariants and crash tests; role-specific current-state representations; and,
 if witness-carrying state is proposed, exact membership/non-membership, append,
 update, batch, rollback and anti-replay witnesses plus wire/provider costs.
+
+Compare explicit-set and any witness-carrying storage over the declared
+lifetime at the same accepted-input rate. State bytes per entry, indexes,
+replication, witness maintenance, provider retention and offline-wallet
+recovery separately. A compact root does not erase global spent-state or
+availability obligations. Expiry/migration proposals require R7.10/T510 review,
+with no silent loss of old funds or renewed spending of consumed notes.
 
 State indexes and wallet records must retain authenticated note-instance
 identity. Revert removes orphaned positions and dependent spends before replay;
@@ -1156,7 +1198,8 @@ links.
 **Deliverables:** routing and cover-traffic protocol; peer/route selection;
 batch/delay distributions; active tagging, eclipse, Sybil and intersection
 analysis; simulator; reproducible attack experiments; utility/privacy tradeoff
-report.
+report; mix/relay cost, payer, payment-metadata leakage, abuse controls and
+provider-exit/outage scenarios under specification 9.2.
 
 **Metrics:** source-classification advantage, anonymity-set distribution,
 entropy, precision/recall for origin inference, latency, bandwidth
@@ -1179,6 +1222,12 @@ reconstruction threshold; repair/re-replication; retention and incentive model;
 wallet-recovery data; selective-withholding, eclipse, corrupted-provider and
 correlated-loss experiments; separation of public ledger data from R2 network-
 origin metadata.
+
+Apply specification 9.2's payer, cost, abuse and provider-exit contract to
+state/recovery services. With T404, test authenticated retrieval coverage and
+false-empty/stale responses, including offline-wallet witness recovery; a
+valid returned note or agreement between providers does not prove that all
+relevant notes were returned.
 
 **Pass:** executing validators reject unavailable current bodies, a new node
 and offline wallet recover through multiple untrusted providers inside T005,
@@ -1310,6 +1359,11 @@ Every relevant implementation must preserve a permanent regression test for:
 | A045 | Actual T305 payload/proof sizes exceed the T006 screening envelope | Integration stops pending a new reviewed campaign; no retroactive threshold change |
 | A046 | SP 800-230 key-use limit is exceeded through retries, multiple devices or restored backups | Exploratory arm is inapplicable or rejected; no final-standard or full-security claim |
 | A047 | Proof encoding or aggregate membership changes after a fee is signed | Fee and effects remain fixed; out-of-profile carriage fails admission instead of repricing the transaction |
+| A048 | Retrieval provider returns false-empty, truncated, stale or equivocated results | Coverage/completeness check fails or remains visibly incomplete; bounded recovery preserves the declared privacy model |
+| A049 | Compact blocks hide wide individual-proof gossip or an aggregator outage triggers unbudgeted full-proof propagation | Per-hop accounting exposes the cost; out-of-budget carriage fails the frozen profile |
+| A050 | Retrieval, aggregation, state or mix providers exit, censor, or demand payment outside the declared service model | Required service availability, costs and payment leakage remain within the frozen bounds or the gate fails |
+| A051 | Pruning, expiry or witness loss prevents offline recovery or revives a consumed note | R7.10 continuity and authenticated recovery hold; missing evidence cannot count as bounded operability |
+| A052 | A stateful A/B authorisation wallet crashes after signing and restores an older backup, then retries on multiple devices | No unsafe key-index reuse; recovery follows the reviewed T202 state contract or the arm fails |
 
 These are minimum cases, not a complete security test suite.
 
@@ -1326,6 +1380,11 @@ These are planned obligations; no row records executed tests or a passed gate.
 | A045 | R1, R2, R6, R9 | T005, T006, T305 | G3B; later G6, G7, G10 remain open |
 | A046 | R3, R4 | T001, T202, T204, T305 | G3A, G4, G9 |
 | A047 | R4, R6, R12 | T402, T304, T305, T506 | G3A, G4, G13 |
+| A048 | R1, R2, R10 | T006, T404, T605 | G3B, G6, G11 |
+| A049 | R6, R9, R10 | T006, T305, T604 | G3B, G3A, G7, G10 |
+| A050 | R2, R9, R10 | T006, T305, T403, T602, T604, T605 | G3B, G3A, G6, G10, G11 |
+| A051 | R4, R7.10, R9, R10 | T403, T404, T510, T605 | G5, G9, G10, G11 |
+| A052 | R3, R4, R7 | T202, T204, T305 | G3A, G4, G9 |
 
 # 8. Performance and capacity report
 
@@ -1625,6 +1684,17 @@ Only these labels may be used:
 At the current revision the project is a **research design**.
 
 # 13. Revision record
+
+## Unreleased — 2026-11-08
+
+- clarified T001/T103/T104 security and construction evidence and T305
+  component-cost and proof-distribution measurements;
+- assigned retrieval completeness, helper-service costs and failure
+  assumptions, and state/witness recovery evidence to their responsible tasks;
+- added planned scenarios A048–A052 with requirement, task and gate mappings;
+  and
+- retained independent review and exact-artifact requirements without
+  recording a passed task, benchmark, approval or new release.
 
 ## 0.5.4-research — 2026-09-05
 

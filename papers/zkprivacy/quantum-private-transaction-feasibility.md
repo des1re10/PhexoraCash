@@ -1,8 +1,8 @@
 ---
 title: "Stateless Versus Stateful Hash-Based Authorisation Inside a Private-Transaction STARK"
-subtitle: "Comparative reproducibility protocol for the Quantum 2-input/2-output gate"
+subtitle: "Unreleased clarifications to the Quantum 2-input/2-output protocol"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
-date: "2026-09-05"
+date: "2026-11-08"
 version: "0.4.0-research-protocol"
 status: "Research protocol — no implementation, benchmark result, security proof, or feasibility claim"
 license: "CC0-1.0; see repository LICENSE"
@@ -40,8 +40,10 @@ abstract: |
 
 # 1. Status and claim boundary
 
-This is a **research protocol**, not a result paper. At version
-<code>0.4.0-research-protocol</code>:
+This is a **research protocol**, not a result paper. This working copy contains
+unreleased clarifications dated 2026-11-08 to the
+<code>0.4.0-research-protocol</code> baseline. Campaigns must pin exact source
+hashes; this update is not an approved pre-registration. The status remains:
 
 - no complete Quantum transaction prover or verifier exists in this repository;
 - no TzEL-shaped or NIST stateful authorisation baseline has been independently
@@ -154,6 +156,11 @@ This is a scoped novelty review, not proof that no related manuscript exists.
 It must be repeated before submission and recorded with queries, dates, and
 screening decisions in the evidence manifest.
 
+A targeted source check on 8 November 2026 added SophOMR [SOPHOMR] and
+InstantOMR [INSTANTOMR] and checked the FIPS 203/205 parameter distinctions.
+This supplements the July novelty screen; it is not a new exhaustive search
+or a change to the T305 adopt/adapt/replicate decision.
+
 ## 3.2 Work that already addresses adjacent problems
 
 | Prior work | What it establishes or investigates | Why this paper must not repeat its claim |
@@ -169,6 +176,7 @@ screening decisions in the evidence manifest.
 | Post-Quantum Privacy Pass [PQPP] | A STARK-friendly post-quantum credential design with concrete token trade-offs | General-purpose post-quantum proofs of authorisation are not unique to Quantum |
 | GeT a CAKE [KEMANON] | Uses KEM anonymity and fuzziness in black-box KEM-to-PAKE transformations and analyses Kyber for those properties | Ordinary KEM confidentiality and ML-KEM standardisation alone cannot support a receiver-anonymity claim |
 | Oblivious Message Retrieval [OMR], PerfOMR [PERFOMR], and OCash [OCASH] | Private recipient detection/retrieval and anonymous light-client payments | Scalable private note discovery is substantial prior work and remains a separate Quantum integration question |
+| SophOMR [SOPHOMR] and InstantOMR [INSTANTOMR] | Homomorphic retrieval improvements in throughput, latency and parallelism | Provider work, malicious-provider completeness, exact PQ parameters and integration costs remain separate gates; latency reduction is not equivalent to less total CPU work |
 | Dandelion++ [DANDELION] and later P2P-anonymity analysis [P2PANON] | Transaction-origin routing and attacks/limits in cryptocurrency P2P networks | A generic transaction-origin anonymity paper would duplicate a mature line of work |
 | PHANTOM/GHOSTDAG [GHOSTDAG] | A blockDAG ordering protocol and security analysis | GHOSTDAG selection alone does not solve Quantum's nullifier, anchor, reward, and private-state semantics |
 
@@ -356,6 +364,24 @@ already well above the illustrative 25 KB direct-layer-1 transaction budget in
 the Quantum design unless a different aggregation, carriage, or system
 requirement is approved.
 
+The 25 KB figure is an illustrative topology budget, not a frozen T005 limit.
+T305 must distinguish amortised proof bytes from complete transaction bytes:
+the latter still include the selected ciphertext/payload carriage, commitments,
+nullifiers and framing. The specification's Section 4.5 also requires the
+wallet-to-validator path, including any aggregators, to be budgeted before wide distribution;
+omitting individual proofs from a block does not erase earlier gossip traffic.
+
+SophOMR's USENIX prepublication Table 4 reports 157 seconds for 65,536
+612-byte payloads, with at most 50 pertinent payloads, on one thread
+[SOPHOMR]. A linear extrapolation to 2,000 outputs/s gives about 115
+thread-hours per recipient per day of history. This is an author-reported
+benchmark extrapolation, not a measured Quantum cost, an end-to-end provider
+budget or a STOP decision. Exact payloads, security, preprocessing, service
+concurrency and completeness protection require their own T006 accounting.
+Its passive receiver-privacy model does not establish malicious-provider
+completeness. InstantOMR's latency/parallelism gains likewise do not establish
+lower total work [INSTANTOMR]. Both remain comparison inputs to T006.
+
 # 6. Frozen experiment statement
 
 ## 6.1 Public inputs
@@ -475,12 +501,27 @@ admissible.
 
 # 7. Cryptographic profiles that must be frozen
 
+T001 must justify every exact parameter set against the composed R3 target.
+NIST categories are comparative security benchmarks, not direct statements of
+128 post-quantum bits after multi-user and lifetime losses. For example,
+SLH-DSA-128s belongs to category 1 and ML-KEM-768 to category 3; their smaller
+encodings do not demonstrate security-equivalent replacements for the current
+category-5 candidates [FIPS203, FIPS205]. A changed security or hash profile
+requires a separately reviewed campaign, with the same R3 acceptance target.
+
 ## 7.1 Commitment
 
 The report must identify one reviewed construction, exact parameters, setup
 rules, randomness sampler, encodings, hiding and binding definitions, and
 concrete post-quantum estimates. A family name such as Module-LWE/Module-SIS or
 BDLOP is insufficient.
+
+Hash-based and lattice-based commitments are eligible under specification 4.4
+and T103/T104. Freeze the construction before comparing authorisation arms.
+For commitments, Merkle paths and proof-system hashes, identify the hash,
+digest length and concrete security argument, and measure its trace cost.
+An algebraic hash requires its own review and standardisation-status statement;
+an existing SHAKE gadget does not make additional SHAKE evaluations free.
 
 If the commitment cannot efficiently bind every note field required by the
 specification inside the selected proof system, the experiment fails its
@@ -643,7 +684,12 @@ contexts; a T305 AIR-only pass does not prove global freshness. Positive
 vectors must show that policy-permitted proof replacement preserves txid and
 fee. Builder tests reject self-referential digest dependencies and
 out-of-profile proof carriage; no fixed-point search is an accepted builder.
-The full corpus includes A039–A047 from the verification guide where relevant.
+The full corpus includes A039–A052 from the verification guide where relevant
+to each task, following its scenario-to-requirement mapping. T305 covers the
+assigned aspects of A049 (proof carriage), A050 (helper-service costs and
+failure assumptions), and A052 (stateful signing after crash/restore).
+Receiving-completeness and state-recovery scenarios retain their mapped
+owners; this cross-reference does not add them as transaction-proof constraints.
 
 # 9. Benchmark protocol
 
@@ -685,8 +731,9 @@ The raw record for every run must include:
 
 - authorisation arm and exact parameter revision;
 - end-to-end proof-generation latency;
-- per-component trace rows or cycles, including the isolated authorisation
-  contribution;
+- per-component trace rows/cycles, time and memory for authorisation,
+  commitments, Merkle paths, nullifiers, ML-KEM/KDF/AEAD binding,
+  ranges/balance and proof overhead, with shared work accounted once;
 - peak and steady resident memory;
 - proof bytes, full canonical consensus-transaction bytes, external encrypted-
   note payload bytes, and total generated bytes per payment;
@@ -696,12 +743,20 @@ The raw record for every run must include:
 - malformed-proof rejection time and allocation;
 - parallel-prover scaling and saturation;
 - aggregate creation latency, size, verifier cost, and amortisation;
+- per-hop admission/distribution bytes and fanout, batch-wait latency,
+  aggregator capacity, retries, withholding and outage behaviour;
 - preprocessing time and bytes; and
 - all warnings, failures, retries, and outliers.
 
 Single-wallet measurements run with only the frozen wallet parallelism.
 Separate throughput experiments may use additional workers, but their results
 must not be substituted for wallet latency.
+
+Analytical hash-call and Keccak-permutation counts must state the operation,
+message sizes, average/worst-case assumptions and excluded work. They do not
+measure AIR constraints, trace padding or end-to-end proving time. Neither
+signature nor encryption dominance may be reported as a result without the
+component measurements above.
 
 ## 9.3 Environments
 
@@ -856,6 +911,17 @@ in any comparison.
 
 # References
 
+- **[SOPHOMR]** Lee and Yeo, [SophOMR: Improved Oblivious Message Retrieval
+  from SIMD-Aware Homomorphic Compression](https://eprint.iacr.org/2024/1814),
+  ePrint 2024/1814, USENIX Security 2026; consulted 2026-11-08.
+  The 157-second figure is from Table 4 of the
+  [USENIX prepublication](https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_lee.pdf),
+  not a Quantum reproduction.
+- **[INSTANTOMR]** Liang et al., [InstantOMR: Oblivious Message Retrieval with
+  Low Latency and Optimal Parallelizability](https://eprint.iacr.org/2025/2317),
+  ePrint 2025/2317, revision 2026-05-02, USENIX Security 2026; consulted
+  2026-11-08. The latency/throughput distinction is discussed in Section 6.5
+  of the [USENIX prepublication](https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_liang.pdf).
 - **[FIPS203]** NIST, [FIPS 203: Module-Lattice-Based Key-Encapsulation
   Mechanism Standard](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf),
   2024.
@@ -937,6 +1003,17 @@ in any comparison.
   [PHANTOM and GHOSTDAG](https://eprint.iacr.org/2018/104.pdf), 2018.
 
 # Appendix A — Revision record
+
+## Unreleased — 2026-11-08
+
+- added a targeted SophOMR/InstantOMR source update, explicitly separate from
+  the earlier literature screen and from protocol measurements;
+- clarified parameter justification, component-cost measurement and the full
+  proof-distribution path, including helper-service costs;
+- extended the scenario cross-reference through A052 with task-specific
+  applicability; and
+- retained the published baseline identity without recording a new release,
+  approved campaign, benchmark result or gate pass.
 
 ## 0.4.0-research-protocol — 2026-09-05
 

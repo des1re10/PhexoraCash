@@ -341,3 +341,16 @@ constructions and claims.
   full-scan profile before costly implementation. Its exploratory inputs and
   ciphertext-only lower bound cannot establish protocol feasibility or security.
 - Kept the active research papers, evidence gates and public website unchanged.
+
+**Research-gate clarifications — 2026-11-08**
+
+- Clarified construction-specific commitment evidence, composed-security
+  parameter justification and measured component costs without selecting a
+  construction, lowering the R3 target or changing monetary policy.
+- Required explicit proof-distribution paths, malicious-provider retrieval
+  completeness, helper-service funding/exit assumptions and role-specific
+  nullifier/witness storage and recovery accounting.
+- Added planned scenarios A048–A052 and a scoped SophOMR/InstantOMR literature
+  update; no benchmark, specialist approval or gate pass is reported.
+- Marked the working papers as unreleased clarifications to their published
+  baselines, aligned commitment summaries and regenerated all three PDFs.
