@@ -64,4 +64,4 @@
 
 ## Coordination between active AI sessions
 
-- For simultaneous AI sessions, read [Agent coordination](../Agents/AgentCoordination.md). Join the shared live mailbox, announce scope, check messages during active work, and acknowledge ownership changes before mutations. This link intentionally targets the workspace protocol owned by Agents.
+- For simultaneous AI sessions, read [Agent coordination](https://github.com/des1re10/Agents/blob/main/AgentCoordination.md), available locally at `../Agents/AgentCoordination.md`. Join the shared live mailbox, announce scope, check messages during active work, and acknowledge ownership changes before mutations. Agents owns this workspace protocol; the repository URL also works outside the multi-repository checkout for authorized repository readers.
