@@ -379,6 +379,45 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
             </div>
         </section>
 
+        <section id="comparison" class="comparison-section">
+            <div class="section-heading">
+                <p class="section-kicker" data-i18n="home.comparisonKicker">Architectural comparison</p>
+                <h2 data-i18n="home.comparisonTitle">Phexora Cash vs. Bitcoin, Kaspa, and Monero</h2>
+                <p data-i18n="home.comparisonDescription">
+                    A 90-second technical overview of why existing chains force a trade-off between
+                    default privacy, BlockDAG throughput, and post-quantum security—and how the
+                    Phexora Cash research specification defines five mandatory release criteria.
+                </p>
+            </div>
+            <div class="comparison-video-card">
+                <div class="comparison-video-frame">
+                    <video
+                        id="comparison-video"
+                        class="comparison-video"
+                        controls
+                        preload="metadata"
+                        playsinline
+                        poster="assets/videos/PhexoraCash_BlockchainComparison_EN_16x9_poster.jpg"
+                        src="assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.mp4"
+                        aria-label="Architectural comparison video: Phexora Cash versus Bitcoin, Kaspa, and Monero"
+                        data-i18n-aria-label="home.comparisonVideoAria"
+                    >
+                        <track
+                            id="comparison-video-track"
+                            kind="captions"
+                            srclang="en"
+                            label="English"
+                            src="assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.en.vtt"
+                            default
+                        >
+                    </video>
+                </div>
+                <p class="comparison-video-caption" data-i18n="home.comparisonCaption">
+                    Research design 0.5.4-research · Target architecture and mandatory release gates, not a live network or token offer.
+                </p>
+            </div>
+        </section>
+
         <section id="papers" class="papers-section">
             <div class="section-heading section-heading-left">
                 <p class="section-kicker" data-i18n="home.publicationKicker">Research with a clear direction</p>

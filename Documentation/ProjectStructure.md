@@ -46,6 +46,7 @@ PhexoraCash/
 │   │   └── style.css                 # Main stylesheet
 │   ├── js/
 │   │   └── site-i18n.js              # Single DE/EN landing-page locale contract
+│   ├── videos/                       # Self-hosted DE/EN architectural comparison videos, posters, and WebVTT captions
 │   └── images/
 │       └── favicon.svg               # Site favicon
 │

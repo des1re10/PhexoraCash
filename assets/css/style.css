@@ -281,14 +281,52 @@ a:focus-visible {
 
 .status-section,
 .requirements-section,
+.comparison-section,
 .papers-section,
 .cta-section {
     padding: 4.5rem 5%;
 }
 
 .status-section,
+.comparison-section,
 .papers-section {
     background: var(--bg-primary);
+}
+
+.comparison-section {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-video-card {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.25rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.comparison-video-frame {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: #0d1322;
+    aspect-ratio: 16 / 9;
+}
+
+.comparison-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.comparison-video-caption {
+    margin-top: 0.85rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-align: center;
 }
 
 .requirements-section {
@@ -723,6 +761,7 @@ pre {
 
     .status-section,
     .requirements-section,
+    .comparison-section,
     .papers-section,
     .cta-section {
         padding: 3.5rem 5%;
@@ -847,6 +886,7 @@ pre {
 @media print {
     .navbar,
     .site-footer,
+    .comparison-section,
     .cta-section {
         display: none;
     }

@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.360
+Why do Bitcoin, Kaspa, and Monero force you today to choose between privacy, high throughput, and post-quantum protection?
+
+2
+00:00:08.810 --> 00:00:17.490
+With Bitcoin, you hold a scarce asset capped at 21 million in your own wallet, yet you expose every address and amount on a public ledger.
+
+3
+00:00:17.940 --> 00:00:28.300
+With Kaspa, you get parallel blocks in a BlockDAG for high layer-one throughput, but your payment history remains public and relies on classical cryptography.
+
+4
+00:00:28.750 --> 00:00:38.510
+With Monero, you protect sender, recipient, and amounts by default at the protocol level, yet you remain tied to classical elliptic curves and a sequential chain.
+
+5
+00:00:39.010 --> 00:00:49.330
+With Phexora Cash, you get an open research architecture that unites default privacy, BlockDAG throughput, and post-quantum protection in one protocol design.
+
+6
+00:00:49.830 --> 00:01:01.150
+For your payments, the design combines a private note model with selective disclosure, a 128-bit post-quantum target, and a goal of 1,000 accepted transactions per second.
+
+7
+00:01:01.650 --> 00:01:10.890
+In this direct comparison, you see at a glance how Phexora Cash addresses the gaps of Bitcoin, Kaspa, and Monero across five mandatory release gates.
+
+8
+00:01:11.390 --> 00:01:22.150
+Instead of unbacked promises, you can inspect the open research design, the verification plan, and the STARK feasibility protocol today, because any network release requires passing every gate.
+
+9
+00:01:22.600 --> 00:01:28.720
+Read the full specification and the research protocols for free right now on cash.phexora.ai.

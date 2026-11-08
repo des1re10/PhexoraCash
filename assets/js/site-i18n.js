@@ -78,6 +78,11 @@
             "home.requirement4Description": "Throughput and recovery must remain inside a frozen, non-institutional validator budget instead of redefining the hardware after measurement.",
             "home.requirement5Title": "Contestable block production",
             "home.requirement5Description": "Hardware, pool templates, ordering incentives, and the long-run security budget remain explicit, independently reviewed release questions.",
+            "home.comparisonKicker": "Architectural comparison",
+            "home.comparisonTitle": "Phexora Cash vs. Bitcoin, Kaspa, and Monero",
+            "home.comparisonDescription": "A 90-second technical overview of why existing chains force a trade-off between default privacy, BlockDAG throughput, and post-quantum security—and how the Phexora Cash research specification defines five mandatory release criteria.",
+            "home.comparisonVideoAria": "Architectural comparison video: Phexora Cash versus Bitcoin, Kaspa, and Monero",
+            "home.comparisonCaption": "Research design 0.5.4-research · Target architecture and mandatory release gates, not a live network or token offer.",
             "home.publicationKicker": "Research with a clear direction",
             "home.publicationTitle": "The foundation of Phexora Cash",
             "home.publicationDescription": "The specification, verification plan, and comparison protocol form a transparent and publicly reviewable research foundation.",
@@ -177,6 +182,11 @@
             "home.requirement4Description": "Durchsatz und Recovery müssen innerhalb eines vorab eingefrorenen, nicht institutionellen Validatorbudgets bleiben, statt die Hardware nach der Messung neu zu definieren.",
             "home.requirement5Title": "Bestreitbare Blockproduktion",
             "home.requirement5Description": "Hardware, Pool-Templates, Anreize bei der Transaktionsauswahl und das langfristige Sicherheitsbudget bleiben explizite, unabhängig geprüfte Release-Fragen.",
+            "home.comparisonKicker": "Architekturvergleich",
+            "home.comparisonTitle": "Phexora Cash vs. Bitcoin, Kaspa und Monero",
+            "home.comparisonDescription": "Ein 97-sekündiger technischer Überblick, warum bestehende Blockchains einen Kompromiss zwischen Standard-Privatsphäre, BlockDAG-Durchsatz und Post-Quanten-Schutz erzwingen – und wie die Phexora-Cash-Forschungsspezifikation fünf verbindliche Freigabekriterien definiert.",
+            "home.comparisonVideoAria": "Architekturvergleich im Video: Phexora Cash im Vergleich zu Bitcoin, Kaspa und Monero",
+            "home.comparisonCaption": "Forschungsdesign 0.5.4-research · Zielarchitektur und verbindliche Freigabe-Gates, kein laufendes Mainnet und kein Token-Angebot.",
             "home.publicationKicker": "Forschung mit klarer Linie",
             "home.publicationTitle": "Das Fundament von Phexora Cash",
             "home.publicationDescription": "Spezifikation, Verifikationsplan und Vergleichsprotokoll bilden eine transparente und öffentlich prüfbare Forschungsgrundlage.",
@@ -210,6 +220,23 @@
         Object.freeze({ source: "data-i18n-aria-label", target: "aria-label" }),
         Object.freeze({ source: "data-i18n-content", target: "content" })
     ]);
+
+    const VIDEO_SOURCES = Object.freeze({
+        en: Object.freeze({
+            src: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.mp4",
+            poster: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9_poster.jpg",
+            trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.en.vtt",
+            trackLang: "en",
+            trackLabel: "English"
+        }),
+        de: Object.freeze({
+            src: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.mp4",
+            poster: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9_poster.jpg",
+            trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.de.vtt",
+            trackLang: "de",
+            trackLabel: "Deutsch"
+        })
+    });
 
     function translationFor(language, key) {
         const languageTranslations = TRANSLATIONS[language];
@@ -253,6 +280,26 @@
         });
     }
 
+    function updateComparisonVideo(language) {
+        const video = document.getElementById("comparison-video");
+        const track = document.getElementById("comparison-video-track");
+        if (!video || !track) {
+            return;
+        }
+        const source = VIDEO_SOURCES[language];
+        video.setAttribute("poster", source.poster);
+        track.setAttribute("srclang", source.trackLang);
+        track.setAttribute("label", source.trackLabel);
+        if (track.getAttribute("src") !== source.trackSrc) {
+            track.setAttribute("src", source.trackSrc);
+        }
+        if (video.getAttribute("src") !== source.src) {
+            video.pause();
+            video.setAttribute("src", source.src);
+            video.load();
+        }
+    }
+
     function replaceLanguageQuery(language) {
         const currentUrl = new URL(window.location.href);
         currentUrl.searchParams.set(LANGUAGE_QUERY_PARAMETER, language);
@@ -268,6 +315,7 @@
         bindings.forEach(({ apply }) => apply());
         document.documentElement.lang = language;
         updateLanguageButtons(language);
+        updateComparisonVideo(language);
 
         if (updateUrl) {
             replaceLanguageQuery(language);

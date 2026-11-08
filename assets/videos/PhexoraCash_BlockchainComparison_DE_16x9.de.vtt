@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.030
+Warum musst du dich bei Bitcoin, Kaspa und Monero heute zwischen Privatsphäre, hohem Durchsatz und Post-Quanten-Schutz entscheiden?
+
+2
+00:00:07.480 --> 00:00:17.190
+Bei Bitcoin hältst du zwar ein knappes Gut mit 21 Millionen Obergrenze in deiner eigenen Wallet, legst aber jede Adresse und jeden Betrag dauerhaft im öffentlichen Hauptbuch offen.
+
+3
+00:00:17.640 --> 00:00:28.310
+Mit Kaspa nutzt du zwar parallele Blöcke im BlockDAG für hohen Durchsatz auf der Basisschicht, doch deine Zahlungshistorie bleibt öffentlich sichtbar und beruht auf klassischer Kryptografie.
+
+4
+00:00:28.760 --> 00:00:39.180
+Bei Monero schützt du zwar Sender, Empfänger und Beträge standardmäßig auf Protokollebene, bleibst aber an klassische elliptische Kurven und eine sequenzielle Blockkette gebunden.
+
+5
+00:00:39.680 --> 00:00:50.580
+Mit Phexora Cash erhältst du eine offene Forschungsarchitektur, die Standard-Privatsphäre, BlockDAG-Durchsatz und Post-Quanten-Schutz in einem Protokollentwurf vereint.
+
+6
+00:00:51.080 --> 00:01:05.170
+Für deine Zahlungen kombiniert der Entwurf ein privates Noten-Modell samt selektiver Offenlegung, mindestens 128 Bit Post-Quanten-Schutzniveau und das Ziel von 1.000 akzeptierten Transaktionen pro Sekunde.
+
+7
+00:01:05.670 --> 00:01:14.940
+Im direkten Vergleich siehst du auf einen Blick, wie Phexora Cash die Lücken von Bitcoin, Kaspa und Monero in fünf verbindlichen Freigabekriterien adressiert.
+
+8
+00:01:15.440 --> 00:01:27.720
+Statt unbelegter Versprechen prüfst du heute das offene Forschungsdesign, den Verifikationsplan und das STARK-Machbarkeitsprotokoll, denn ein Netzwerk-Release erfolgt erst nach bestandenen Prüf-Gates.
+
+9
+00:01:28.170 --> 00:01:36.040
+Lies jetzt die vollständige Spezifikation und die Forschungsprotokolle frei zugänglich auf cash.phexora.ai.
