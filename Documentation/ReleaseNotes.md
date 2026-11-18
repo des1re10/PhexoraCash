@@ -8,6 +8,8 @@
   outgoing-history backup and its clean-device recovery test.
 - Aligned T305 proof carriage and engineering outcomes across the papers and
   the prior-art decision. Publication of a negative result is independent.
+- Paper 1 section 3.5 describes the prior-work strategy without reusing the
+  section 12 outcome labels, so it does not read as a profile selection.
 - Added seven-day private catch-up, joint ledger/network inference at three
   loads and candidate-specific quantum-mining finality analysis. The research
   gates remain open.

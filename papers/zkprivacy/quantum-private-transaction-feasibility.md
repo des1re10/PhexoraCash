@@ -238,8 +238,12 @@ Quantum changes parameter sets, consensus, or deployment.
 
 The versioned
 [T305 prior-art and reuse decision](decisions/t305-prior-art-decision.md)
-records the initial comparison and chooses **ADAPT + REPLICATE**, not a blank
-construction or direct code adoption. Named owner and reviewer signatures
+records the initial comparison and its prior-work strategy instead of a blank
+construction: reuse published definitions and test questions but no code,
+adapt published architecture only where prior work misses a measured Quantum
+requirement, and replicate published comparisons before claiming an
+improvement. This strategy selects no authorisation profile; T305 makes that
+selection under Section 12. Named owner and reviewer signatures
 remain mandatory before implementation. Before the T301–T305 profile is
 frozen, the record must remain current and compare at least TzEL, Lattice
 RingCT v2.0, MatRiCT, MatRiCT+, Gao et al., LACT+, and the proposed Quantum
@@ -1027,7 +1031,8 @@ in any comparison.
 
 Separated signer-state evidence from proof vectors and engineering selection
 from publication. Defined how T305 uses the preregistered carriage and
-sender-recovery profiles and the seven-day T006 screen.
+sender-recovery profiles and the seven-day T006 screen. Section 3.5 now
+states the prior-work strategy without the Section 12 outcome labels.
 
 ## Unreleased — 2026-11-08
 
