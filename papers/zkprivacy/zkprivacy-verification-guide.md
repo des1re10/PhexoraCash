@@ -2,7 +2,7 @@
 title: "Quantum Research Implementation and Verification Plan"
 subtitle: "Phexora Cash — unreleased evidence-plan clarifications to research design 0.5.4"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
-date: "2026-11-08"
+date: "2026-11-18"
 version: "0.5.4-research"
 status: "Planning document — no conformant implementation or completed verification"
 license: "CC0-1.0; see repository LICENSE"
@@ -38,7 +38,7 @@ The display-name change leaves protocol identifiers, task and scenario IDs,
 reviewer roles, requirements and acceptance gates unchanged.
 
 This working copy contains unreleased clarifications to the 0.5.4-research
-baseline, dated 2026-11-08. Campaigns must pin exact source hashes and obtain
+baseline, dated 2026-11-18. Campaigns must pin exact source hashes and obtain
 the existing owner/reviewer approvals; these edits do not approve a profile.
 
 This guide turns the Quantum research requirements into an ordered body of
@@ -251,6 +251,8 @@ post-quantum security target.
 
 - cryptographic, consensus, network, side-channel, operational, data-
   availability, mining/pool-incentive, and monetary adversary models;
+- quantum-miner resource scenarios and a finality metric for T501, settlement
+  horizon and acceptable reorganisation probability for T509;
 - explicit definition of ledger privacy, recipient-key privacy, and network
   anonymity;
 - per-component and composed security budget;
@@ -367,6 +369,17 @@ envelope is instantiated with T401/T402 artifacts in T006 and rechecked
 against measured T305 sizes before integration. T005 does not require the
 later output codec or complete proof implementation to exist.
 
+Before T006, register the required consensus carriage modes and budgets
+under specification 9.3, the weakest client, and numeric limits for seven-day
+catch-up time, client transfer and energy, provider compute/storage/traffic,
+missed notes and false completion. Register sparse, typical and target-load
+populations/rates, observer priors and per-regime joint inference thresholds
+with a confidence level and acceptance rule. Use the increase in correct
+first-choice source identifications over the best guess from the frozen prior.
+Require its upper confidence bound to stay within the limit in each regime.
+A missing bound leaves the
+campaign unregistered.
+
 At least three independently obtainable observations in multiple regions are
 required for any hardware, connectivity, or price claim. Calibration evidence
 must be labelled and cannot be reused as the passing campaign after a profile
@@ -394,6 +407,19 @@ clients, failures and correlated retries under the T001 observer; raw artifacts;
 and independent performance and network-privacy review. Proofs or transport
 components not yet implemented are explicitly modelled, with a frozen size
 and cost sweep rather than fictitious throughput or anonymity evidence.
+
+Run the seven-day catch-up case first. Generate the same canonical output
+ranges and known incoming payments for the full scan and each private retrieval
+candidate. Keep the live stream running during catch-up. Record recovered
+payments, authenticated coverage, time, bytes and energy on the weakest client,
+and all provider work. For an omitted payment, false-empty reply or withheld
+range, require verified recovery within the frozen limits or visible incomplete
+status. An incomplete result cannot count as successful catch-up. Include
+any sender-recovery data selected by T204 in the costs for its role.
+
+Score origin inference for the joint ledger/network observer on the three
+T005 traffic regimes using the T602 comparison method. Exceeding the limit
+in any required regime rules out that transport candidate.
 
 For each retrieval candidate, specify authenticated canonical coverage and
 malicious-provider omission, false-empty, truncation, stale-range and
@@ -513,6 +539,15 @@ message-bound-signature analysis and any reviewed transformation; signed
 applicability decision for the NIST stateful arm before benchmark results are
 viewed.
 
+Test durable index consumption before signature export at the signer boundary.
+Interrupt before and after persistence/export, retry on a second authorised
+device, restore an older backup and exhaust the tree. Verify that released
+signatures over different signing operations use distinct indices and that
+uncertain or exhausted signers refuse new signatures. T305 records the outcome
+for each stateful arm, including indices lost to crashes. Circuit tests cover
+the index range, authenticated tree and exact signed effects. See
+[NIST SP 800-208, section 9.1](https://doi.org/10.6028/NIST.SP.800-208).
+
 T304/T305 own measured in-proof cost and complete signing-plus-proving latency.
 Both standardised stateless profiles require full KAT and security treatment;
 signature size is not a proxy for proof cost. A separately registered
@@ -565,6 +600,10 @@ memory-hard wallet-storage KDF; recovery tests; immutable note-creation versus
 active transaction-profile interpretation; historical signing-key retention
 and recovery; and the interface for T510 to validate any migration without
 changing old nullifiers or silently stranding unspent notes.
+
+Confirm the reference backup or select the versioned alternative under 5.7 before
+T401 fixes the output format. Document the exact authorised view material,
+data availability, retention, coverage checks and effects of losing a backup.
 
 **Pass:** BIP-39 official vectors and Quantum derivation/address/disclosure
 vectors match both implementations; the complete generated master-secret
@@ -711,7 +750,7 @@ cannot weaken this task or the protocol specification.
 Merkle membership, nullifier derivation, output openings, encrypted-note
 binding, complete in-proof authorisation for each retained T202 arm, 64-bit
 range constraints, carry-safe conservation, public fee, zero-knowledge
-masking, and the selected individual and aggregate proof path. Only
+masking, and each carriage path preregistered under T005. Only
 authorisation and its required state may differ between arms.
 
 **Deliverables:** two interoperable implementations; pinned desktop and
@@ -719,12 +758,13 @@ constrained-client hardware; single-wallet p50/p95/p99 proving latency; peak
 and steady memory; verifier time and memory; proof bytes; consensus-transaction
 bytes; external encrypted-note payload bytes; total generated bytes per
 payment; payload-provider and retrieval bandwidth; payload availability and
-retention assumptions; parallel-prover scaling; aggregate latency, size, and
+retention assumptions; parallel-prover scaling; where required, aggregate latency, size, and
 amortised verification; isolated authorisation contribution; state-management
 failure results;
 pre-registered material-benefit criteria; clearly labelled reproduced versus
 author-reported prior-work measurements; raw artifacts; and a signed
-GO/ADAPT/REPLICATE/STOP decision.
+GO/ADAPT/STOP engineering decision under Paper 1 section 12 and a separate
+publication disposition. Incomplete evidence leaves T305 open.
 
 Break down trace rows/cycles, time and memory for authorisation, commitments,
 Merkle paths, nullifiers, ML-KEM/KDF/AEAD binding, ranges/balance and proof
@@ -744,7 +784,7 @@ additionally requires a material pre-registered benefit over every qualifying
 stateful arm. The 256f incumbent and 256s comparator are evaluated separately;
 retaining 256s requires a versioned profile decision before integration.
 **Reject:** no arm meets the frozen client, verifier, wire, and
-aggregate budgets. A reject returns the signature, commitment, relation, proof
+selected carriage budgets. A reject returns the signature, commitment, relation, proof
 profile, or explicit system requirements to research; it MUST NOT be deferred
 to node optimisation.
 
@@ -842,8 +882,14 @@ finality and fee semantics; and, if the selected state profile requires wallet
 witnesses, online updates, offline recovery from multiple untrusted providers,
 anti-replay verification, and witness-query privacy evidence.
 
-**Pass:** restore-from-seed and rescan reproduce the same wallet state through
-reorgs; spent notes cannot be selected; no network identity is derived from
+**Pass:** restore the complete T204 recovery material on a clean device and
+rescan through a reorg. Spendable notes and balances must match the canonical
+reference. Using only the authorised full-wallet view and its declared data,
+recover recipients and amounts of outgoing payments in scope, reconcile
+reverted payments, and verify that spending remains unavailable. Repeat with
+missing, stale and tampered outgoing records. Mark the affected history as
+incomplete while preserving independently recovered spendable balances.
+Spent notes cannot be selected; no network identity is derived from
 wallet keys. **Reject:** missing data is zero-filled, failed decryption is
 treated as an empty note, or sensitive logs are emitted.
 
@@ -899,6 +945,14 @@ concentration; open miner availability; cloud-rental and botnet exposure;
 block-rate/propagation interaction; reproducible measurements; independent
 hardware and mining-incentive review; and results against the G12 metrics,
 scenario definitions, pass/fail thresholds, and STOP conditions frozen by T005.
+
+For each PoW candidate compare classical-only and mixed classical/quantum
+production. Pin the resource ranges, circuit cost per search iteration,
+measurement/restart assumptions and competing block arrivals. Propagate the
+estimated production distribution through T501 ordering under network delay.
+Report uncertainty, reorganisation probability at the T001 settlement horizon
+and sensitivity to faster quantum devices. Unsupported bounds or a breached
+finality threshold disqualify the candidate for this profile.
 
 **Pass:** at least one candidate meets every pre-registered applicable T005
 threshold and the signed comparison selects it with residual hardware, energy,
@@ -1206,11 +1260,18 @@ analysis; simulator; reproducible attack experiments; utility/privacy tradeoff
 report; mix/relay cost, payer, payment-metadata leakage, abuse controls and
 provider-exit/outage scenarios under specification 9.2.
 
+Use the T006 sparse, typical and target regimes. For each, score the same
+labelled payments against the frozen prior using ledger-only, network-only
+and combined observations. Report confidence bounds and the per-regime
+pass/fail outcome for the joint observer under the T005 rule. T006 uses its
+declared simulation envelope. T602 and T604 repeat the comparison with the
+implemented protocol, including retry and cover traffic.
+
 **Metrics:** source-classification advantage, anonymity-set distribution,
 entropy, precision/recall for origin inference, latency, bandwidth
 amplification, failure behavior, and confidence intervals.
 
-**Pass:** thresholds defined in T001 are met under all required scenarios and
+**Pass:** the T005 thresholds for the T001 observer are met under all required scenarios and
 an independent network-privacy review passes. **Reject:** only ciphertext byte
 uniformity, payload correlation, or Dandelion++ deployment is offered as proof
 of full anonymity.
@@ -1276,6 +1337,8 @@ omitted, or snapshot trust is undocumented.
   phases;
 - miner-controlled custom templates, the selected pooled-mining comparator,
   T508 ordering/censorship scenarios, T505 bootstrap and T605 recovery enabled;
+- sparse and typical-load privacy runs in addition to the sustained target
+  run, with the same T602 joint-observer scoring and per-regime limits;
 - raw proof-size, bandwidth, storage, CPU, memory, latency, rejection and
   anonymity metrics for every declared role.
 
@@ -1328,7 +1391,7 @@ Every relevant implementation must preserve a permanent regression test for:
 | A009 | Equivalent DAG delivered in different arrival orders | Identical ordering and state root |
 | A010 | Oversized vectors/proofs or unknown version | Rejected before expensive work |
 | A011 | Failed PQ negotiation requests classical fallback | Connection rejected |
-| A012 | Origin observer combines timing, volume and route metadata | Must remain below T001 attack threshold |
+| A012 | Origin observer combines public ledger fields with timing, volume and route metadata | Joint inference meets the frozen T005 limit in each T001 observer regime |
 | A013 | Snapshot interrupted or maliciously altered | Recovery rejects or reaches canonical root |
 | A014 | Reward rounding, reorganisation, fee replay, or schedule-boundary case | The selected monetary-policy invariant holds; fees are never counted as new issuance, lost from the pool, or claimed twice |
 | A015 | Observer compares note ciphertexts or scanning tags against candidate recipient keys | Recipient inference remains below the T001 threshold |
@@ -1417,7 +1480,7 @@ Every benchmark report MUST contain:
 14. commands and immutable artifact locations.
 
 T305 reports MUST additionally separate single-wallet latency from parallel
-prover throughput and aggregate amortisation, report authorisation cost per arm,
+prover throughput and any applicable aggregate amortisation, report authorisation cost per arm,
 and label prior-work numbers as reproduced or author-reported. Consensus bytes,
 external encrypted-note payload bytes, total generated bytes per payment,
 payload-provider/retrieval traffic, and availability/retention assumptions MUST
@@ -1487,8 +1550,8 @@ specification limit.
       comparator; a failing 256f does not exclude 256s.
 - [ ] Stateful key reuse, exhaustion, crash, restore, rollback, concurrency,
       recovery, and desynchronisation cases are tested.
-- [ ] Wallet latency, parallel proving, verifier cost, wire size, and aggregate
-      amortisation are reported separately.
+- [ ] Wallet latency, parallel proving, verifier cost, wire size, and any required
+      aggregate amortisation are reported separately.
 - [ ] Digest-only note carriage reports consensus bytes, external encrypted
       payload bytes, total payment bytes, provider traffic, and retention
       assumptions separately.
@@ -1689,6 +1752,11 @@ Only these labels may be used:
 At the current revision the project is a **research design**.
 
 # 13. Revision record
+
+## Unreleased — 2026-11-18
+
+Assigned signer and verifier tests, defined the T305 engineering decision,
+and added clean-device recovery, joint origin inference and quantum PoW cases.
 
 ## Unreleased — 2026-11-08
 

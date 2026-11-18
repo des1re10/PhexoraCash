@@ -2,7 +2,7 @@
 title: "Stateless Versus Stateful Hash-Based Authorisation Inside a Private-Transaction STARK"
 subtitle: "Phexora Cash — unreleased clarifications to the Quantum 2-input/2-output protocol"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
-date: "2026-11-08"
+date: "2026-11-18"
 version: "0.4.0-research-protocol"
 status: "Research protocol — no implementation, benchmark result, security proof, or feasibility claim"
 license: "CC0-1.0; see repository LICENSE"
@@ -46,7 +46,7 @@ The display-name change does not change the transaction relation, comparison
 arms, protocol identifiers, pre-registration or evidence requirements.
 
 This is a **research protocol**, not a result paper. This working copy contains
-unreleased clarifications dated 2026-11-08 to the
+unreleased clarifications dated 2026-11-18 to the
 <code>0.4.0-research-protocol</code> baseline. Campaigns must pin exact source
 hashes; this update is not an approved pre-registration. The status remains:
 
@@ -78,7 +78,7 @@ The paper owns one decision:
 > Does either exact FIPS 205 stateless profile, <code>SLH-DSA-SHAKE-256f</code>
 > or <code>SLH-DSA-SHAKE-256s</code>, inside the
 > complete Quantum 2-input/2-output relation meet every pre-registered
-> security, latency, memory, proof-size, wire-size, and aggregation threshold,
+> security, latency, memory, proof-size, wire-size, and applicable aggregation threshold,
 > and does it provide a material benefit over a TzEL-shaped one-time baseline
 > and an applicable NIST stateful baseline?
 
@@ -320,11 +320,11 @@ versioned T005 value before the first measured feasibility run.
 | H5c | External encrypted payload and total payment bytes remain below <code>B_external_payload</code> and <code>B_total_payment</code> | T005 |
 | H5d | Payload-provider and retrieval traffic remain below <code>B_payload_provider</code> | T005 |
 | H6 | Verifier latency, memory, and malformed-proof work remain below their frozen budgets | T005 |
-| H7 | Aggregate mode meets size and latency budgets and omits replaced individual proofs | T304/T005 |
+| H7 | If T005 requires aggregate carriage, it meets its size and latency budgets and omits replaced individual proofs. Otherwise record H7 as inapplicable before measurement | T304/T005 |
 | H8 | Concrete composed soundness and privacy analysis reaches at least 128 post-quantum bits under the declared model | T001/T303/T701 |
 | H9 | The second implementation reproduces metrics within the frozen tolerance and no semantic mismatch remains | T004/T005/T305 |
 
-A hypothesis with an unset threshold is **not evaluated**. A run performed
+An applicable hypothesis with an unset threshold is **not evaluated**. A run performed
 before threshold freeze is exploratory and cannot be relabelled as the
 acceptance run.
 
@@ -433,6 +433,13 @@ effects ID then binds that payload digest under specification Section 6.1.
 The ciphertext must not depend on the final ID. An external payload required for receipt, scanning,
 recovery, or spending remains part of client and system feasibility even when
 it is not part of the layer-1 transaction encoding.
+
+T204 confirms the reference encrypted outgoing-history backup or selects a
+versioned sender-recoverable payload before T401 freezes the output format. If the sender requires a recovery ciphertext, account for its
+generation, proof binding where required, public distinguishability, carriage
+and retrieval. If the source is an encrypted wallet backup, report backup
+bytes, retention and restore traffic separately. T404/T405 later verify the
+clean-device recovery claim in specification 5.7.
 
 The experiment reuses T402's canonical effects codec, pre-encryption context,
 effects ID, authorisation digest and proof-policy interface. T304 supplies a
@@ -674,13 +681,20 @@ At minimum, each implementation must reject a proof attempt or proof for:
 14. duplicate output commitments;
 15. transcript domain or proof-mode confusion; and
 16. an aggregate proof bound to a different ordered transaction set;
-17. reuse of a one-time key or state index;
-18. state rollback after backup restore or interrupted signing;
-19. a signature from an exhausted or different authorisation tree;
+17. a stateful signature with a leaf index outside the permitted range;
+18. a signature whose authentication path fails for the declared index;
+19. a signature from a different authorisation tree;
 20. a transaction that mixes authorisation profiles across its inputs;
 21. a nullifier bound to a different leaf position or creation profile;
 22. a changed ciphertext/fee context with the old effects ID or signature; and
 23. an envelope carrying effects not authorised by its admitted proofs.
+
+Run A052 separately against the signer. Interrupt index allocation, signature
+release and restart, exercise a stale backup and concurrent signing, and try
+to sign after exhaustion. Check that each signing operation consumes a unique
+index durably before export, or fails closed. Preserve the signer log from
+synthetic fixtures and the observed result in each arm's evidence. Prior use
+of an otherwise valid index cannot be detected from a single proof statement.
 
 Integration vectors must additionally cover identical notes accepted in
 separate transactions, old-note spending across active-version changes,
@@ -698,7 +712,9 @@ owners; this cross-reference does not add them as transaction-proof constraints.
 
 # 9. Benchmark protocol
 
-T006 must have a signed NOT_RULED_OUT result before this campaign. The report
+T006 must have a signed NOT_RULED_OUT result before this campaign, including
+the seven-day offline case with live arrivals on the weakest client and the
+sparse, typical and target joint-observer screen under specification 9.3.1. The report
 must link its envelope and compare measured output, proof and packet sizes
 against it. A mismatch stops integration and requires a new reviewed screen;
 T305 cannot promote simulation into receiving or anonymity assurance.
@@ -718,10 +734,11 @@ artifact harness, and environment:
 
 T202 and T305 must publish and sign the rule for excluding an inapplicable NIST
 SP 800-208 arm before results are viewed, including reviewer rationale, and the
-material-benefit rule for retaining each stateless arm (C and D). T005 must then publish and
+material-benefit and selection rules in Section 12 for retaining either stateless arm. T005 must then publish and
 sign every numerical acceptance threshold, including:
 
-- p95 and p99 latency, memory, verifier, proof, wire, and aggregate budgets;
+- p95 and p99 latency, memory, verifier, proof and wire budgets for every
+  required carriage path, plus aggregate budgets if selected under T005;
 - separate consensus-transaction, external encrypted-payload, total-payment,
   and payload-provider/retrieval budgets;
 - any minimum acceptable material-benefit delta; and
@@ -747,7 +764,7 @@ The raw record for every run must include:
 - verifier wall time, CPU time, and peak memory;
 - malformed-proof rejection time and allocation;
 - parallel-prover scaling and saturation;
-- aggregate creation latency, size, verifier cost, and amortisation;
+- for required aggregate carriage, creation latency, size, verifier cost, and amortisation;
 - per-hop admission/distribution bytes and fanout, batch-wait latency,
   aggregator capacity, retries, withholding and outage behaviour;
 - preprocessing time and bytes; and
@@ -840,37 +857,34 @@ if all of the following are true:
 - two genuinely independent implementations interoperate;
 - every positive and negative vector has the expected result;
 - every pre-registered desktop and constrained-client threshold passes;
-- individual and aggregate wire modes, external payload carriage, total payment
-  bytes, and provider traffic meet their separate thresholds;
+- every T005-required carriage path, external payloads, total payment bytes
+  and provider traffic meet their respective thresholds. An individual-only
+  profile carries full proofs at target load. An aggregate profile also
+  accounts for individual admission traffic, batch delay and outages;
 - the composed security analysis reaches the required target;
 - no critical or high unresolved review finding remains;
 - all raw artifacts and reproduction commands are public; and
 - accountable human reviewers sign their respective boundaries.
 
-The signed result then uses exactly one classification:
+Record the engineering decision and publication disposition separately.
+Missing required evidence or signatures leaves the assessment pending and
+blocks integration. For a completed assessment, apply these rules in order:
 
-- **GO — retain stateless:** Arm C or D qualifies and satisfies the frozen
-  material-benefit rule relative to every qualifying stateful arm. Selection
-  of Arm D changes the normative profile before integration.
-- **ADAPT — select stateful:** a reviewed Arm A or B qualifies while neither
-  stateless arm provides a qualifying material benefit. The normative specification changes
-  before integration.
-- **REPLICATE — publish comparison or negative result:** the evidence is
-  reproducible and useful but supports no new construction or qualifying
-  deployment profile.
-- **STOP — redesign:** no arm satisfies the common direct-layer-1,
-  constrained-client, security, and privacy requirements.
+1. **GO** if a qualifying stateless arm passes the preregistered
+   material-benefit rule. Predeclare how to assess the benefit when no
+   stateful arm qualifies, and how to choose between two qualifying stateless
+   arms. Selecting D requires a versioned profile change.
+2. **ADAPT** if GO does not apply and a stateful arm qualifies. Identify the
+   selected arm and revise the normative profile before integration.
+3. **STOP** otherwise. Identify the failed requirement, the tested profile
+   and the design decision that must be reopened before another campaign.
 
-Any non-GO outcome must identify which of these design surfaces returns to
-research:
-
-- authorisation profile;
-- commitment construction;
-- transaction relation;
-- note-encryption composition;
-- proof-system profile;
-- client-support claim; or
-- aggregate mode.
+Independently record whether the evidence supports publication as a
+replication, comparison or negative result, with its reproduction artifacts
+and limitations. Otherwise record publication as pending. For example, when
+all arms exceed the frozen client memory budget in a complete reproducible
+campaign, record STOP and a publishable negative result. Publication alone
+never authorises integration.
 
 Removing a required relation, weakening privacy, adding a classical fallback,
 or changing a threshold after measurement is not an optimisation.
@@ -1008,6 +1022,12 @@ in any comparison.
   [PHANTOM and GHOSTDAG](https://eprint.iacr.org/2018/104.pdf), 2018.
 
 # Appendix A — Revision record
+
+## Unreleased — 2026-11-18
+
+Separated signer-state evidence from proof vectors and engineering selection
+from publication. Defined how T305 uses the preregistered carriage and
+sender-recovery profiles and the seven-day T006 screen.
 
 ## Unreleased — 2026-11-08
 

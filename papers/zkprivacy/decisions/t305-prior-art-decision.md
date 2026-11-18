@@ -3,8 +3,8 @@
 **Status:** Recorded research direction; named owner and reviewer signatures
 required before implementation; not a protocol, security, licensing, or release
 approval<br>
-**Decision revision:** 1.1-research<br>
-**Decision date:** 2026-09-05<br>
+**Decision revision:** 1.2-research<br>
+**Decision date:** 2026-11-18<br>
 **Applies to:** T006, T103, T104, T202, T203, T301–T305, T401–T402,
 and Paper 1 (0.4.0-research-protocol)<br>
 **Prior-art evidence cut-off:** 2026-07-23; scoped NIST profile update
@@ -118,21 +118,13 @@ this does not establish privacy or full-system feasibility. T305 must reuse
 the T402 codec and recheck its actual sizes against that envelope before
 integration. An out-of-envelope result requires a new reviewed T006 campaign.
 
-- **GO — retain a stateless profile:** Arm C or D meets every frozen threshold
-  and independently passes the material-benefit rule against every qualifying
-  stateful comparator. Selecting D requires a versioned authorisation-profile
-  decision before integration.
-- **ADAPT — select a stateful profile:** A reviewed Arm A or B meets the
-  complete requirements while neither C nor D qualifies. The
-  normative specification must then change before node work begins.
-- **REPLICATE — publish a comparative or negative result:** No arm establishes
-  a new construction, but the independent measurements or failure analysis are
-  reproducible and useful. The manuscript must be labelled accordingly.
-- **STOP — redesign the system:** No arm meets the frozen direct-layer-1,
-  constrained-client, security, and privacy budgets. Delegated proving, a data
-  availability layer, weaker parameters, or a different throughput target may
-  be evaluated only through an explicit requirements decision, not as a hidden
-  fallback.
+For each completed T305 campaign, apply the ordered engineering rules in
+[Paper 1, section 12](../quantum-private-transaction-feasibility.md).
+GO selects a qualifying stateless arm under the preregistered benefit rule.
+ADAPT selects a qualifying stateful arm if GO does not apply. STOP returns
+the design to research. Missing evidence leaves the assessment pending.
+Record publication as a replication, comparison or negative result separately
+from engineering selection. The prior-art strategy above applies throughout.
 
 A generic protocol novelty claim is rejected regardless of benchmark outcome.
 
@@ -179,6 +171,10 @@ the implementation tasks.
   Standard](https://csrc.nist.gov/pubs/fips/205/final), 2024.
 
 ## Revision record
+
+### 1.2-research — 2026-11-18
+
+Separated the T305 engineering outcome from publication of its evidence.
 
 ### 1.1-research — 2026-09-05
 

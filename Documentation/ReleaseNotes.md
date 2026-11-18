@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+**Research acceptance criteria — 2026-11-18**
+
+- Assigned one-time index safety to the signer and defined the reference
+  outgoing-history backup and its clean-device recovery test.
+- Aligned T305 proof carriage and engineering outcomes across the papers and
+  the prior-art decision. Publication of a negative result is independent.
+- Added seven-day private catch-up, joint ledger/network inference at three
+  loads and candidate-specific quantum-mining finality analysis. The research
+  gates remain open.
+
 **Programme name — 2026-11-08**
 
 - Standardised the programme as Phexora Cash across the DE/EN website,

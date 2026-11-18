@@ -32,7 +32,7 @@ PhexoraCash/
 │       ├── zkprivacy-verification-guide.md   # 0.5.4 implementation and evidence plan
 │       ├── zkprivacy-verification-guide.pdf  # PDF export
 │       ├── decisions/                         # Versioned research gates; not papers
-│       │   ├── t305-prior-art-decision.md     # Adopt/adapt/replicate and reuse boundary
+│       │   ├── t305-prior-art-decision.md     # Prior art, reuse and T305 decision ownership
 │       │   └── decentralisation-operability-security-budget-decision.md
 │       │                                      # R9-R12/G10-G13 research boundary
 │       └── templates/                         # Future-paper plans; not active papers

@@ -2,7 +2,7 @@
 title: "Quantum: Privacy-Preserving Post-Quantum DAG Protocol"
 subtitle: "Phexora Cash — unreleased clarifications to research design 0.5.4-research"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
-date: "2026-11-08"
+date: "2026-11-18"
 version: "0.5.4-research"
 status: "Research design draft — not implementation-ready, audited, or production-safe"
 license: "CC0-1.0; see repository LICENSE"
@@ -52,7 +52,7 @@ production network at this revision.
 
 The legacy filename contains “v1” so that existing links remain valid. The
 baseline is <code>0.5.4-research</code>. This working copy contains unreleased
-clarifications dated 2026-11-08; it is not the unchanged published revision
+clarifications dated 2026-11-18; it is not the unchanged published revision
 or an approved experiment profile. Evidence MUST identify the exact source
 commit and file hashes, not the baseline version alone.
 
@@ -548,8 +548,16 @@ thresholds. The minimum research model includes:
 - side-channel attackers against wallet and validator implementations.
 
 The consensus profile MUST separately state the assumed adversarial work
-fraction, network-delay model, liveness conditions, and finality rule. These
-cannot be inferred from the GHOSTDAG name.
+fraction, network-delay model, liveness conditions, and finality rule.
+T001 MUST include a quantum-capable miner among the production scenarios.
+For each candidate PoW, T509 must bound the cost and duration of a quantum
+search, including parallel resources, measurement and the arrival of competing
+blocks. Evaluate effective adversarial block production under the T501 delay
+and block-interval assumptions. Report the resulting reorganisation risk
+at the specified settlement depth or time and the range where the finality
+claim holds. An unsupported bound leaves PoW selection open.
+[Nerem and Gaur](https://arxiv.org/abs/2110.00878) analyse the timing effect
+for Bitcoin. T509 requires parameters and ordering specific to this DAG.
 
 Out of scope for a cryptographic anonymity guarantee are compromised endpoints,
 malicious operating systems, coerced key disclosure, voluntarily published
@@ -664,6 +672,15 @@ commitment binds the authorized key. Operational signing state remains
 wallet-private and is covered by state-management evidence rather than assumed
 to be validated by the proof. The cost and soundness of in-proof verification
 are a blocking gate.
+
+For each stateful arm the signer MUST durably consume a unique leaf index
+before releasing its signature. An interrupted operation may waste a leaf.
+After rollback, uncertain allocation, or exhaustion the signer MUST refuse
+to sign until it can establish a fresh permitted allocation. This obligation
+extends across devices and retries. The transaction proof checks the index
+range, tree binding and signature over the effects. Its public statement
+contains no global signing history. T202 tests signer state and T305 reports
+those results separately from verification of a single transaction.
 
 Every stateful comparison profile MUST additionally pin key-index allocation,
 crash consistency, backup/restore rollback behavior, concurrency, exhaustion,
@@ -1040,6 +1057,19 @@ initial profile MUST specify non-overlapping key or capability types for:
 - **auditor-scoped disclosure**: derive a capability restricted by a canonical
   scope such as account branch, counterparty set, transaction class, or time
   interval.
+
+Before T401 freezes encrypted outputs, T204 MUST select the source of outgoing
+history. The reference experiment uses an authenticated encrypted wallet
+backup for sent-payment records. Spending keys and one-time signer allocation
+state are excluded from this view-only archive. A sender-recoverable protocol
+payload is a separate candidate and requires its own T401 format and costs. Specify which recovery material and data the full-wallet viewer
+needs, how to establish the covered canonical interval, and what remains
+recoverable after device loss. Balance and spend recovery have their own
+tests. If outgoing records are missing, stale or unverifiable, report the
+affected history as incomplete. T401/T402 account for any added public bytes
+and linkability. T006/T305 count delivery, backup storage and retrieval costs
+in the roles that incur them. T404/T405 verify recovery and view-only scope
+on a clean device.
 
 Each exported capability MUST state exactly what it reveals, what it cannot
 prove, its scope encoding, and its forward/backward visibility. Wallets MUST
@@ -1613,10 +1643,18 @@ records why the experiment is comparative, which public work must be
 replicated or labelled author-reported, and which code may not be adopted.
 Named T001 owner and reviewer signatures remain mandatory before implementation.
 
+T005 MUST preregister the consensus carriage mode or modes required of the
+candidate before T006. Every required path must meet the same end-to-end
+resource envelope at the target load. Individual-only carriage must budget
+the full proof per transaction. Aggregate carriage must include individual
+admission and transfer wherever used, plus batching, aggregation and compact
+block distribution. An unused mode gives no capacity credit. A mode change
+starts a new campaign.
+
 T004 MUST pin the benchmark method, artifact harness, reference desktop and
 constrained-client environment, workload, and parallelism controls. T005 MUST
 then freeze the numerical proof-latency, memory, verifier, proof-size, wire-size,
-external-payload, total-payment-byte, provider-traffic, and aggregate-
+external-payload, total-payment-byte, provider-traffic, and any applicable aggregate-
 amortisation thresholds before results are interpreted. The report MUST
 publish single-wallet latency separately from aggregate throughput and MUST
 keep consensus bytes, external payloads, total payment bytes, and provider
@@ -1649,6 +1687,22 @@ retrieval path, including malicious outputs, missed notes, false positives,
 offline catch-up, provider work and query leakage. It MUST also evaluate the
 traffic and latency cost of candidate batching, mixing and cover traffic
 against the named observer, including idle clients and correlated retries.
+
+The first catch-up case is seven days offline on the weakest supported
+client while new payments continue to arrive. At the Section 9.3.1 workload
+below this represents 1,896,652,800,000 historical KEM bytes before
+overhead. Compare the local scan and proposed private retrieval paths against
+the same canonical history, including an omitted payment and a withheld
+range. T005 fixes client bytes, energy, completion time, provider limits
+and the permitted disclosure before T006 runs.
+
+T006 screens and T602/T604 test origin inference from ledger and network
+observations together at sparse, typical and target traffic. Include public
+fee, transaction shape, anchor and expiry alongside packet timing, size and
+retries. T001 defines the observer's prior knowledge. T005 fixes workload
+rates, active populations, observation windows and the maximum improvement
+in inference over that prior for each regime. Each regime must pass on its
+own, including the cost and latency of maintaining anonymity at sparse load.
 
 For every private-retrieval candidate, the screen MUST distinguish recipient
 privacy from response completeness. An empty response is not proof that no
@@ -1773,7 +1827,7 @@ its own cryptographic design, proof, audit, benchmark, or release.
 | G1 Requirements | R1–R12 traceable to tasks and tests | Drafted, not independently reviewed |
 | G2 Commitment | Exact scheme and ≥128-bit composed PQ analysis | Blocked |
 | G3 Proof | Complete AIR/transcript/ZK/soundness profile | Blocked |
-| G3A Transaction feasibility | Complete 2-input/2-output proof meets frozen client, verifier, size, and aggregation budgets | Not run |
+| G3A Transaction feasibility | Complete 2-input/2-output proof meets frozen client, verifier and selected carriage budgets | Not run |
 | G3B Early receiving/transport screen | T006 returns NOT_RULED_OUT and actual T305 output remains inside its frozen envelope; no anonymity claim | Not run |
 | G4 Private transaction | Prevention of unauthorised issuance and authorisation relation reviewed | Draft relation only |
 | G5 DAG state | Deterministic consensus and conflict handling proved/tested | Blocked |
@@ -1892,6 +1946,11 @@ Each item has an owner task in the verification guide. A value becomes
 normative only with rationale, vectors, tests, and review.
 
 # Appendix B — Revision record
+
+## Unreleased — 2026-11-18
+
+Clarified signer state, outgoing-history recovery, consensus proof carriage,
+quantum mining assumptions and the joint ledger/network privacy screen.
 
 ## Unreleased — 2026-11-08
 
