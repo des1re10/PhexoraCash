@@ -1,6 +1,6 @@
 ---
-title: "Quantum: Privacy-Preserving Post-Quantum DAG Protocol"
-subtitle: "Phexora Cash — unreleased clarifications to research design 0.5.4-research"
+title: "QuietBlocks: Privacy-Preserving Post-Quantum DAG Protocol"
+subtitle: "QuietBlocks — unreleased clarifications to research design 0.5.4-research"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
 date: "2026-11-18"
 version: "0.5.4-research"
@@ -37,7 +37,7 @@ abstract: |
 
 # Document status
 
-**Programme identity:** Phexora Cash is the programme name.
+**Programme identity:** QuietBlocks is the programme name.
 Quantum remains the historical protocol codename used in this
 manuscript and its stable filenames. This display-name change does not alter
 protocol encodings, domain-separation tags, wallet identifiers, QTM or any
@@ -1633,7 +1633,7 @@ include:
   proposed, aggregation path.
 
 The non-normative
-[T305 research protocol](quantum-private-transaction-feasibility.md)
+[T305 research protocol](quietblocks-transaction-feasibility.md)
 pre-registers the literature boundary, exact experiment, measurement fields,
 independent-implementation rules, and stop/go evidence for this gate. It may
 make the experiment more specific but cannot omit or weaken a requirement in
@@ -1954,7 +1954,7 @@ quantum mining assumptions and the joint ledger/network privacy screen.
 
 ## Unreleased — 2026-11-08
 
-- identified the programme as Phexora Cash while retaining the historical
+- identified the programme as QuietBlocks while retaining the historical
   Quantum protocol codename and all existing protocol identifiers;
 
 - clarified construction-specific commitment evidence and composed-security

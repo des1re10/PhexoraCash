@@ -1,13 +1,13 @@
-# Phexora Cash
+# QuietBlocks
 
 **Research into private, post-quantum digital cash by Phexora AI**
 
-[![Website](https://img.shields.io/badge/Website-cash.phexora.ai-6366f1)](https://cash.phexora.ai)
+[![Website](https://img.shields.io/badge/Website-quietblocks.phexora.ai-6366f1)](https://quietblocks.phexora.ai)
 [![Research text: CC0 1.0](https://img.shields.io/badge/Research%20text-CC0--1.0-success)](LICENSE)
 
-## What Phexora Cash is
+## What QuietBlocks is
 
-Phexora Cash is a research program for a private note-based DAG protocol. A
+QuietBlocks is a research program for a private note-based DAG protocol. A
 releasable design must satisfy five requirements together:
 
 - **post-quantum security:** at least 128 bits of composed post-quantum security
@@ -67,37 +67,29 @@ cannot be demonstrated.
 
 ## Publication identity
 
-Phexora Cash is the programme name. The papers
-identify this programme while retaining the historical project codename
-`Quantum` in filenames and protocol text. The working
-sources and regenerated PDFs now contain explicitly unreleased clarifications
-to the published 0.5.4-research specification/guide and 0.4.0 feasibility
-protocol. The published baseline remains in Git history; reproduction and
-campaign approval must identify the exact source commit and artifact hashes.
-A publication-name change or new release still requires regenerated PDFs and
-the normal research review gates. The historical codename is not the current
-product or programme name.
+QuietBlocks is the research programme and repository name. Use
+`quietblocks` as the registry ID and [quietblocks.phexora.ai](https://quietblocks.phexora.ai/)
+as the permanent site URL. Startup, deployment and workflow filenames use the
+same identity.
 
-The repository is `PhexoraCash`, the registry/deployment ID is `cash`, and the
-configured host is `cash.phexora.ai`. Startup, deployment and CI filenames use
-the same identity. The GitHub repository rename is an owner action. Before
-publication, the new host requires DNS, certificates and the SiteBuilder
-publication/analytics mapping; source changes alone do not migrate a running
-service. Protocol encodings, hash-domain tags, wallet identifiers and QTM keep
-their existing research definitions.
+The paper sources and PDFs include clarifications to research design
+0.5.4-research and comparative protocol 0.4.0. Cite the document version and
+Git commit when reproducing results. Earlier editions remain in Git history.
+The papers retain `Quantum` as a historical project codename in protocol text.
+Protocol encodings, hash-domain tags, wallet identifiers and QTM retain their
+published definitions.
 
 ## Research documents
 
-- [Research design specification](papers/zkprivacy/zkprivacy-quantum-spec-v1.md)
-- [Implementation and verification plan](papers/zkprivacy/zkprivacy-verification-guide.md)
-- [Private-transaction STARK feasibility protocol](papers/zkprivacy/quantum-private-transaction-feasibility.md)
+- [Research design specification](papers/zkprivacy/quietblocks-specification.md)
+- [Implementation and verification plan](papers/zkprivacy/quietblocks-verification-guide.md)
+- [Private-transaction STARK feasibility protocol](papers/zkprivacy/quietblocks-transaction-feasibility.md)
 - [T305 prior-art and reuse decision](papers/zkprivacy/decisions/t305-prior-art-decision.md)
 - [Decentralisation, operability, and security-budget decision](papers/zkprivacy/decisions/decentralisation-operability-security-budget-decision.md)
-- [Market and claim thesis](Documentation/Phexora_Cash_Market_Thesis.html)
+- [Market and claim thesis](Documentation/QuietBlocks_Market_Thesis.html)
 - [Static-site system architecture](Documentation/SystemArchitecture.html)
 
-The specification filename retains “v1” for link compatibility. The normative
-revision is declared inside the document.
+Each paper declares its research revision in the document.
 
 ## Research-paper programme
 
@@ -155,8 +147,8 @@ The checked-in website can be opened directly from a standalone clone without
 starting a runtime:
 
 ~~~bash
-git clone https://github.com/des1re10/PhexoraCash.git PhexoraCash
-cd PhexoraCash
+git clone https://github.com/des1re10/QuietBlocks.git QuietBlocks
+cd QuietBlocks
 # Open index.html in a browser
 ~~~
 
@@ -172,7 +164,7 @@ The validated HTTP preview is a development-workspace command. From a complete
 <code>Libraries</code> repository, run:
 
 ~~~bash
-cd PhexoraCash
+cd QuietBlocks
 ./start-local.sh
 # Open http://127.0.0.1:9180
 ~~~

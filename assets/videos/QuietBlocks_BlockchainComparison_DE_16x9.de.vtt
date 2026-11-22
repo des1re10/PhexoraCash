@@ -5,69 +5,69 @@ WEBVTT
 Private Zahlungen, parallele Blöcke, Post-Quanten-Signaturen: Bitcoin, Kaspa und Monero bieten nicht alle drei.
 
 2
-00:00:08.880 --> 00:00:15.120
+00:00:08.820 --> 00:00:14.267
 Bei Bitcoin kann jeder nachvollziehen, welche Adressen verwendet und welche Beträge übertragen wurden.
 
 3
-00:00:15.120 --> 00:00:17.780
+00:00:14.267 --> 00:00:16.457
 Wer die Schlüssel hält, steht dort nicht.
 
 4
-00:00:17.780 --> 00:00:25.210
-Der Entwurf von Phexora Cash zielt auf private Zahlungen als Standard und auf den Nachweis einer einzelnen Zahlung, wenn du es willst.
+00:00:16.457 --> 00:00:23.560
+Der Entwurf von QuietBlocks zielt auf private Zahlungen als Standard und auf den Nachweis einer einzelnen Zahlung, wenn du es willst.
 
 5
-00:00:25.990 --> 00:00:31.960
+00:00:24.010 --> 00:00:30.071
 Kaspa ordnet parallel erzeugte Blöcke und erreicht damit hohen Durchsatz auf der Basisschicht.
 
 6
-00:00:31.960 --> 00:00:36.860
+00:00:30.071 --> 00:00:35.422
 Eine gewöhnliche Zahlung zeigt trotzdem Ein- und Ausgänge sowie Beträge öffentlich.
 
 7
-00:00:36.860 --> 00:00:41.700
-Der Entwurf von Phexora Cash verbindet parallele Blöcke mit privaten Zahlungen.
+00:00:35.422 --> 00:00:40.451
+Der Entwurf von QuietBlocks verbindet parallele Blöcke mit privaten Zahlungen.
 
 8
-00:00:41.700 --> 00:00:48.910
+00:00:40.451 --> 00:00:47.350
 Ziel sind mindestens 1.000 akzeptierte private Zahlungen pro Sekunde auf der Basisschicht, über 24 Stunden.
 
 9
-00:00:49.410 --> 00:00:57.750
+00:00:47.800 --> 00:00:56.450
 Monero verbirgt Betrag und Empfänger, verschleiert den Ursprung und erlaubt dir, einem Empfänger eine einzelne Zahlung nachzuweisen.
 
 10
-00:00:57.750 --> 00:01:04.130
+00:00:56.450 --> 00:01:03.658
 Die Standardsignaturen beruhen auf klassischen elliptischen Kurven, und die Blöcke bilden eine einzelne Kette.
 
 11
-00:01:04.130 --> 00:01:12.440
-Der Entwurf von Phexora Cash zielt auf mindestens 128 Bit Post-Quanten-Sicherheit für das Gesamtsystem und auf parallele Blöcke.
+00:01:03.658 --> 00:01:11.980
+Der Entwurf von QuietBlocks zielt auf mindestens 128 Bit Post-Quanten-Sicherheit für das Gesamtsystem und auf parallele Blöcke.
 
 12
-00:01:12.940 --> 00:01:16.090
-Das ist die Forschungsfrage hinter Phexora Cash.
+00:01:12.480 --> 00:01:14.948
+Das ist die Forschungsfrage hinter QuietBlocks.
 
 13
-00:01:16.090 --> 00:01:22.080
+00:01:14.948 --> 00:01:21.040
 Kann ein Entwurf alle drei verbinden und zusätzlich den Ursprung einer Zahlung vor Beobachtern im Netzwerk schützen?
 
 14
-00:01:22.630 --> 00:01:34.530
+00:01:21.540 --> 00:01:33.022
 Nebeneinander siehst du: Gewöhnliche Zahlungen sind bei Bitcoin und Kaspa öffentlich, Bitcoin und Monero nutzen eine einzelne Kette, und alle drei verwenden klassische Signaturen.
 
 15
-00:01:34.530 --> 00:01:38.070
-Die Spalte von Phexora Cash nennt Entwurfsziele.
+00:01:33.022 --> 00:01:36.037
+Die Spalte von QuietBlocks nennt Entwurfsziele.
 
 16
-00:01:38.070 --> 00:01:40.170
+00:01:36.037 --> 00:01:38.410
 Ein konformes Netzwerk gibt es nicht.
 
 17
-00:01:40.730 --> 00:01:52.440
+00:01:38.910 --> 00:01:50.390
 Für eine Freigabe braucht es unabhängigen Betrieb samt Wiederherstellung, Miner, die Transaktionen selbst auswählen können, und eine getrennte Prüfung der langfristigen Finanzierung der Netzwerksicherheit.
 
 18
-00:01:52.890 --> 00:02:00.220
-Den Forschungsentwurf, den Prüfplan und die geplante Machbarkeitsstudie findest du auf cash.phexora.ai.
+00:01:50.840 --> 00:01:59.360
+Den Forschungsentwurf, den Prüfplan und die geplante Machbarkeitsstudie findest du auf quietblocks.phexora.ai.

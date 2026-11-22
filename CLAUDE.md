@@ -1,8 +1,8 @@
-# CLAUDE.md — Phexora Cash
+# CLAUDE.md — QuietBlocks
 
 ## Scope
 
-Phexora Cash is a static documentation website and research-paper repository. It
+QuietBlocks is a static documentation website and research-paper repository. It
 does not currently contain a blockchain, node, wallet, API, backend, database,
 or frontend framework.
 
@@ -39,14 +39,14 @@ separate later profiles and do not inherit base-protocol claims.
 
 | Responsibility | Owner |
 |---|---|
-| Protocol requirements and candidate design | <code>papers/zkprivacy/zkprivacy-quantum-spec-v1.md</code> |
-| Task graph and evidence gates | <code>papers/zkprivacy/zkprivacy-verification-guide.md</code> |
-| T305 research protocol and prior-work boundary | <code>papers/zkprivacy/quantum-private-transaction-feasibility.md</code> |
+| Protocol requirements and candidate design | <code>papers/zkprivacy/quietblocks-specification.md</code> |
+| Task graph and evidence gates | <code>papers/zkprivacy/quietblocks-verification-guide.md</code> |
+| T305 research protocol and prior-work boundary | <code>papers/zkprivacy/quietblocks-transaction-feasibility.md</code> |
 | T305 adopt/adapt/replicate and source-reuse decision | <code>papers/zkprivacy/decisions/t305-prior-art-decision.md</code> |
 | Operability, availability, producer, and security-budget decision | <code>papers/zkprivacy/decisions/decentralisation-operability-security-budget-decision.md</code> |
 | Future-paper scope and promotion gates | <code>papers/zkprivacy/templates/</code> |
 | Public research positioning | <code>index.html</code> and <code>README.md</code> |
-| Market/claim wording | <code>Documentation/Phexora_Cash_Market_Thesis.html</code> |
+| Market/claim wording | <code>Documentation/QuietBlocks_Market_Thesis.html</code> |
 | Actual static-site architecture | <code>Documentation/SystemArchitecture.html</code> |
 | Public site styles | <code>assets/css/style.css</code> |
 | Public DE/EN locale contract and language switching | <code>assets/js/site-i18n.js</code> |
@@ -65,7 +65,7 @@ PDF build.
 ## Technology and structure
 
 ~~~text
-PhexoraCash/
+QuietBlocks/
 ├── index.html
 ├── assets/
 ├── papers/zkprivacy/
@@ -81,15 +81,15 @@ PhexoraCash/
 - Local preview: port 9180 through the repository start scripts.
 - PDF build: Markdown → DocWizard-Pro/Pandoc → PDF.
 - Deployment: <code>tools/Scripts/deploy_testing.bat</code> on Windows, then
-  <code>tools/Scripts/Startup/phexora_cash_deploy_script.sh</code> on the server.
+  <code>tools/Scripts/Startup/quietblocks_deploy_script.sh</code> on the server.
 - Server deployment uses the shared script infrastructure as tooling but
-  publishes only Phexora Cash; the registry marks this static site as a non-consumer
+  publishes only QuietBlocks; the registry marks this static site as a non-consumer
   of the shared Libraries payload.
 - AppManager or the central orchestrator passes the exact bundle-staged
   `Libraries/Scripts` owner directory; manual runs use the canonical
   `~/AppManager/Libraries/Scripts` installation.
 - Missing sudo, missing startup tooling, or web-root content that differs from
-  the staged Phexora Cash payload is a deployment failure.
+  the staged QuietBlocks payload is a deployment failure.
 - Public web root: <code>index.html</code>, <code>LICENSE</code>,
   <code>assets/</code>, and <code>papers/</code>. <code>Documentation/</code> is not
   deployed publicly.

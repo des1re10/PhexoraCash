@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # ============================================================================
-# Phexora Cash - Server Deployment Script
+# QuietBlocks - Server Deployment Script
 # ============================================================================
 # Deploys static documentation website from pCloud to web server
 # Uses shared deployment infrastructure for consistency with other projects
 #
-# Usage: ./phexora_cash_deploy_script.sh
+# Usage: ./quietblocks_deploy_script.sh
 # ============================================================================
 
 # Fix own line endings first (handles Windows CRLF -> Unix LF)
@@ -35,7 +35,7 @@ if [ -n "${SCRIPT_REAL_PATH:-}" ] && [ -f "$SCRIPT_REAL_PATH" ]; then
 else
     SCRIPT_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" >/dev/null 2>&1 && pwd)"
 fi
-CASH_OUTPUT_FILE=""
+QUIETBLOCKS_OUTPUT_FILE=""
 
 # Determine the system type
 SYSTEM=$(uname -s)
@@ -48,12 +48,12 @@ if [[ "$SYSTEM" == "Linux" ]]; then
         exit 1
     else
         # Linux server - pCloud mounted
-        SOURCE_BASE="$HOME/pCloudDrive/Crypto Folder/Phexora Cash Sources/Phexora Cash"
+        SOURCE_BASE="$HOME/pCloudDrive/Crypto Folder/QuietBlocks Sources/QuietBlocks"
         HOME_BASE="$HOME"
     fi
 elif [[ "$SYSTEM" == "Darwin" ]]; then
     # Mac path
-    SOURCE_BASE="$HOME/pCloudDrive/Crypto Folder/Phexora Cash Sources/Phexora Cash"
+    SOURCE_BASE="$HOME/pCloudDrive/Crypto Folder/QuietBlocks Sources/QuietBlocks"
     HOME_BASE="$HOME"
 else
     echo "Unsupported system type: $SYSTEM"
@@ -65,7 +65,7 @@ if [ -n "${SOURCE_BASE_OVERRIDE:-}" ]; then
 fi
 
 echo "================================================"
-echo "  Phexora Cash - Server Deployment"
+echo "  QuietBlocks - Server Deployment"
 echo "================================================"
 echo ""
 echo "Source directory: $SOURCE_BASE"
@@ -120,14 +120,14 @@ fi
 
 # Set paths based on deployment target
 if [ "$DEPLOY_TARGET" == "main" ]; then
-    TARGET_DIR="$HOME_BASE/PhexoraCash/PhexoraCash"
-    WEB_ROOT="/var/www/phexora-cash"
-    DOMAIN="cash.phexora.ai"
+    TARGET_DIR="$HOME_BASE/QuietBlocks/QuietBlocks"
+    WEB_ROOT="/var/www/quietblocks"
+    DOMAIN="quietblocks.phexora.ai"
     echo "Deploying to MAIN server: $WEB_ROOT"
 else
-    TARGET_DIR="$HOME_BASE/PhexoraCashTest/PhexoraCash"
-    WEB_ROOT="/var/www/phexora-cash-test"
-    DOMAIN="test.cash.phexora.ai"
+    TARGET_DIR="$HOME_BASE/QuietBlocksTest/QuietBlocks"
+    WEB_ROOT="/var/www/quietblocks-test"
+    DOMAIN="test.quietblocks.phexora.ai"
     echo "Deploying to TEST server: $WEB_ROOT"
 fi
 
@@ -190,13 +190,13 @@ done
 PUBLIC_MARKDOWN_FILES=(
     "papers/zkprivacy/decisions/decentralisation-operability-security-budget-decision.md"
     "papers/zkprivacy/decisions/t305-prior-art-decision.md"
-    "papers/zkprivacy/quantum-private-transaction-feasibility.md"
+    "papers/zkprivacy/quietblocks-transaction-feasibility.md"
     "papers/zkprivacy/templates/README.md"
     "papers/zkprivacy/templates/ghostdag-private-state-template.md"
     "papers/zkprivacy/templates/network-origin-anonymity-template.md"
     "papers/zkprivacy/templates/private-note-discovery-template.md"
-    "papers/zkprivacy/zkprivacy-quantum-spec-v1.md"
-    "papers/zkprivacy/zkprivacy-verification-guide.md"
+    "papers/zkprivacy/quietblocks-specification.md"
+    "papers/zkprivacy/quietblocks-verification-guide.md"
 )
 for markdown_file in "${PUBLIC_MARKDOWN_FILES[@]}"; do
     if [ -f "$SOURCE_BASE/$markdown_file" ]; then
@@ -219,7 +219,7 @@ echo ""
 echo "=== Deployment Configuration ==="
 echo "Source: $SOURCE_BASE"
 echo "Target Project: $TARGET_DIR"
-echo "Shared Libraries payload: not applicable (Phexora Cash is a static non-consumer)"
+echo "Shared Libraries payload: not applicable (QuietBlocks is a static non-consumer)"
 echo "Web Root: $WEB_ROOT"
 echo "Domain: $DOMAIN"
 echo ""
@@ -247,21 +247,21 @@ mkdir -p "$TARGET_DIR" 2>/dev/null || true
 static_publish_command mkdir -p "$WEB_ROOT"
 echo "  Directories ready (including web root)"
 
-# === Deploy Phexora Cash using shared script ===
+# === Deploy QuietBlocks using shared script ===
 echo ""
-echo "=== Deploying Phexora Cash ==="
-CASH_OUTPUT_FILE="$(mktemp)"
-register_deploy_temp_file "$CASH_OUTPUT_FILE"
+echo "=== Deploying QuietBlocks ==="
+QUIETBLOCKS_OUTPUT_FILE="$(mktemp)"
+register_deploy_temp_file "$QUIETBLOCKS_OUTPUT_FILE"
 bash "$SHARED_DEPLOY_SCRIPT" \
-    "PhexoraCash" \
+    "QuietBlocks" \
     "$SOURCE_BASE" \
     "$TARGET_DIR" \
     "$DEPLOY_TARGET" \
-    "n" 2>&1 | tee "$CASH_OUTPUT_FILE"
-CASH_OUTPUT=$(<"$CASH_OUTPUT_FILE")
-rm -f "$CASH_OUTPUT_FILE"
-unregister_deploy_temp_file "$CASH_OUTPUT_FILE"
-CASH_OUTPUT_FILE=""
+    "n" 2>&1 | tee "$QUIETBLOCKS_OUTPUT_FILE"
+QUIETBLOCKS_OUTPUT=$(<"$QUIETBLOCKS_OUTPUT_FILE")
+rm -f "$QUIETBLOCKS_OUTPUT_FILE"
+unregister_deploy_temp_file "$QUIETBLOCKS_OUTPUT_FILE"
+QUIETBLOCKS_OUTPUT_FILE=""
 
 echo "  Verifying deployed site files..."
 for required_path in "index.html" "assets" "papers" "LICENSE"; do
@@ -277,7 +277,7 @@ for markdown_file in "${PUBLIC_MARKDOWN_FILES[@]}"; do
     fi
 done
 
-# === Copy to web root (Phexora Cash-specific: static website served by nginx) ===
+# === Copy to web root (QuietBlocks-specific: static website served by nginx) ===
 echo ""
 echo "[2/5] Deploying to web root..."
 echo "  Deploying to web root: $WEB_ROOT"
@@ -316,12 +316,12 @@ echo "  ✓ Web root deployment complete"
 MANIFEST_FILE="$TARGET_DIR/deployment_sync_manifest.json"
 validate_sync_manifest "$MANIFEST_FILE"
 
-read -r CASH_ITEMS CASH_FILES <<< "$(parse_deployment_counts "$CASH_OUTPUT")"
+read -r QUIETBLOCKS_ITEMS QUIETBLOCKS_FILES <<< "$(parse_deployment_counts "$QUIETBLOCKS_OUTPUT")"
 display_app_only_deployment_summary \
-    "Phexora Cash" \
-    "$CASH_OUTPUT" \
-    "$CASH_ITEMS" \
-    "$CASH_FILES"
+    "QuietBlocks" \
+    "$QUIETBLOCKS_OUTPUT" \
+    "$QUIETBLOCKS_ITEMS" \
+    "$QUIETBLOCKS_FILES"
 
 # Cleanup source manifests
 if should_cleanup_source_manifests; then
@@ -353,7 +353,7 @@ echo "  Deployed $WEB_FILE_COUNT files to $WEB_ROOT"
 
 # === Run startup script for nginx/SSL setup ===
 echo "[5/5] Running startup script for nginx configuration..."
-STARTUP_SCRIPT="$TARGET_DIR/tools/Scripts/Startup/run_phexora_cash.sh"
+STARTUP_SCRIPT="$TARGET_DIR/tools/Scripts/Startup/run_quietblocks.sh"
 if [ ! -f "$STARTUP_SCRIPT" ]; then
     echo "ERROR: Required startup script not found: $STARTUP_SCRIPT"
     exit 1
@@ -390,7 +390,7 @@ echo "NEXT STEPS:"
 echo "=============="
 if [ "$DEPLOY_TARGET" == "test" ]; then
     echo "1. Verify test site at http://$DOMAIN"
-    echo "2. Check nginx logs: sudo tail -20 /var/log/nginx/cash_error.log"
+    echo "2. Check nginx logs: sudo tail -20 /var/log/nginx/quietblocks_error.log"
 else
     echo "1. Verify site at https://$DOMAIN"
     echo "2. Check all papers load correctly"

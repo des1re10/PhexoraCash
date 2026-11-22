@@ -1,11 +1,11 @@
 # Project Structure
 
-Phexora Cash uses the `PhexoraCash` checkout, `cash` deployment ID and
-`cash.phexora.ai` host. [Publication identity](../README.md#publication-identity)
+QuietBlocks uses the `QuietBlocks` checkout, `quietblocks` deployment ID and
+`quietblocks.phexora.ai` host. [Publication identity](../README.md#publication-identity)
 defines the publication prerequisites.
 
 ```
-PhexoraCash/
+QuietBlocks/
 ├── CLAUDE.md                         # Development guidelines for Claude Code
 ├── AGENTS.md                         # Agent instructions (local start commands)
 ├── README.md                         # Project overview and quick start
@@ -17,20 +17,20 @@ PhexoraCash/
 │   ├── ProjectStructure.md           # This file
 │   ├── SystemArchitecture.html       # System design and deployment
 │   ├── InvestorOnePager.html         # Evidence-based research brief
-│   ├── Phexora_Cash_Market_Thesis.html    # Market and claim thesis
+│   ├── QuietBlocks_Market_Thesis.html    # Market and claim thesis
 │   ├── ResearchEvaluation/          # Internal analytic receive-floor screen
 │   ├── assets/
 │   │   └── documentation.css         # Shared internal-document styles
 │   └── ReleaseNotes.md               # Version history
 │
 ├── papers/                           # Research papers and specifications
-│   └── zkprivacy/                    # Phexora Cash: Privacy-Preserving DAG Blockchain
-│       ├── quantum-private-transaction-feasibility.md  # 0.4.0 active T305 research protocol
-│       ├── quantum-private-transaction-feasibility.pdf # Generated PDF export
-│       ├── zkprivacy-quantum-spec-v1.md      # 0.5.4 research design and requirements
-│       ├── zkprivacy-quantum-spec-v1.pdf     # PDF export
-│       ├── zkprivacy-verification-guide.md   # 0.5.4 implementation and evidence plan
-│       ├── zkprivacy-verification-guide.pdf  # PDF export
+│   └── zkprivacy/                    # QuietBlocks: Privacy-Preserving DAG Blockchain
+│       ├── quietblocks-transaction-feasibility.md  # 0.4.0 active T305 research protocol
+│       ├── quietblocks-transaction-feasibility.pdf # Generated PDF export
+│       ├── quietblocks-specification.md      # 0.5.4 research design and requirements
+│       ├── quietblocks-specification.pdf     # PDF export
+│       ├── quietblocks-verification-guide.md   # 0.5.4 implementation and evidence plan
+│       ├── quietblocks-verification-guide.pdf  # PDF export
 │       ├── decisions/                         # Versioned research gates; not papers
 │       │   ├── t305-prior-art-decision.md     # Prior art, reuse and T305 decision ownership
 │       │   └── decentralisation-operability-security-budget-decision.md
@@ -54,8 +54,8 @@ PhexoraCash/
 │   ├── feasibility_screen.py         # Analytic rejection screen; never gate approval
 │   └── Scripts/
 │       ├── Startup/                  # Deployment and startup scripts
-│       │   ├── phexora_cash_deploy_script.sh  # Deploy from pCloud to server
-│       │   └── run_phexora_cash.sh            # Nginx/SSL configuration
+│       │   ├── quietblocks_deploy_script.sh  # Deploy from pCloud to server
+│       │   └── run_quietblocks.sh            # Nginx/SSL configuration
 │       └── deploy_testing.bat        # Windows deployment to pCloud
 │
 ├── tests/
@@ -97,7 +97,7 @@ papers and does not approve their receiving or transport profiles.
 
 ## Production measurement
 
-- `cash.phexora.ai` owns a dedicated SiteBuilder analytics identity and
+- `quietblocks.phexora.ai` owns a dedicated SiteBuilder analytics identity and
   exact allowed origin; it is not grouped with another static website.
 - The SiteBuilder-generated runtime remains off until explicit analytics
   consent and records page views plus named research-document CTAs without
@@ -106,9 +106,9 @@ papers and does not approve their receiving or transport profiles.
 
 ## Production publication
 
-The repository deployment keeps `/var/www/phexora-cash` as the registered restore
+The repository deployment keeps `/var/www/quietblocks` as the registered restore
 source. Production Nginx serves the stable SiteBuilder domain alias
-`runtime/main/publication-domains/cash.phexora.ai`; SiteBuilder atomically
+`runtime/main/publication-domains/quietblocks.phexora.ai`; SiteBuilder atomically
 moves that alias to the deployment of the currently assigned site when its
 owner or a publisher selects Publish. TEST remains repository-owned at
-`/var/www/phexora-cash-test`.
+`/var/www/quietblocks-test`.

@@ -1,4 +1,4 @@
-# Phexora Cash - Release Notes
+# QuietBlocks - Release Notes
 
 ## Unreleased
 
@@ -14,17 +14,13 @@
   loads and candidate-specific quantum-mining finality analysis. The research
   gates remain open.
 
-**Programme name — 2026-11-08**
+**QuietBlocks identity and publication paths — 2026-11-23**
 
-- Standardised the programme as Phexora Cash across the DE/EN website,
-  documentation, repository references, filenames and operational configuration.
-- Identified Phexora Cash in all three active papers and regenerated their
-  PDFs; Quantum remains the historical protocol codename.
-- Configured the `cash` registry ID, Cash startup/deployment paths and new
-  hostnames. Host activation requires DNS, certificates and publication mapping;
-  the GitHub repository rename remains an owner action.
-- Kept Quantum protocol encodings and QTM unchanged. The rename introduces no
-  implementation, research result, monetary change or new approved release.
+- Apply QuietBlocks to the bilingual research site, repository and operational
+  paths, and use `quietblocks.phexora.ai` as the canonical host.
+- Publish the research papers under QuietBlocks filenames with regenerated PDFs.
+  The historical codename Quantum and protocol definitions identify the same
+  research design, including QTM.
 
 Earlier entries use the current programme name and source paths for navigation;
 Git history preserves their original naming and publication state.
@@ -35,7 +31,7 @@ Git history preserves their original naming and publication state.
   the preview reuses the existing DE/EN title and description keys.
 - Repaired the market-and-claim-thesis link in `README.md`, which still pointed
   at the pre-Cash `Documentation/Quantum_Market_Thesis.html` filename.
-- Extended the `cash-identity` workflow with a metadata and link-target check
+- Extended the `quietblocks-identity` workflow with a metadata and link-target check
   so a missing canonical tag or a dead local link fails CI.
 
 **Research revision 0.5.4 — 2026-09-05**
@@ -64,7 +60,7 @@ Git history preserves their original naming and publication state.
   necessary-only and consent actions, plus a footer settings control.
 **Consent-based static-site measurement**
 
-- Registered Phexora Cash as its own SiteBuilder website analytics owner, restricted
+- Registered QuietBlocks as its own SiteBuilder website analytics owner, restricted
   collection to the exact production origin, and linked aggregate reporting to
   BusinessPlanner.
 - Installed the SiteBuilder-generated opt-in runtime and assigned stable CTA
@@ -132,7 +128,7 @@ Git history preserves their original naming and publication state.
   multi-user, multi-target, and lifetime bound. Lower-entropy legacy imports
   remain explicitly degraded and do not inherit the full claim.
 - Separated generic proof-system accumulation capability in T306 from the exact
-  Phexora Cash consensus/state relation in T505, made T405 a dependency for its
+  QuietBlocks consensus/state relation in T505, made T405 a dependency for its
   policy-state semantics, and removed performance-threshold ownership from the
   T104 commitment-security decision.
 - Added governance-capture, client-distribution, and voluntary-social-adoption
@@ -189,7 +185,7 @@ Git history preserves their original naming and publication state.
   Design targets are presented as the target architecture, repeated research
   copy and duplicate legal navigation were removed, and the mobile layout was
   shortened.
-- Reframed public copy around Phexora Cash's vision, design principles, and research
+- Reframed public copy around QuietBlocks's vision, design principles, and research
   progress while retaining detailed uncertainty, prior-art, and stop/go
   analysis in the linked research documents.
 - Added consistent keyboard focus treatment, reduced-motion handling, and
@@ -206,9 +202,9 @@ Git history preserves their original naming and publication state.
   hidden port fallback, reject malformed or out-of-range explicit ports
   before PDF checks, bind only to <code>127.0.0.1</code>, and preserve startup
   failures. The Windows launcher now reports the same loopback URL it binds.
-- Aligned server publication with Phexora Cash's registry-owned static-site
+- Aligned server publication with QuietBlocks's registry-owned static-site
   boundary: the wrapper uses shared deployment helpers but stages only the
-  Phexora Cash payload and no longer requires or deploys a Libraries payload.
+  QuietBlocks payload and no longer requires or deploys a Libraries payload.
 - Server publication now receives one canonical bundle-staged shared-tooling
   directory, fails closed when non-interactive sudo is unavailable, verifies
   every web-root file/directory against the staged app, and emits the standard
@@ -241,20 +237,20 @@ Git history preserves their original naming and publication state.
 **Initial Release**
 
 - Created project structure for post-quantum cryptography research
-- Added Phexora Cash specification:
-  - `zkprivacy-quantum-spec-v1.md` - Full specification for privacy-preserving DAG blockchain
-  - `zkprivacy-verification-guide.md` - AI implementation and verification guide
+- Added QuietBlocks specification:
+  - `quietblocks-specification.md` - Full specification for privacy-preserving DAG blockchain
+  - `quietblocks-verification-guide.md` - AI implementation and verification guide
 - Landing page with paper listing
 - Responsive design with light academic theme
 
 **Papers Included:**
-- Phexora Cash: Privacy-Preserving DAG Blockchain (Draft v1.0)
+- QuietBlocks: Privacy-Preserving DAG Blockchain (Draft v1.0)
 
 ### v1.1.0 (2026-01-16)
 
 **Major Architecture Update: DAG-Native Design**
 
-- Renamed ZKPrivacy to Phexora Cash
+- Renamed ZKPrivacy to QuietBlocks
 - Adopted GhostDAG consensus as core architecture (1,000+ TPS target)
 - Added comprehensive documentation:
   - Abstract, Introduction, Design Philosophy sections

@@ -14,7 +14,7 @@ lang: "en-GB"
 Do not cite this outline as a completed paper. Promote it only after the
 transaction/state transition and the versioned GHOSTDAG candidate are frozen.
 
-The [specification](../zkprivacy-quantum-spec-v1.md), Sections 5.6.1 and
+The [specification](../quietblocks-specification.md), Sections 5.6.1 and
 7.3–7.3.1, requires authenticated note-instance identity, exact header/checkpoint
 execution context and atomic acceptance/rejection/reorg accounting. Its
 symbolic deferred-acceptance example is a candidate reference-model case,

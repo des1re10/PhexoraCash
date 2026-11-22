@@ -475,7 +475,7 @@ cannot prevent users from declining a client release or choosing a social fork.
 
 ## 10. Task-graph decision
 
-The [verification guide](../zkprivacy-verification-guide.md)
+The [verification guide](../quietblocks-verification-guide.md)
 owns the complete 41-task dependency graph. This record states the decision
 boundaries; it does not maintain a second copy of that graph.
 

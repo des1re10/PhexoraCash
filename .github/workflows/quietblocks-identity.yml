@@ -1,10 +1,10 @@
-name: cash-identity
+name: quietblocks-identity
 
 on:
   push:
     branches: [main]
     paths:
-      - '.github/workflows/cash-identity.yml'
+      - '.github/workflows/quietblocks-identity.yml'
       - 'README.md'
       - 'AGENTS.md'
       - 'CLAUDE.md'
@@ -20,7 +20,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - '.github/workflows/cash-identity.yml'
+      - '.github/workflows/quietblocks-identity.yml'
       - 'README.md'
       - 'AGENTS.md'
       - 'CLAUDE.md'
@@ -42,10 +42,10 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Phexora Cash research repository
+      - name: Checkout QuietBlocks research repository
         uses: actions/checkout@v4
         with:
-          path: PhexoraCash
+          path: QuietBlocks
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -57,27 +57,27 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Validate Phexora Cash branding and deployment identity
-        working-directory: PhexoraCash
+      - name: Validate QuietBlocks branding and deployment identity
+        working-directory: QuietBlocks
         shell: bash
         run: |
           set -euo pipefail
-          grep -Fq '# Phexora Cash' README.md
-          grep -Fq 'cash.phexora.ai' README.md
-          grep -Fq 'Phexora Cash' index.html
-          test -f tools/Scripts/Startup/run_phexora_cash.sh
-          test -f tools/Scripts/Startup/phexora_cash_deploy_script.sh
+          grep -Fq '# QuietBlocks' README.md
+          grep -Fq 'quietblocks.phexora.ai' README.md
+          grep -Fq 'QuietBlocks' index.html
+          test -f tools/Scripts/Startup/run_quietblocks.sh
+          test -f tools/Scripts/Startup/quietblocks_deploy_script.sh
           test ! -e tools/Scripts/Startup/run_quantum.sh
           test ! -e tools/Scripts/Startup/quantum_deploy_script.sh
           test ! -e Documentation/Quantum_Market_Thesis.html
-          test -f Documentation/Phexora_Cash_Market_Thesis.html
-          grep -Fq 'get_application("cash")' start-local.sh
-          grep -Fq "get_application('cash')" start-local.bat
-          grep -Fq 'PhexoraCash/PhexoraCash' tools/Scripts/Startup/phexora_cash_deploy_script.sh
-          grep -Fq 'PhexoraCashTest/PhexoraCash' tools/Scripts/Startup/phexora_cash_deploy_script.sh
-          grep -Fq 'https://github.com/des1re10/PhexoraCash' README.md
-          grep -Fq 'https://github.com/des1re10/PhexoraCash' index.html
-          stale_matches="$(git grep -InE 'quantum\.phexora\.ai|run_quantum\.sh|quantum_deploy_script\.sh|get_application\(["'\'' ]*quantum["'\'' ]*\)|QuantumTest|Phexora Cash/Phexora Cash|QUANTUM_(OUTPUT|NGINX)|maintenance_quantum|quantum_(access|error)\.log|github\.com/des1re10/Quantum|github\.com/des1re10/Phexora-Cash' -- README.md AGENTS.md CLAUDE.md index.html Documentation assets tools start-local.sh start-local.bat build-pdfs.sh build-pdfs.bat || true)"
+          test -f Documentation/QuietBlocks_Market_Thesis.html
+          grep -Fq 'get_application("quietblocks")' start-local.sh
+          grep -Fq "get_application('quietblocks')" start-local.bat
+          grep -Fq 'QuietBlocks/QuietBlocks' tools/Scripts/Startup/quietblocks_deploy_script.sh
+          grep -Fq 'QuietBlocksTest/QuietBlocks' tools/Scripts/Startup/quietblocks_deploy_script.sh
+          grep -Fq 'https://github.com/des1re10/QuietBlocks' README.md
+          grep -Fq 'https://github.com/des1re10/QuietBlocks' index.html
+          stale_matches="$(git grep -InE 'quantum\.phexora\.ai|run_quantum\.sh|quantum_deploy_script\.sh|get_application\(["'\'' ]*quantum["'\'' ]*\)|QuantumTest|QuietBlocks/QuietBlocks|QUANTUM_(OUTPUT|NGINX)|maintenance_quantum|quantum_(access|error)\.log|github\.com/des1re10/Quantum|github\.com/des1re10/QuietBlocks' -- README.md AGENTS.md CLAUDE.md index.html Documentation assets tools start-local.sh start-local.bat build-pdfs.sh build-pdfs.bat || true)"
           if [[ -n "$stale_matches" ]]; then
             printf '%s\n' "$stale_matches"
             echo 'Stale operational Quantum identity remains'
@@ -85,24 +85,24 @@ jobs:
           fi
 
       - name: Validate shell and site syntax
-        working-directory: PhexoraCash
+        working-directory: QuietBlocks
         shell: bash
         run: |
           set -euo pipefail
-          bash -n tools/Scripts/Startup/run_phexora_cash.sh
-          bash -n tools/Scripts/Startup/phexora_cash_deploy_script.sh
+          bash -n tools/Scripts/Startup/run_quietblocks.sh
+          bash -n tools/Scripts/Startup/quietblocks_deploy_script.sh
           bash -n build-pdfs.sh
           bash -n start-local.sh
           node --check assets/js/site-i18n.js
 
       - name: Validate public metadata and link targets
-        working-directory: PhexoraCash
+        working-directory: QuietBlocks
         shell: bash
         run: |
           set -euo pipefail
-          grep -Fq '<link rel="canonical" href="https://cash.phexora.ai/">' index.html
-          grep -Fq 'property="og:url" content="https://cash.phexora.ai/"' index.html
-          grep -Fq 'property="og:site_name" content="Phexora Cash"' index.html
+          grep -Fq '<link rel="canonical" href="https://quietblocks.phexora.ai/">' index.html
+          grep -Fq 'property="og:url" content="https://quietblocks.phexora.ai/"' index.html
+          grep -Fq 'property="og:site_name" content="QuietBlocks"' index.html
           python3 - <<'PY'
           import os, re, sys
           missing = []
@@ -111,27 +111,27 @@ jobs:
               for target in re.findall(rf'{attribute}="([^"]+)"', html):
                   if target.startswith(('http://', 'https://', 'mailto:', '#', 'data:')):
                       continue
-                  if not os.path.exists(target.split('#')[0]):
+                  if not os.path.exists(target.split('#', 1)[0].split('?', 1)[0]):
                       missing.append(f'index.html -> {target}')
           for markdown in ('README.md', 'AGENTS.md', 'CLAUDE.md'):
               text = open(markdown, encoding='utf-8').read()
               for target in re.findall(r'\]\(([^)\s]+)\)', text):
                   if target.startswith(('http://', 'https://', 'mailto:', '#')):
                       continue
-                  if not os.path.exists(target.split('#')[0]):
+                  if not os.path.exists(target.split('#', 1)[0].split('?', 1)[0]):
                       missing.append(f'{markdown} -> {target}')
           if missing:
               print('\n'.join(missing))
-              sys.exit('Phexora Cash links point at missing targets')
+              sys.exit('QuietBlocks links point at missing targets')
           PY
 
       - name: Preserve released 0.5.4 publication artifacts
-        working-directory: PhexoraCash
+        working-directory: QuietBlocks
         shell: bash
         run: |
           set -euo pipefail
-          test -f papers/zkprivacy/zkprivacy-quantum-spec-v1.md
-          test -f papers/zkprivacy/zkprivacy-quantum-spec-v1.pdf
-          test -f papers/zkprivacy/quantum-private-transaction-feasibility.md
-          test -f papers/zkprivacy/quantum-private-transaction-feasibility.pdf
+          test -f papers/zkprivacy/quietblocks-specification.md
+          test -f papers/zkprivacy/quietblocks-specification.pdf
+          test -f papers/zkprivacy/quietblocks-transaction-feasibility.md
+          test -f papers/zkprivacy/quietblocks-transaction-feasibility.pdf
           grep -Fq 'historical project codename' README.md

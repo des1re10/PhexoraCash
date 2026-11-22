@@ -1,6 +1,6 @@
 ---
-title: "Quantum Research Implementation and Verification Plan"
-subtitle: "Phexora Cash — unreleased evidence-plan clarifications to research design 0.5.4"
+title: "QuietBlocks Research Implementation and Verification Plan"
+subtitle: "QuietBlocks — unreleased evidence-plan clarifications to research design 0.5.4"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
 date: "2026-11-18"
 version: "0.5.4-research"
@@ -32,7 +32,7 @@ abstract: |
 
 # 1. Purpose and status
 
-**Programme identity:** This is the Phexora Cash verification plan. Quantum
+**Programme identity:** This is the QuietBlocks verification plan. Quantum
 remains the historical protocol codename used in the plan and stable filenames.
 The display-name change leaves protocol identifiers, task and scenario IDs,
 reviewer roles, requirements and acceptance gates unchanged.
@@ -741,7 +741,7 @@ prover.
 before wallet, node, or GHOSTDAG integration consumes implementation effort.
 
 **Experiment protocol:** The non-normative
-[T305 research protocol](quantum-private-transaction-feasibility.md) records
+[T305 research protocol](quietblocks-transaction-feasibility.md) records
 the prior-work boundary, pre-registration, independent-implementation method,
 evidence package, and stop/go form. It may strengthen experimental detail but
 cannot weaken this task or the protocol specification.
@@ -1760,7 +1760,7 @@ and added clean-device recovery, joint origin inference and quantum PoW cases.
 
 ## Unreleased — 2026-11-08
 
-- identified the programme as Phexora Cash while retaining the historical
+- identified the programme as QuietBlocks while retaining the historical
   Quantum protocol codename, task IDs and evidence contracts;
 
 - clarified T001/T103/T104 security and construction evidence and T305

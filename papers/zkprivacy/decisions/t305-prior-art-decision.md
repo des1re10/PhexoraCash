@@ -119,7 +119,7 @@ the T402 codec and recheck its actual sizes against that envelope before
 integration. An out-of-envelope result requires a new reviewed T006 campaign.
 
 For each completed T305 campaign, apply the ordered engineering rules in
-[Paper 1, section 12](../quantum-private-transaction-feasibility.md).
+[Paper 1, section 12](../quietblocks-transaction-feasibility.md).
 GO selects a qualifying stateless arm under the preregistered benefit rule.
 ADAPT selects a qualifying stateful arm if GO does not apply. STOP returns
 the design to research. Missing evidence leaves the assessment pending.

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Phexora Cash - PDF Build Script
+# QuietBlocks - PDF Build Script
 # Converts active root-level Markdown papers to PDF using DocWizard-Pro
 #
 
@@ -13,20 +13,20 @@ DOCWIZARD_PYTHON="$DOCWIZARD_ROOT/.venv/bin/python"
 PAPERS_DIR="$SCRIPT_DIR/papers/zkprivacy"
 
 echo "================================================"
-echo "  Phexora Cash - PDF Build Script"
+echo "  QuietBlocks - PDF Build Script"
 echo "================================================"
 echo ""
 
 # Check if DocWizard-Pro exists
 if [ ! -f "$DOCWIZARD_SCRIPT" ]; then
     echo "ERROR: DocWizard-Pro not found at: $DOCWIZARD_SCRIPT"
-    echo "       Make sure DocWizard-Pro is in the same parent directory as Phexora Cash"
+    echo "       Make sure DocWizard-Pro is in the same parent directory as QuietBlocks"
     exit 1
 fi
 
 if [ ! -x "$DOCWIZARD_PYTHON" ]; then
     echo "ERROR: DocWizard-Pro Python runtime not found at: $DOCWIZARD_PYTHON"
-    echo "       Prepare the DocWizard-Pro .venv before building Phexora Cash PDFs"
+    echo "       Prepare the DocWizard-Pro .venv before building QuietBlocks PDFs"
     exit 1
 fi
 

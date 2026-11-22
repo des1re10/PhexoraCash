@@ -5,61 +5,61 @@ WEBVTT
 Private payments, parallel blocks, post-quantum signatures: Bitcoin, Kaspa and Monero do not offer all three.
 
 2
-00:00:08.777 --> 00:00:14.563
+00:00:08.700 --> 00:00:14.408
 With Bitcoin, anyone can trace which addresses were used and which amounts were transferred.
 
 3
-00:00:14.563 --> 00:00:17.347
+00:00:14.408 --> 00:00:16.952
 The ledger does not name the key holders.
 
 4
-00:00:17.347 --> 00:00:24.070
-The Phexora Cash design aims for private payments by default, with proof of one payment whenever you choose.
+00:00:16.952 --> 00:00:23.590
+The QuietBlocks design aims for private payments by default, with proof of one payment whenever you choose.
 
 5
-00:00:24.543 --> 00:00:28.525
+00:00:24.040 --> 00:00:28.162
 Kaspa orders blocks in parallel for high layer-one throughput.
 
 6
-00:00:28.525 --> 00:00:33.216
+00:00:28.162 --> 00:00:32.351
 A standard payment still shows its inputs, outputs and amounts.
 
 7
-00:00:33.216 --> 00:00:43.700
-The Phexora Cash design pairs parallel blocks with private payments and targets at least 1,000 accepted private payments per second on layer one for 24 hours.
+00:00:32.351 --> 00:00:42.790
+The QuietBlocks design pairs parallel blocks with private payments and targets at least 1,000 accepted private payments per second on layer one for 24 hours.
 
 8
-00:00:44.220 --> 00:00:52.081
+00:00:43.240 --> 00:00:51.214
 Monero hides the amount and the recipient, obscures the source, and lets you prove one payment to someone you choose.
 
 9
-00:00:52.081 --> 00:00:58.576
+00:00:51.214 --> 00:00:57.620
 Its standard signatures rely on classical elliptic curves, and its blocks form a single chain.
 
 10
-00:00:58.576 --> 00:01:06.740
-The Phexora Cash design targets at least 128 bits of post-quantum security across the whole system, and parallel blocks.
+00:00:57.620 --> 00:01:05.730
+The QuietBlocks design targets at least 128 bits of post-quantum security across the whole system, and parallel blocks.
 
 11
-00:01:07.310 --> 00:01:10.751
-This is the research question behind Phexora Cash.
+00:01:06.230 --> 00:01:09.587
+This is the research question behind QuietBlocks.
 
 12
-00:01:10.751 --> 00:01:16.910
+00:01:09.587 --> 00:01:16.300
 Can one design combine all three, and also protect the origin of a payment from network observers?
 
 13
-00:01:17.460 --> 00:01:27.989
+00:01:16.800 --> 00:01:27.079
 Side by side, you see that standard payments are public on Bitcoin and Kaspa, Bitcoin and Monero use a single chain, and all three rely on classical signatures.
 
 14
-00:01:27.989 --> 00:01:33.100
-The Phexora Cash column lists design targets, and no conformant network exists.
+00:01:27.079 --> 00:01:32.090
+The QuietBlocks column lists design targets, and no conformant network exists.
 
 15
-00:01:33.664 --> 00:01:43.290
+00:01:32.590 --> 00:01:42.280
 Release also requires independent validation and recovery, miners who can choose their own transactions, and a separate review of long-term security funding.
 
 16
-00:01:43.817 --> 00:01:50.430
-You can read the design, the verification plan and the proposed feasibility study at cash.phexora.ai.
+00:01:42.730 --> 00:01:49.880
+You can read the design, the verification plan and the proposed feasibility study at quietblocks.phexora.ai.

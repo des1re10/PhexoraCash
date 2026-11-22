@@ -1,6 +1,6 @@
 ---
 title: "Stateless Versus Stateful Hash-Based Authorisation Inside a Private-Transaction STARK"
-subtitle: "Phexora Cash — unreleased clarifications to the Quantum 2-input/2-output protocol"
+subtitle: "QuietBlocks — unreleased clarifications to the Quantum 2-input/2-output protocol"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
 date: "2026-11-18"
 version: "0.4.0-research-protocol"
@@ -40,7 +40,7 @@ abstract: |
 
 # 1. Status and claim boundary
 
-**Programme identity:** This study belongs to Phexora Cash. Quantum remains
+**Programme identity:** This study belongs to QuietBlocks. Quantum remains
 the historical protocol codename used in this manuscript and stable filenames.
 The display-name change does not change the transaction relation, comparison
 arms, protocol identifiers, pre-registration or evidence requirements.
@@ -65,9 +65,9 @@ begins. Empty threshold fields, missing evidence, or an unimplemented relation
 are **not** passing results.
 
 The authoritative protocol requirements remain the
-[Quantum research design](zkprivacy-quantum-spec-v1.md). The authoritative
+[Quantum research design](quietblocks-specification.md). The authoritative
 task dependencies and evidence gates remain the
-[verification plan](zkprivacy-verification-guide.md). If this protocol
+[verification plan](quietblocks-verification-guide.md). If this protocol
 conflicts with either document, the conflict must be resolved explicitly; an
 implementation must not choose the more convenient interpretation.
 
@@ -1036,7 +1036,7 @@ states the prior-work strategy without the Section 12 outcome labels.
 
 ## Unreleased — 2026-11-08
 
-- identified the programme as Phexora Cash while retaining the historical
+- identified the programme as QuietBlocks while retaining the historical
   Quantum protocol codename and the comparative experiment contract;
 
 - added a targeted SophOMR/InstantOMR source update, explicitly separate from

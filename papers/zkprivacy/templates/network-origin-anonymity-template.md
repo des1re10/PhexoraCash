@@ -14,7 +14,7 @@ lang: "en-GB"
 Do not cite this outline as a completed paper. Promote it only after the
 transaction propagation format, target workload, and observer model are frozen.
 
-T006 in the [verification guide](../zkprivacy-verification-guide.md) first
+T006 in the [verification guide](../quietblocks-verification-guide.md) first
 screens candidate packet sizes, latency, batching, mixing, cover traffic,
 idle-client cost and correlated retries against a named observer. Modelled
 proof/transport components must be explicit. NOT_RULED_OUT permits T305;

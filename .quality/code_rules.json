@@ -2,31 +2,31 @@
   "protected_paths": [
     {
       "pattern": ".quality/code_rules.json",
-      "message": "Phexora Cash research requirement review-policy changes require explicit review."
+      "message": "QuietBlocks research requirement review-policy changes require explicit review."
     },
     {
       "pattern": "README.md",
-      "message": "Phexora Cash release-boundary and research-status changes require explicit claim and traceability review."
+      "message": "QuietBlocks release-boundary and research-status changes require explicit claim and traceability review."
     },
     {
-      "pattern": "papers/zkprivacy/zkprivacy-quantum-spec-v1.md",
-      "message": "Phexora Cash normative protocol requirement changes require explicit cryptographic, systems, and traceability review."
+      "pattern": "papers/zkprivacy/quietblocks-specification.md",
+      "message": "QuietBlocks normative protocol requirement changes require explicit cryptographic, systems, and traceability review."
     },
     {
-      "pattern": "papers/zkprivacy/zkprivacy-verification-guide.md",
-      "message": "Phexora Cash verification and release-evidence contract changes require explicit review."
+      "pattern": "papers/zkprivacy/quietblocks-verification-guide.md",
+      "message": "QuietBlocks verification and release-evidence contract changes require explicit review."
     },
     {
       "pattern": "papers/zkprivacy/decisions/*.md",
-      "message": "Phexora Cash research decision-boundary changes require explicit review."
+      "message": "QuietBlocks research decision-boundary changes require explicit review."
     },
     {
       "pattern": ".github/workflows/quality.yml",
-      "message": "Phexora Cash server-side quality-gate changes require explicit CI review."
+      "message": "QuietBlocks server-side quality-gate changes require explicit CI review."
     },
     {
       "pattern": ".github/pull_request_template.md",
-      "message": "Phexora Cash requirements review-evidence template changes require explicit review."
+      "message": "QuietBlocks requirements review-evidence template changes require explicit review."
     }
   ]
 }

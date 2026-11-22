@@ -82,10 +82,10 @@
             "home.comparisonTitle": "QuietBlocks compared with Bitcoin, Kaspa, and Monero",
             "home.comparisonDescription": "See how Bitcoin, Kaspa, and Monero handle payment privacy, block ordering, and signatures, and how those choices compare with the QuietBlocks design goals.",
             "home.comparisonVideoAria": "Video comparing the QuietBlocks design with Bitcoin, Kaspa, and Monero",
-            "home.comparisonCaption": "The video presents the 0.5.4 research design and uses the previous project name, Phexora Cash.",
+            "home.comparisonCaption": "The video compares the design goals of QuietBlocks research revision 0.5.4.",
             "home.publicationKicker": "Research with a clear direction",
             "home.publicationTitle": "The foundation of QuietBlocks",
-            "home.publicationDescription": "Read the specification, verification plan, and feasibility study protocol. These editions were published under the name Phexora Cash.",
+            "home.publicationDescription": "Read the specification, verification plan, and feasibility study protocol.",
             "home.paper1Order": "Start here",
             "home.paper1Status": "Research design 0.5.4",
             "home.paper1Title": "Post-quantum DAG protocol for private payments",
@@ -186,10 +186,10 @@
             "home.comparisonTitle": "QuietBlocks im Vergleich mit Bitcoin, Kaspa und Monero",
             "home.comparisonDescription": "Das Video vergleicht den Umgang von Bitcoin, Kaspa und Monero mit Zahlungsprivatsphäre, Blockreihenfolge und Signaturen mit den Entwurfszielen von QuietBlocks.",
             "home.comparisonVideoAria": "Video zum Vergleich des QuietBlocks-Entwurfs mit Bitcoin, Kaspa und Monero",
-            "home.comparisonCaption": "Das Video zeigt den Forschungsentwurf 0.5.4 unter dem früheren Projektnamen Phexora Cash.",
+            "home.comparisonCaption": "Das Video vergleicht die Entwurfsziele der QuietBlocks-Forschungsfassung 0.5.4.",
             "home.publicationKicker": "Forschung mit klarer Linie",
             "home.publicationTitle": "Das Fundament von QuietBlocks",
-            "home.publicationDescription": "Hier findest du die Spezifikation, den Verifikationsplan und das Protokoll der Machbarkeitsstudie. Diese Ausgaben erschienen unter dem Namen Phexora Cash.",
+            "home.publicationDescription": "Hier findest du die Spezifikation, den Verifikationsplan und das Protokoll der Machbarkeitsstudie.",
             "home.paper1Order": "Hier beginnen",
             "home.paper1Status": "Forschungsdesign 0.5.4",
             "home.paper1Title": "Post-Quanten-DAG-Protokoll für private Zahlungen",
@@ -223,16 +223,16 @@
 
     const VIDEO_SOURCES = Object.freeze({
         en: Object.freeze({
-            src: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.mp4?v=59ed65b02793",
-            poster: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9_poster.jpg?v=6e9841c0bd93",
-            trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.en.vtt?v=e60d52bb613f",
+            src: "assets/videos/QuietBlocks_BlockchainComparison_EN_16x9.mp4?v=bc90a6b6eee0",
+            poster: "assets/videos/QuietBlocks_BlockchainComparison_EN_16x9_poster.jpg?v=6e9841c0bd93",
+            trackSrc: "assets/videos/QuietBlocks_BlockchainComparison_EN_16x9.en.vtt?v=8ee65093c419",
             trackLang: "en",
             trackLabel: "English"
         }),
         de: Object.freeze({
-            src: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.mp4?v=ebb1f9312a53",
-            poster: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9_poster.jpg?v=c947a26b01ac",
-            trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.de.vtt?v=d2bc7565366c",
+            src: "assets/videos/QuietBlocks_BlockchainComparison_DE_16x9.mp4?v=c62b750333c3",
+            poster: "assets/videos/QuietBlocks_BlockchainComparison_DE_16x9_poster.jpg?v=c947a26b01ac",
+            trackSrc: "assets/videos/QuietBlocks_BlockchainComparison_DE_16x9.de.vtt?v=ceb99a8ecbbe",
             trackLang: "de",
             trackLabel: "Deutsch"
         })

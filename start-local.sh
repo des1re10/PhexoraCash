@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Phexora Cash - Local Development Server
+# QuietBlocks - Local Development Server
 # Quick start script for testing the website locally
 #
 
@@ -20,11 +20,11 @@ if [ -z "$PORT" ]; then
     PORT="$(PYTHONPATH="$LIBRARIES_PYTHON" python3 - <<'PY'
 from ApplicationRegistry import get_application
 
-config = get_application("cash")
+config = get_application("quietblocks")
 if config is None:
-    raise RuntimeError("Phexora Cash is missing from ApplicationRegistry")
+    raise RuntimeError("QuietBlocks is missing from ApplicationRegistry")
 if config.local_preview_port is None:
-    raise RuntimeError("Phexora Cash local_preview_port is not configured")
+    raise RuntimeError("QuietBlocks local_preview_port is not configured")
 print(config.local_preview_port)
 PY
 )"
@@ -38,7 +38,7 @@ fi
 cd "$SCRIPT_DIR"
 
 echo "================================================"
-echo "  Phexora Cash - Privacy, Scalability and Post-Quantum Security Research"
+echo "  QuietBlocks - Privacy, Scalability and Post-Quantum Security Research"
 echo "  Local Development Server"
 echo "================================================"
 echo ""

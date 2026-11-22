@@ -15,7 +15,7 @@ Do not cite this outline as a completed paper. Promote it only after the
 complete-transaction paper freezes the output format, encrypted payload,
 transaction size, and measured output rate.
 
-Before that promotion, T006 in the [verification guide](../zkprivacy-verification-guide.md)
+Before that promotion, T006 in the [verification guide](../quietblocks-verification-guide.md)
 screens real candidate encrypted outputs, full scans, private retrieval,
 offline catch-up and provider costs under frozen limits. NOT_RULED_OUT is
 only an early feasibility screen; it is neither this paper's result nor a

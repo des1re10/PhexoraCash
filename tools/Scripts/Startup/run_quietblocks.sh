@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Phexora Cash - Startup Script
+# QuietBlocks - Startup Script
 # Sets up nginx, maintenance page, and SSL for static documentation website
 # Uses shared common_functions.sh library
 #
@@ -9,7 +9,7 @@
 # ============================================================================
 # PROJECT CONFIGURATION
 # ============================================================================
-PROJECT_NAME="Phexora Cash"
+PROJECT_NAME="QuietBlocks"
 
 # Resolve paths dynamically from script location
 # Use readlink -f to properly resolve symlinks (e.g., when run from ~/Desktop/Run scripts/)
@@ -29,21 +29,21 @@ fi
 
 # Determine deployment target from environment or default to main
 DEPLOY_TARGET="${DEPLOY_TARGET:-main}"
-PRODUCTION_DOMAIN="cash.phexora.ai"
-TEST_WEB_ROOT="/var/www/phexora-cash-test"
+PRODUCTION_DOMAIN="quietblocks.phexora.ai"
+TEST_WEB_ROOT="/var/www/quietblocks-test"
 
 if [ "$DEPLOY_TARGET" = "main" ]; then
     DOMAIN="$PRODUCTION_DOMAIN"
-    NGINX_CONFIG_NAME="phexora-cash.conf"
-    NGINX_SSL_SESSION_CACHE_NAME="CashTLS"
-    MAINTENANCE_PAGE="/var/www/html/maintenance_cash.html"
-    MAINTENANCE_PAGE_FILENAME="maintenance_cash.html"
+    NGINX_CONFIG_NAME="quietblocks.conf"
+    NGINX_SSL_SESSION_CACHE_NAME="QuietBlocksTLS"
+    MAINTENANCE_PAGE="/var/www/html/maintenance_quietblocks.html"
+    MAINTENANCE_PAGE_FILENAME="maintenance_quietblocks.html"
 elif [ "$DEPLOY_TARGET" = "test" ]; then
-    DOMAIN="test.cash.phexora.ai"
-    NGINX_CONFIG_NAME="phexora-cash-test.conf"
+    DOMAIN="test.quietblocks.phexora.ai"
+    NGINX_CONFIG_NAME="quietblocks-test.conf"
     NGINX_SSL_SESSION_CACHE_NAME="CashTestTLS"
-    MAINTENANCE_PAGE="/var/www/html/maintenance_cash_test.html"
-    MAINTENANCE_PAGE_FILENAME="maintenance_cash_test.html"
+    MAINTENANCE_PAGE="/var/www/html/maintenance_quietblocks_test.html"
+    MAINTENANCE_PAGE_FILENAME="maintenance_quietblocks_test.html"
 else
     echo "FATAL: DEPLOY_TARGET must be main or test, got: $DEPLOY_TARGET"
     exit 1
@@ -140,7 +140,7 @@ if [ ! -f "$MAINTENANCE_PAGE" ]; then
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phexora Cash - Maintenance</title>
+    <title>QuietBlocks - Maintenance</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -230,13 +230,13 @@ fi
 sed -i 's/\r$//' "$SSL_SETUP_SCRIPT" 2>/dev/null || true
 chmod +x "$SSL_SETUP_SCRIPT"
 
-CASH_NGINX_EXTRA="$(mktemp)"
-cat > "$CASH_NGINX_EXTRA" << EOF
+QUIETBLOCKS_NGINX_EXTRA="$(mktemp)"
+cat > "$QUIETBLOCKS_NGINX_EXTRA" << EOF
     # Static site logging
     root $WEB_ROOT;
     index index.html;
-    access_log /var/log/nginx/cash_access.log;
-    error_log /var/log/nginx/cash_error.log;
+    access_log /var/log/nginx/quietblocks_access.log;
+    error_log /var/log/nginx/quietblocks_error.log;
     add_header X-XSS-Protection "1; mode=block" always;
 
     # Cache static assets
@@ -271,12 +271,12 @@ if ! ALLOW_HTTP_ONLY_NGINX=1 \
     NGINX_ENABLE_STANDARD_API=0 \
     NGINX_ENABLE_STANDARD_WS=0 \
     NGINX_ENABLE_HEALTH_LOCATION=0 \
-    NGINX_EXTRA_SERVER_CONFIG_FILE="$CASH_NGINX_EXTRA" \
+    NGINX_EXTRA_SERVER_CONFIG_FILE="$QUIETBLOCKS_NGINX_EXTRA" \
     "$SSL_SETUP_SCRIPT" --skip-if-valid "${DOMAIN%%.phexora.ai}" phexora.ai 0 "$WEB_ROOT"; then
-    rm -f "$CASH_NGINX_EXTRA"
+    rm -f "$QUIETBLOCKS_NGINX_EXTRA"
     exit 1
 fi
-rm -f "$CASH_NGINX_EXTRA"
+rm -f "$QUIETBLOCKS_NGINX_EXTRA"
 
 cert_valid=false
 cert_status="missing"
@@ -374,13 +374,13 @@ fi
 
 echo ""
 echo "Logs:"
-echo "  Access: /var/log/nginx/cash_access.log"
-echo "  Errors: /var/log/nginx/cash_error.log"
+echo "  Access: /var/log/nginx/quietblocks_access.log"
+echo "  Errors: /var/log/nginx/quietblocks_error.log"
 echo ""
 echo "Troubleshooting:"
 echo "  - Test nginx: sudo nginx -t"
 echo "  - Check status: sudo systemctl status nginx"
-echo "  - View errors: sudo tail -20 /var/log/nginx/cash_error.log"
+echo "  - View errors: sudo tail -20 /var/log/nginx/quietblocks_error.log"
 echo ""
 
 # Only wait in interactive mode
