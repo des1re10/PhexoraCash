@@ -1,37 +1,73 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:07.030
-Warum musst du dich bei Bitcoin, Kaspa und Monero heute zwischen Privatsphäre, hohem Durchsatz und Post-Quanten-Schutz entscheiden?
+00:00:00.000 --> 00:00:08.370
+Private Zahlungen, parallele Blöcke, Post-Quanten-Signaturen: Bitcoin, Kaspa und Monero bieten nicht alle drei.
 
 2
-00:00:07.480 --> 00:00:17.190
-Bei Bitcoin hältst du zwar ein knappes Gut mit 21 Millionen Obergrenze in deiner eigenen Wallet, legst aber jede Adresse und jeden Betrag dauerhaft im öffentlichen Hauptbuch offen.
+00:00:08.880 --> 00:00:15.120
+Bei Bitcoin kann jeder nachvollziehen, welche Adressen verwendet und welche Beträge übertragen wurden.
 
 3
-00:00:17.640 --> 00:00:28.310
-Mit Kaspa nutzt du zwar parallele Blöcke im BlockDAG für hohen Durchsatz auf der Basisschicht, doch deine Zahlungshistorie bleibt öffentlich sichtbar und beruht auf klassischer Kryptografie.
+00:00:15.120 --> 00:00:17.780
+Wer die Schlüssel hält, steht dort nicht.
 
 4
-00:00:28.760 --> 00:00:39.180
-Bei Monero schützt du zwar Sender, Empfänger und Beträge standardmäßig auf Protokollebene, bleibst aber an klassische elliptische Kurven und eine sequenzielle Blockkette gebunden.
+00:00:17.780 --> 00:00:25.210
+Der Entwurf von Phexora Cash zielt auf private Zahlungen als Standard und auf den Nachweis einer einzelnen Zahlung, wenn du es willst.
 
 5
-00:00:39.680 --> 00:00:50.580
-Mit Phexora Cash erhältst du eine offene Forschungsarchitektur, die Standard-Privatsphäre, BlockDAG-Durchsatz und Post-Quanten-Schutz in einem Protokollentwurf vereint.
+00:00:25.990 --> 00:00:31.960
+Kaspa ordnet parallel erzeugte Blöcke und erreicht damit hohen Durchsatz auf der Basisschicht.
 
 6
-00:00:51.080 --> 00:01:05.170
-Für deine Zahlungen kombiniert der Entwurf ein privates Noten-Modell samt selektiver Offenlegung, mindestens 128 Bit Post-Quanten-Schutzniveau und das Ziel von 1.000 akzeptierten Transaktionen pro Sekunde.
+00:00:31.960 --> 00:00:36.860
+Eine gewöhnliche Zahlung zeigt trotzdem Ein- und Ausgänge sowie Beträge öffentlich.
 
 7
-00:01:05.670 --> 00:01:14.940
-Im direkten Vergleich siehst du auf einen Blick, wie Phexora Cash die Lücken von Bitcoin, Kaspa und Monero in fünf verbindlichen Freigabekriterien adressiert.
+00:00:36.860 --> 00:00:41.700
+Der Entwurf von Phexora Cash verbindet parallele Blöcke mit privaten Zahlungen.
 
 8
-00:01:15.440 --> 00:01:27.720
-Statt unbelegter Versprechen prüfst du heute das offene Forschungsdesign, den Verifikationsplan und das STARK-Machbarkeitsprotokoll, denn ein Netzwerk-Release erfolgt erst nach bestandenen Prüf-Gates.
+00:00:41.700 --> 00:00:48.910
+Ziel sind mindestens 1.000 akzeptierte private Zahlungen pro Sekunde auf der Basisschicht, über 24 Stunden.
 
 9
-00:01:28.170 --> 00:01:36.040
-Lies jetzt die vollständige Spezifikation und die Forschungsprotokolle frei zugänglich auf cash.phexora.ai.
+00:00:49.410 --> 00:00:57.750
+Monero verbirgt Betrag und Empfänger, verschleiert den Ursprung und erlaubt dir, einem Empfänger eine einzelne Zahlung nachzuweisen.
+
+10
+00:00:57.750 --> 00:01:04.130
+Die Standardsignaturen beruhen auf klassischen elliptischen Kurven, und die Blöcke bilden eine einzelne Kette.
+
+11
+00:01:04.130 --> 00:01:12.440
+Der Entwurf von Phexora Cash zielt auf mindestens 128 Bit Post-Quanten-Sicherheit für das Gesamtsystem und auf parallele Blöcke.
+
+12
+00:01:12.940 --> 00:01:16.090
+Das ist die Forschungsfrage hinter Phexora Cash.
+
+13
+00:01:16.090 --> 00:01:22.080
+Kann ein Entwurf alle drei verbinden und zusätzlich den Ursprung einer Zahlung vor Beobachtern im Netzwerk schützen?
+
+14
+00:01:22.630 --> 00:01:34.530
+Nebeneinander siehst du: Gewöhnliche Zahlungen sind bei Bitcoin und Kaspa öffentlich, Bitcoin und Monero nutzen eine einzelne Kette, und alle drei verwenden klassische Signaturen.
+
+15
+00:01:34.530 --> 00:01:38.070
+Die Spalte von Phexora Cash nennt Entwurfsziele.
+
+16
+00:01:38.070 --> 00:01:40.170
+Ein konformes Netzwerk gibt es nicht.
+
+17
+00:01:40.730 --> 00:01:52.440
+Für eine Freigabe braucht es unabhängigen Betrieb samt Wiederherstellung, Miner, die Transaktionen selbst auswählen können, und eine getrennte Prüfung der langfristigen Finanzierung der Netzwerksicherheit.
+
+18
+00:01:52.890 --> 00:02:00.220
+Den Forschungsentwurf, den Prüfplan und die geplante Machbarkeitsstudie findest du auf cash.phexora.ai.

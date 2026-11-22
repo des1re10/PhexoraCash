@@ -80,7 +80,7 @@
             "home.requirement5Description": "Hardware, pool templates, ordering incentives, and the long-run security budget remain explicit, independently reviewed release questions.",
             "home.comparisonKicker": "Architectural comparison",
             "home.comparisonTitle": "Phexora Cash vs. Bitcoin, Kaspa, and Monero",
-            "home.comparisonDescription": "A 90-second technical overview of why existing chains force a trade-off between default privacy, BlockDAG throughput, and post-quantum security—and how the Phexora Cash research specification defines five mandatory release criteria.",
+            "home.comparisonDescription": "Compare how Bitcoin, Kaspa and Monero handle payment privacy, block ordering and signatures. The video shows the goals of the Phexora Cash research design beside each live network.",
             "home.comparisonVideoAria": "Architectural comparison video: Phexora Cash versus Bitcoin, Kaspa, and Monero",
             "home.comparisonCaption": "Research design 0.5.4-research · Target architecture and mandatory release gates, not a live network or token offer.",
             "home.publicationKicker": "Research with a clear direction",
@@ -184,7 +184,7 @@
             "home.requirement5Description": "Hardware, Pool-Templates, Anreize bei der Transaktionsauswahl und das langfristige Sicherheitsbudget bleiben explizite, unabhängig geprüfte Release-Fragen.",
             "home.comparisonKicker": "Architekturvergleich",
             "home.comparisonTitle": "Phexora Cash vs. Bitcoin, Kaspa und Monero",
-            "home.comparisonDescription": "Ein 97-sekündiger technischer Überblick, warum bestehende Blockchains einen Kompromiss zwischen Standard-Privatsphäre, BlockDAG-Durchsatz und Post-Quanten-Schutz erzwingen – und wie die Phexora-Cash-Forschungsspezifikation fünf verbindliche Freigabekriterien definiert.",
+            "home.comparisonDescription": "Vergleiche, wie Bitcoin, Kaspa und Monero mit Zahlungsprivatsphäre, Blockordnung und Signaturen umgehen. Neben jedem laufenden Netzwerk zeigt das Video die Ziele des Phexora-Cash-Forschungsentwurfs.",
             "home.comparisonVideoAria": "Architekturvergleich im Video: Phexora Cash im Vergleich zu Bitcoin, Kaspa und Monero",
             "home.comparisonCaption": "Forschungsdesign 0.5.4-research · Zielarchitektur und verbindliche Freigabe-Gates, kein laufendes Mainnet und kein Token-Angebot.",
             "home.publicationKicker": "Forschung mit klarer Linie",
@@ -223,16 +223,16 @@
 
     const VIDEO_SOURCES = Object.freeze({
         en: Object.freeze({
-            src: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.mp4",
-            poster: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9_poster.jpg",
-            trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.en.vtt",
+            src: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.mp4?v=59ed65b02793",
+            poster: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9_poster.jpg?v=4621e8ab6f19",
+            trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.en.vtt?v=e60d52bb613f",
             trackLang: "en",
             trackLabel: "English"
         }),
         de: Object.freeze({
-            src: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.mp4",
-            poster: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9_poster.jpg",
-            trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.de.vtt",
+            src: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.mp4?v=ebb1f9312a53",
+            poster: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9_poster.jpg?v=d74f1f3d79bc",
+            trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.de.vtt?v=d2bc7565366c",
             trackLang: "de",
             trackLabel: "Deutsch"
         })
