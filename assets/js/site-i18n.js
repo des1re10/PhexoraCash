@@ -224,14 +224,14 @@
     const VIDEO_SOURCES = Object.freeze({
         en: Object.freeze({
             src: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.mp4?v=59ed65b02793",
-            poster: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9_poster.jpg?v=4621e8ab6f19",
+            poster: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9_poster.jpg?v=6e9841c0bd93",
             trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_EN_16x9.en.vtt?v=e60d52bb613f",
             trackLang: "en",
             trackLabel: "English"
         }),
         de: Object.freeze({
             src: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.mp4?v=ebb1f9312a53",
-            poster: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9_poster.jpg?v=d74f1f3d79bc",
+            poster: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9_poster.jpg?v=c947a26b01ac",
             trackSrc: "assets/videos/PhexoraCash_BlockchainComparison_DE_16x9.de.vtt?v=d2bc7565366c",
             trackLang: "de",
             trackLabel: "Deutsch"
