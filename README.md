@@ -147,7 +147,7 @@ The checked-in website can be opened directly from a standalone clone without
 starting a runtime:
 
 ~~~bash
-git clone https://github.com/des1re10/QuietBlocks.git QuietBlocks
+git clone https://github.com/des1re10/PhexoraCash.git QuietBlocks
 cd QuietBlocks
 # Open index.html in a browser
 ~~~

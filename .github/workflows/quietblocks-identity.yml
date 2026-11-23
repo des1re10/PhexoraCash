@@ -75,8 +75,8 @@ jobs:
           grep -Fq "get_application('quietblocks')" start-local.bat
           grep -Fq 'QuietBlocks/QuietBlocks' tools/Scripts/Startup/quietblocks_deploy_script.sh
           grep -Fq 'QuietBlocksTest/QuietBlocks' tools/Scripts/Startup/quietblocks_deploy_script.sh
-          grep -Fq 'https://github.com/des1re10/QuietBlocks' README.md
-          grep -Fq 'https://github.com/des1re10/QuietBlocks' index.html
+          grep -Fq 'https://github.com/des1re10/PhexoraCash' README.md
+          grep -Fq 'https://github.com/des1re10/PhexoraCash' index.html
           stale_matches="$(git grep -InE 'quantum\.phexora\.ai|run_quantum\.sh|quantum_deploy_script\.sh|get_application\(["'\'' ]*quantum["'\'' ]*\)|QuantumTest|QuietBlocks/QuietBlocks|QUANTUM_(OUTPUT|NGINX)|maintenance_quantum|quantum_(access|error)\.log|github\.com/des1re10/Quantum|github\.com/des1re10/QuietBlocks' -- README.md AGENTS.md CLAUDE.md index.html Documentation assets tools start-local.sh start-local.bat build-pdfs.sh build-pdfs.bat || true)"
           if [[ -n "$stale_matches" ]]; then
             printf '%s\n' "$stale_matches"
