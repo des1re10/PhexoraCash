@@ -223,14 +223,14 @@
 
     const VIDEO_SOURCES = Object.freeze({
         en: Object.freeze({
-            src: "assets/videos/QuietBlocks_BlockchainComparison_EN_16x9.mp4?v=bc90a6b6eee0",
+            src: "assets/videos/QuietBlocks_BlockchainComparison_EN_16x9.mp4?v=e42e311afc2c",
             poster: "assets/videos/QuietBlocks_BlockchainComparison_EN_16x9_poster.jpg?v=6e9841c0bd93",
             trackSrc: "assets/videos/QuietBlocks_BlockchainComparison_EN_16x9.en.vtt?v=8ee65093c419",
             trackLang: "en",
             trackLabel: "English"
         }),
         de: Object.freeze({
-            src: "assets/videos/QuietBlocks_BlockchainComparison_DE_16x9.mp4?v=c62b750333c3",
+            src: "assets/videos/QuietBlocks_BlockchainComparison_DE_16x9.mp4?v=331d6fd8dd70",
             poster: "assets/videos/QuietBlocks_BlockchainComparison_DE_16x9_poster.jpg?v=c947a26b01ac",
             trackSrc: "assets/videos/QuietBlocks_BlockchainComparison_DE_16x9.de.vtt?v=ceb99a8ecbbe",
             trackLang: "de",
