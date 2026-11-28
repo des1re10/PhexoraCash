@@ -288,11 +288,13 @@ by the user; those boundaries MUST be stated with every claim.
   same proof or counting authorised subsidies alone cannot detect excess
   private value. Under R1.1 private value crosses no transparent pool
   boundary, so a check that survives such a failure may require disclosing
-  values, for example when notes migrate between versioned pools. Such a
-  disclosure conflicts with R1.2 unless the Product Owner approves it
-  explicitly. Without a mechanism compatible with R1, the Product Owner MUST
-  record the residual hidden-inflation risk in the Section 4.4 decision. The
-  mechanism remains open.
+  values, for example when notes migrate between versioned pools. R1.2 remains
+  binding: a check that reveals individual transferred values requires a
+  versioned change of R1.2 and of the public privacy claim, not an approval
+  under this requirement. An aggregate disclosure MUST be analysed against R1.2
+  and the T001 privacy definition. Without a mechanism compatible with R1, the
+  Product Owner MUST record the residual hidden-inflation risk in the Section
+  4.4 decision. The mechanism remains open.
 
 ## R5 — Deterministic consensus safety
 
@@ -934,9 +936,12 @@ remain open. The reservation grants no spending or migration authority. Any
 future recovery rule MUST bind the recipient's commitment at note creation
 and preserve the spent identity required by R7.10. The sender creates the
 note, so the final address scheme MUST deliver the recipient's commitment to
-the sender, and the recipient's wallet MUST be able to check on receipt that
-the note carries its own commitment; otherwise a sender could insert recovery
-material it controls. T001 MUST state whether the commitment is reused across
+the sender; otherwise a sender could insert recovery material it controls.
+Before confirming receipt or counting a note as available balance, the
+recipient's wallet MUST check that the note carries its own commitment. On a
+mismatch it MUST NOT confirm the payment as received and MUST report the note
+separately; an ordinary spend into a note with the recipient's own commitment
+remains possible. T001 MUST state whether the commitment is reused across
 notes or derived per note, and which notes a later break of the recipient
 ciphertext would link through it. QH and both SLH-DSA-SHAKE
 profiles depend on SHAKE256. Recovery after an isolated signature failure
@@ -1996,7 +2001,8 @@ Reserved a note recovery commitment, recorded the open Product Owner decision
 on hiding and binding, and required an independent private-supply check.
 Stated the conflict between that check and R1, with a recorded residual-risk
 decision as the alternative, and required delivery and recipient verification
-of the recovery commitment.
+of the recovery commitment. Kept R1.2 binding for any disclosure of individual
+values and required the wallet check before a note is credited.
 
 ## Unreleased — 2026-11-18
 

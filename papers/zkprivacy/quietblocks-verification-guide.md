@@ -813,15 +813,16 @@ sender/recipient test vectors; failure and deletion behavior.
 An output-creation API MUST receive all data needed by the final note
 commitment, including spend-authorization and nullifier-key digests and the
 recipient's recovery commitment (specification 5.1). A view public key alone
-is insufficient. The recipient MUST be able to check on receipt that a note
-carries its own recovery commitment.
+is insufficient. Before confirming receipt or counting the note as available
+balance, the recipient's wallet MUST check that the note carries its own
+recovery commitment and MUST report a mismatched note separately.
 
 **Pass:** intended recipients recover exactly the committed note, non-recipients
 cannot distinguish which eligible recipient key was targeted beyond the approved
 disclosure budget, and replay/swapping fails. **Reject:** encryption and
 commitment can describe different notes, a ciphertext/scanning tag identifies
-the recipient, or the recipient cannot detect a recovery commitment it does
-not control.
+the recipient, or a wallet confirms receipt of, or counts as available, a note
+whose recovery commitment it does not control.
 
 ## T402 — Transaction codec, builder and authorization hash
 
@@ -1163,7 +1164,9 @@ detects or bounds despite a specified failure, and state what the mechanism
 discloses and what remains undetectable. Keep this gate open if the only
 evidence is the issuance counter or the transaction proof whose soundness is
 in question, unless the Product Owner's specification 4.4 decision records the
-residual hidden-inflation risk.
+residual hidden-inflation risk. A report that closes on that decision MUST
+state, for each named failure, that hidden inflation after that failure is
+not independently detectable.
 
 **Pass:** exhaustive/bounded-model checks and analytical proof show the selected
 monetary-policy invariant holds across reorganisations, fees never count as
@@ -1779,7 +1782,8 @@ At the current revision the project is a **research design**.
 Assigned the long-offline recovery cases to T001, the commitment decision to
 T104 and the private-supply check to T504. Added the recovery commitment to
 the T401 output-creation inputs and allowed the T504 supply check to close on
-a recorded residual-risk decision.
+a recorded residual-risk decision. Required the T401 check before a note is
+credited and an explicit undetectability statement in such T504 reports.
 
 ## Unreleased — 2026-11-18
 
