@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+**Consent bar language — 2026-11-28**
+
+- The analytics consent bar now matches the selected page language, including
+  after a switch, using the current SiteBuilder analytics runtime.
+
 **Research acceptance criteria — 2026-11-18**
 
 - Assigned one-time index safety to the signer and defined the reference

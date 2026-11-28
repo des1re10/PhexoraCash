@@ -100,21 +100,22 @@ window.phexoraTrack=function(type,properties,additionalAttribution){
 };
 let pageTracked=false;
 const start=()=>{if(!pageTracked&&window.phexoraTrack('page_view',{}))pageTracked=true};
-const labels=String(document.documentElement.lang||'').toLowerCase().startsWith('de')?{
+const labelSets={de:{
   title:'Datenschutz',
   text:'Mit deiner Zustimmung messen wir die Nutzung von Seiten, Links und Formularen. Inhalte werden nicht erfasst.',
   reject:'Nur notwendige',
   accept:'Zustimmen',
   settings:'Cookie-Einstellungen',
   storageError:'Die Auswahl konnte nicht gespeichert werden. Analytics bleibt deaktiviert.'
-}:{
+},en:{
   title:'Privacy',
   text:'With your consent, we measure use of pages, links, and forms. We do not collect their contents.',
   reject:'Necessary only',
   accept:'Agree',
   settings:'Cookie settings',
   storageError:'Your choice could not be saved. Analytics remains disabled.'
-};
+}};
+const labels=()=>labelSets[String(document.documentElement.lang||'').toLowerCase().startsWith('de')?'de':'en'];
 const elementId=value=>`phexora-${value}-${c.siteId}`;
 const removeElement=value=>document.getElementById(elementId(value))?.remove();
 const ensureStyles=()=>{
@@ -132,14 +133,14 @@ const renderSettingsButton=()=>{
   button.id=elementId('consent-settings');
   button.type='button';
   button.className='phexora-consent phexora-consent-settings';
-  button.textContent=labels.settings;
+  button.textContent=labels().settings;
   button.addEventListener('click',()=>{button.remove();renderBanner()});
   const settingsHost=document.querySelector('.footer-legal-links, footer .legal:last-of-type, footer')||document.body;
   settingsHost.appendChild(button);
 };
 const saveConsent=(analytics,status)=>{
   const record=consentRecord(analytics);
-  try{localStorage.setItem(consentKey,JSON.stringify(record))}catch(error){status.textContent=labels.storageError;return false}
+  try{localStorage.setItem(consentKey,JSON.stringify(record))}catch(error){status.textContent=labels().storageError;return false}
   if(!analytics)clearSession();
   window.dispatchEvent(new CustomEvent('cookieConsentUpdated',{detail:record}));
   removeElement('consent-banner');
@@ -153,13 +154,13 @@ function renderBanner(){
   banner.id=elementId('consent-banner');
   banner.className='phexora-consent phexora-consent-banner';
   banner.setAttribute('role','dialog');
-  banner.setAttribute('aria-label',labels.title);
+  banner.setAttribute('aria-label',labels().title);
   const title=document.createElement('strong');
   title.className='phexora-consent-title';
-  title.textContent=labels.title;
+  title.textContent=labels().title;
   const text=document.createElement('p');
   text.className='phexora-consent-text';
-  text.textContent=labels.text;
+  text.textContent=labels().text;
   const copy=document.createElement('div');
   copy.className='phexora-consent-copy';
   const status=document.createElement('p');
@@ -170,12 +171,12 @@ function renderBanner(){
   const reject=document.createElement('button');
   reject.type='button';
   reject.className='phexora-consent-reject';
-  reject.textContent=labels.reject;
+  reject.textContent=labels().reject;
   reject.addEventListener('click',()=>saveConsent(false,status));
   const accept=document.createElement('button');
   accept.type='button';
   accept.className='phexora-consent-accept';
-  accept.textContent=labels.accept;
+  accept.textContent=labels().accept;
   accept.addEventListener('click',()=>saveConsent(true,status));
   actions.append(reject,accept);
   copy.append(title,text,status);
@@ -196,6 +197,16 @@ const initializeConsentUi=()=>{
 };
 window.addEventListener('cookieConsentUpdated',()=>{if(allowed())start();else clearSession()});
 window.addEventListener('openCookiePreferences',()=>{if(!externalConsentOwner()){removeElement('consent-settings');renderBanner()}});
+const refreshConsentLanguage=()=>{
+  if(externalConsentOwner())return;
+  const bannerVisible=document.getElementById(elementId('consent-banner'))!==null;
+  const settingsVisible=document.getElementById(elementId('consent-settings'))!==null;
+  if(!bannerVisible&&!settingsVisible)return;
+  removeElement('consent-banner');
+  removeElement('consent-settings');
+  if(bannerVisible)renderBanner();else renderSettingsButton();
+};
+new MutationObserver(refreshConsentLanguage).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 window.phexoraSetAnalyticsConsent=enabled=>{
   if(typeof enabled!=='boolean')throw new TypeError('Analytics consent must be boolean');
   const status=document.createElement('span');
