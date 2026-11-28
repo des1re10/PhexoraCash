@@ -788,8 +788,13 @@ against an unbounded adversary. If binding fails, alternative openings may
 conceal inflation; if hiding fails, archived commitments may reveal note
 data. Even a statistically hiding commitment cannot protect the same data in
 an archived recipient ciphertext if that encryption later fails. The owner
-MUST record which residual risk is acceptable under R1, R3 and R4.11. The
-choice of a supply-check mechanism also remains open. For example,
+MUST record which residual risk is acceptable under R1, R3 and R4.11. Either
+option keeps R1.2 and exact value conservation (Section 5.4) as requirements
+under the stated assumptions; the decision concerns which guarantee still
+holds after a named assumption fails. A candidate is selected only after its
+concrete binding risk is compared with its actual privacy gain, including
+recipient ciphertexts that remain archived. The choice of a supply-check
+mechanism also remains open. For example,
 [Zcash ZIP 209](https://zips.z.cash/zip-0209) checks transfers across pool
 boundaries; value fabricated and retained within one private pool need not
 cross such a boundary.
@@ -939,9 +944,12 @@ note, so the final address scheme MUST deliver the recipient's commitment to
 the sender; otherwise a sender could insert recovery material it controls.
 Before confirming receipt or counting a note as available balance, the
 recipient's wallet MUST check that the note carries its own commitment. On a
-mismatch it MUST NOT confirm the payment as received and MUST report the note
-separately; an ordinary spend into a note with the recipient's own commitment
-remains possible. T001 MUST state whether the commitment is reused across
+mismatch it MUST NOT confirm the payment as received or count it as available
+balance, and MUST report the note separately. The wallet MAY offer to move the
+note into one carrying its own commitment only if the note is unspent and the
+wallet controls the bound spend-authorization key and nullifier secret
+(Section 5.4); the ability to decrypt the note does not establish this.
+T001 MUST state whether the commitment is reused across
 notes or derived per note, and which notes a later break of the recipient
 ciphertext would link through it. QH and both SLH-DSA-SHAKE
 profiles depend on SHAKE256. Recovery after an isolated signature failure
@@ -2002,7 +2010,10 @@ on hiding and binding, and required an independent private-supply check.
 Stated the conflict between that check and R1, with a recorded residual-risk
 decision as the alternative, and required delivery and recipient verification
 of the recovery commitment. Kept R1.2 binding for any disclosure of individual
-values and required the wallet check before a note is credited.
+values and required the wallet check before a note is credited. Limited the
+offered move of a mismatched note to unspent notes whose bound keys the wallet
+controls, and framed the Section 4.4 decision by the guarantee that survives a
+named assumption failure.
 
 ## Unreleased — 2026-11-18
 
