@@ -2,7 +2,7 @@
 title: "QuietBlocks Research Implementation and Verification Plan"
 subtitle: "QuietBlocks — unreleased evidence-plan clarifications to research design 0.5.4"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
-date: "2026-11-18"
+date: "2026-11-28"
 version: "0.5.4-research"
 status: "Planning document — no conformant implementation or completed verification"
 license: "CC0-1.0; see repository LICENSE"
@@ -38,7 +38,7 @@ The display-name change leaves protocol identifiers, task and scenario IDs,
 reviewer roles, requirements and acceptance gates unchanged.
 
 This working copy contains unreleased clarifications to the 0.5.4-research
-baseline, dated 2026-11-18. Campaigns must pin exact source hashes and obtain
+baseline, through 2026-11-28. Campaigns must pin exact source hashes and obtain
 the existing owner/reviewer approvals; these edits do not approve a profile.
 
 This guide turns the Quantum research requirements into an ordered body of
@@ -256,6 +256,16 @@ post-quantum security target.
 - explicit definition of ledger privacy, recipient-key privacy, and network
   anonymity;
 - per-component and composed security budget;
+- for the reserved recovery field (specification 5.1), compare two cases for
+  a wallet restored after ten years offline: failure of the spend signature
+  alone and failure of a required SHAKE256 property. Record what the original
+  sender, an observer and the restored wallet each know. Trace shared hash
+  assumptions through QH, the hash-based signature candidates and the chosen
+  STARK transcript and tree hashes once fixed. Credit recovery only where the
+  surviving checks still distinguish the recipient and prevent a second spend;
+- for the decision in specification 4.4, identify which payment data survive
+  in commitments, recipient ciphertexts and backups. For R4.11, identify the
+  evidence a validator could still trust after a binding or proof failure;
 - explicit justification of ML-KEM and authorisation parameters against R3.1,
   distinguishing NIST security categories from concrete post-quantum attack
   costs after composition; smaller parameter sets require a separate reviewed
@@ -500,6 +510,7 @@ lattice-estimator inputs; for hash candidates include the randomness/hiding
 argument, required hash properties, digest lengths and quantum cost models.
 An assumption inventory must also cover ML-KEM and any homomorphic retrieval
 scheme; removing a lattice commitment does not remove their assumptions.
+Record the Product Owner's section 4.4 decision before selecting a construction.
 
 **Pass:** composed security remains at least 128 post-quantum bits and all
 findings are resolved. **Reject:** collision-search testing is used as proof,
@@ -800,14 +811,17 @@ note-creation profile; receiver-anonymity/key-privacy analysis linked to T001/T2
 sender/recipient test vectors; failure and deletion behavior.
 
 An output-creation API MUST receive all data needed by the final note
-commitment, including spend-authorization and nullifier-key digests. A view
-public key alone is insufficient.
+commitment, including spend-authorization and nullifier-key digests and the
+recipient's recovery commitment (specification 5.1). A view public key alone
+is insufficient. The recipient MUST be able to check on receipt that a note
+carries its own recovery commitment.
 
 **Pass:** intended recipients recover exactly the committed note, non-recipients
 cannot distinguish which eligible recipient key was targeted beyond the approved
 disclosure budget, and replay/swapping fails. **Reject:** encryption and
-commitment can describe different notes, or a ciphertext/scanning tag identifies
-the recipient.
+commitment can describe different notes, a ciphertext/scanning tag identifies
+the recipient, or the recipient cannot detect a recovery commitment it does
+not control.
 
 ## T402 — Transaction codec, builder and authorization hash
 
@@ -1143,6 +1157,13 @@ maturity and reorg reversal; private reward-output handling; canonical genesis
 bytes and vectors, including zero initial fee pool, cumulative issuance equal to
 genesis claimed subsidy, zero genesis subsidy under the retained no-premine
 baseline, and canonical initial controller epoch and rates.
+
+For R4.11, give a case of excess private value that the proposed mechanism
+detects or bounds despite a specified failure, and state what the mechanism
+discloses and what remains undetectable. Keep this gate open if the only
+evidence is the issuance counter or the transaction proof whose soundness is
+in question, unless the Product Owner's specification 4.4 decision records the
+residual hidden-inflation risk.
 
 **Pass:** exhaustive/bounded-model checks and analytical proof show the selected
 monetary-policy invariant holds across reorganisations, fees never count as
@@ -1752,6 +1773,13 @@ Only these labels may be used:
 At the current revision the project is a **research design**.
 
 # 13. Revision record
+
+## Unreleased — 2026-11-28
+
+Assigned the long-offline recovery cases to T001, the commitment decision to
+T104 and the private-supply check to T504. Added the recovery commitment to
+the T401 output-creation inputs and allowed the T504 supply check to close on
+a recorded residual-risk decision.
 
 ## Unreleased — 2026-11-18
 

@@ -2,7 +2,7 @@
 title: "QuietBlocks: Privacy-Preserving Post-Quantum DAG Protocol"
 subtitle: "QuietBlocks — unreleased clarifications to research design 0.5.4-research"
 author: "Phexora AI · [phexora.ai](https://phexora.ai)"
-date: "2026-11-18"
+date: "2026-11-28"
 version: "0.5.4-research"
 status: "Research design draft — not implementation-ready, audited, or production-safe"
 license: "CC0-1.0; see repository LICENSE"
@@ -52,7 +52,7 @@ production network at this revision.
 
 The legacy filename contains “v1” so that existing links remain valid. The
 baseline is <code>0.5.4-research</code>. This working copy contains unreleased
-clarifications dated 2026-11-18; it is not the unchanged published revision
+clarifications through 2026-11-28; it is not the unchanged published revision
 or an approved experiment profile. Evidence MUST identify the exact source
 commit and file hashes, not the baseline version alone.
 
@@ -280,6 +280,19 @@ by the user; those boundaries MUST be stated with every claim.
   operand maxima, and checked multiplication/addition bounds before T504. An
   overflow, underflow, wrap, saturation, negative value, zero divisor, or value
   outside those bounds MUST invalidate the transition.
+- R4.11 T504 MUST specify how independent validators detect or bound
+  unauthorised creation of private note value: what they observe, the
+  invariant they check, when a violation becomes observable, what the
+  mechanism discloses about private values, and which inflation could remain
+  hidden if note binding or transaction-proof soundness fails. Replaying the
+  same proof or counting authorised subsidies alone cannot detect excess
+  private value. Under R1.1 private value crosses no transparent pool
+  boundary, so a check that survives such a failure may require disclosing
+  values, for example when notes migrate between versioned pools. Such a
+  disclosure conflicts with R1.2 unless the Product Owner approves it
+  explicitly. Without a mechanism compatible with R1, the Product Owner MUST
+  record the residual hidden-inflation risk in the Section 4.4 decision. The
+  mechanism remains open.
 
 ## R5 — Deterministic consensus safety
 
@@ -749,6 +762,7 @@ The committed note plaintext MUST bind:
 - 64-bit base-unit value;
 - spend-authorization key digest;
 - nullifier-key digest;
+- a reserved recovery commitment (Section 5.1);
 - recipient/diversifier data required by the final address scheme;
 - creation-domain data needed to prevent cross-chain or cross-version reuse.
 
@@ -764,6 +778,19 @@ sampling removes bias.
 Homomorphism is not required: exact conservation is proved inside the
 transaction validity relation. If homomorphism is later added, carry semantics
 and all algebraic assumptions require a separate proof.
+
+**Open Product Owner decision before commitment selection.** Compare statistical
+hiding with computational binding against statistical binding with
+computational hiding. An ordinary commitment cannot provide both guarantees
+against an unbounded adversary. If binding fails, alternative openings may
+conceal inflation; if hiding fails, archived commitments may reveal note
+data. Even a statistically hiding commitment cannot protect the same data in
+an archived recipient ciphertext if that encryption later fails. The owner
+MUST record which residual risk is acceptable under R1, R3 and R4.11. The
+choice of a supply-check mechanism also remains open. For example,
+[Zcash ZIP 209](https://zips.z.cash/zip-0209) checks transfers across pool
+boundaries; value fabricated and retained within one private pool need not
+cross such a boundary.
 
 T103/T104 MUST admit both hash-based and lattice-based candidates under this
 same interface and security target. Construction-specific obligations apply
@@ -887,6 +914,7 @@ Note {
     value_u64
     spend_authorization_key_digest
     nullifier_key_digest
+    recovery_commitment_reserved
     recipient_data
     commitment_randomness
 }
@@ -899,6 +927,21 @@ pre-encryption context in Section 6.1. The final transaction identifier then
 binds the resulting ciphertext; the ciphertext MUST NOT depend on that final
 identifier. The committed note-creation profile fixes historical interpretation
 and remains distinct from the active spending-transaction version.
+
+The creation profile reserves a private field for a commitment to
+recipient-controlled recovery material. Its construction, encoding and use
+remain open. The reservation grants no spending or migration authority. Any
+future recovery rule MUST bind the recipient's commitment at note creation
+and preserve the spent identity required by R7.10. The sender creates the
+note, so the final address scheme MUST deliver the recipient's commitment to
+the sender, and the recipient's wallet MUST be able to check on receipt that
+the note carries its own commitment; otherwise a sender could insert recovery
+material it controls. T001 MUST state whether the commitment is reused across
+notes or derived per note, and which notes a later break of the recipient
+ciphertext would link through it. QH and both SLH-DSA-SHAKE
+profiles depend on SHAKE256. Recovery after an isolated signature failure
+therefore requires a separate assessment from recovery after a hash weakness
+that also affects note binding, nullifiers or the selected proof verifier.
 
 ## 5.2 Public transaction fields
 
@@ -1946,6 +1989,14 @@ Each item has an owner task in the verification guide. A value becomes
 normative only with rationale, vectors, tests, and review.
 
 # Appendix B — Revision record
+
+## Unreleased — 2026-11-28
+
+Reserved a note recovery commitment, recorded the open Product Owner decision
+on hiding and binding, and required an independent private-supply check.
+Stated the conflict between that check and R1, with a recorded residual-risk
+decision as the alternative, and required delivery and recipient verification
+of the recovery commitment.
 
 ## Unreleased — 2026-11-18
 
